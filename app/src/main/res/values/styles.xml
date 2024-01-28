@@ -4,4 +4,18 @@
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:textSize">7sp</item>
     </style>
+
+    <style name="Theme.App" parent="Theme.MaterialComponents">
+        <item name="checkboxStyle">@style/Widget.App.CheckBox</item>
+    </style>
+
+    <style name="Widget.App.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>
+    </style>
+
+    <style name="ThemeOverlay.App.CheckBox" parent="">
+        <item name="colorOnSurface">@color/checkbox_bg_color</item>
+        <item name="colorSecondary">@color/checkbox_active_bg_color</item>
+    </style>
+
 </resources>

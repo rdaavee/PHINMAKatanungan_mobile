@@ -2,10 +2,14 @@
 <resources>
     <color name="text_color_primary">#FF000000</color>
     <color name="text_color_secondary">#FFFFFFFF</color>
+    <color name="text_color_forget">#495E57</color>
     <color name="btn_primary_bg_color">#F4CE14</color>
     <color name="btn_secondary_bg_color">#495E57</color>
     <color name="bg_color_alt">#F4CE14</color>
     <color name="bg_color_primary">#495E57</color>
     <color name="bg_color_secondary">#FFFFFFFF</color>
     <color name="bottomNav_bg_color">#495E57</color>
+    <color name="checkbox_bg_color">#FFFFFFFF</color>
+    <color name="checkbox_active_bg_color">#495E57</color>
+
 </resources>
