@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboardFragment"
+        android:icon="@drawable/dashboard_icon"
+        android:title="Dashboard"/>
+
+    <item
+        android:id="@+id/departmentFragment"
+        android:icon="@drawable/department_icon"
+        android:title="Departments"/>
+
+    <item
+        android:id="@+id/nav_create_post"
+        android:icon="@drawable/create_post"
+        android:title="Create Post"/>
+
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/search_icon"
+        android:title="Search"/>
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/profile_icon"
+        android:title="Profile"/>
+
+</menu>
