@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="bottomNav_font_size" tools:override="true">7sp</dimen>
+    <dimen name="bottomNav_active_font_size" tools:override="true">8sp</dimen>
+</resources>
