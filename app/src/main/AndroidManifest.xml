@@ -25,13 +25,7 @@
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".OnBoardingActivity3"
-            android:exported="false" />
-        <activity
-            android:name=".OnboardingActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".OnboardingActivity1"
+            android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
