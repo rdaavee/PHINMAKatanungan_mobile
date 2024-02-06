@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+                    <!-- COLORS -->
     <color name="text_color_primary">#FF000000</color>
     <color name="text_color_secondary">#FFFFFFFF</color>
-    <color name="text_color_forget">#495E57</color>
+    <color name="text_color_forget">#00AF97</color>
     <color name="text_color_logout">#FF0000</color>
+
+                    <!-- BUTTONS -->
     <color name="btn_primary_bg_color">#00AF97</color>
     <color name="btn_secondary_bg_color">#FFCC21</color>
+
+                    <!-- BACKGROUNDS -->
     <color name="bg_color_alt">#00AF97</color>
     <color name="bg_color_alt_secondary">#005483</color>
     <color name="bg_color_primary">#F3F6FF</color>
     <color name="bg_color_secondary">#FFFFFFFF</color>
-    <color name="bottomNav_bg_color">#495E57</color>
+
+                    <!-- CHIPS -->
+    <color name="chip_bg_color_bsit">#000000</color>
+    <color name="chip_bg_color_bsn">#09921E</color>
+    <color name="chip_bg_color_bsce">#7C0505</color>
+    <color name="chip_bg_color_bsed">#00A3FF</color>
+    <color name="chip_bg_color_bsba">#EBFF00</color>
+    <color name="chip_bg_color_react">#F5F4F5</color>
+
+
+                <!--  BOTTOM NAV  -->
+    <color name="bottomNav_bg_color">#00AF97</color>
+
+                <!--  CHECKBOX  -->
     <color name="checkbox_bg_color">#FFFFFFFF</color>
     <color name="checkbox_active_bg_color">#495E57</color>
+
+
 
 </resources>
