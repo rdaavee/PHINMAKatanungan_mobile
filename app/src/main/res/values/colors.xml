@@ -3,10 +3,12 @@
     <color name="text_color_primary">#FF000000</color>
     <color name="text_color_secondary">#FFFFFFFF</color>
     <color name="text_color_forget">#495E57</color>
-    <color name="btn_primary_bg_color">#F4CE14</color>
-    <color name="btn_secondary_bg_color">#495E57</color>
-    <color name="bg_color_alt">#F4CE14</color>
-    <color name="bg_color_primary">#495E57</color>
+    <color name="text_color_logout">#FF0000</color>
+    <color name="btn_primary_bg_color">#00AF97</color>
+    <color name="btn_secondary_bg_color">#FFCC21</color>
+    <color name="bg_color_alt">#00AF97</color>
+    <color name="bg_color_alt_secondary">#005483</color>
+    <color name="bg_color_primary">#F3F6FF</color>
     <color name="bg_color_secondary">#FFFFFFFF</color>
     <color name="bottomNav_bg_color">#495E57</color>
     <color name="checkbox_bg_color">#FFFFFFFF</color>
