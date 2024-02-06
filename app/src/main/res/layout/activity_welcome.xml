@@ -5,32 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color_primary"
-    tools:context=".OnboardingActivity1">
+    tools:context=".WelcomeActivity">
 
     <ImageView
         android:contentDescription="@android:string/unknownName"
         android:id="@+id/iv_onboarding_1"
-        android:layout_width="290dp"
-        android:layout_height="237.46dp"
-        android:src="@drawable/onboarding_1"
-        android:layout_marginTop="65dp"
-        android:layout_marginStart="60dp"
+        android:layout_width="600dp"
+        android:layout_height="440.86dp"
+        android:src="@drawable/welcome"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tv_welcomeToPHINMAKatanungan"/>
+        app:layout_constraintBottom_toTopOf="@id/tv_welcomeToPHINMAKatanungan"/>
 
     <TextView
         android:id="@+id/tv_welcomeToPHINMAKatanungan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/montserrat_black"
-        android:lineHeight="29dp"
         android:text="Welcome to\nPHINMAKatanungan"
-        android:textColor="#f2f2f2"
+        android:textColor="#00AF97"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_onboarding_1" />
+        app:layout_constraintBottom_toTopOf="@id/tv_subHeader" />
 
 
 
@@ -40,28 +37,44 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:text="Easily collaborate and interact with other users\naffiliated in Dagupan Campus with this forum-\nbased community."
-        android:textColor="#f2f2f2"
+        android:textColor="#005483"
         android:textSize="11sp"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_welcomeToPHINMAKatanungan" />
 
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnNext"
+        android:id="@+id/btnLogin"
         android:layout_width="358dp"
         android:layout_height="60dp"
-        android:background="@drawable/onboarding_btn"
+        android:background="@drawable/login_welcome_btn"
         android:elevation="0dp"
         android:fontFamily="@font/montserrat_semibold"
-        android:text="Next"
+        android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/text_color_secondary"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_subHeader"/>
+
+    <TextView
+        android:id="@+id/tv_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don’t have an account? Sign Up"
+        android:textSize="12sp"
+        android:textColor="#005483"
+        android:fontFamily="@font/montserrat"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

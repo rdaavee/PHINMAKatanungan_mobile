@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignupActivity"
+    android:background="@color/bg_color_secondary"
     android:orientation="vertical">
 
     <LinearLayout
@@ -186,12 +187,13 @@
             android:textColor="@color/text_color_secondary"
             android:textAllCaps="false"
             android:fontFamily="@font/montserrat_bold"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/signup_btn"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             />
 
         <TextView
+            android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account? Log In"
