@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupActivity"
+    tools:context=".activities.SignupActivity"
     android:background="@color/bg_color_secondary"
     android:orientation="vertical">
 
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Name"
+            android:text="Email Address"
             android:textSize="14sp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginStart="40dp"/>
@@ -63,6 +63,7 @@
             android:gravity="center_horizontal">
 
             <EditText
+                android:id="@+id/editTextEmail"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
@@ -85,17 +86,17 @@
             android:gravity="center_horizontal">
 
             <EditText
+                android:id="@+id/editTextStudNumber"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
-                android:background="@drawable/custom_input"
-                android:inputType="textPassword" />
+                android:background="@drawable/custom_input"/>
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="Name"
             android:textSize="14sp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginStart="40dp"/>
@@ -106,10 +107,10 @@
             android:gravity="center_horizontal">
 
             <EditText
+                android:id="@+id/editTextName"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
-                android:background="@drawable/custom_input"
-                android:inputType="textPassword" />
+                android:background="@drawable/custom_input" />
 
         </LinearLayout>
 
@@ -127,29 +128,7 @@
             android:gravity="center_horizontal">
 
             <EditText
-                android:layout_width="358dp"
-                android:layout_height="60dp"
-                android:background="@drawable/custom_input"
-                android:inputType="textPassword"
-                android:paddingEnd="13dp"
-                android:drawableEnd="@drawable/hide_pass" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Confirm Password"
-            android:textSize="14sp"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_marginStart="40dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:gravity="center_horizontal">
-
-            <EditText
+                android:id="@+id/editTextPassword"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
@@ -180,6 +159,7 @@
         </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSignUp"
             android:layout_width="358dp"
             android:layout_height="60dp"
             android:text="Sign up"

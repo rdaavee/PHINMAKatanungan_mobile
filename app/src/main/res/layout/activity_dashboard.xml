@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color_secondary"
-    tools:context=".DashboardActivity">
+    tools:context=".activities.DashboardActivity">
 
   <TextView
       android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
       android:background="@color/bottomNav_bg_color"
       app:menu="@menu/bottom_nav"
       app:itemIconSize="30dp"
-      app:itemIconTint=""
+      app:itemIconTint="#FFFFFF"
       app:itemTextColor="@color/text_color_secondary"
       app:itemRippleColor="@android:color/transparent"
       app:itemTextAppearanceActive="@style/bottomNav_font_details"

@@ -7,17 +7,12 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.example.phinmakatanungan_mobile.DashboardFragment"
+        android:name="com.example.phinmakatanungan_mobile.activities.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
-        android:id="@+id/departmentFragment"
-        android:name="com.example.phinmakatanungan_mobile.DepartmentFragment"
-        android:label="fragment_department"
-        tools:layout="@layout/fragment_department" />
-    <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.phinmakatanungan_mobile.ProfileFragment"
+        android:name="com.example.phinmakatanungan_mobile.activities.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
