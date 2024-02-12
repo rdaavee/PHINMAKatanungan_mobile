@@ -16,8 +16,8 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
         }
 
-        findViewById<TextView>(R.id.tv_signup).setOnClickListener {
-            startActivity(Intent(this@WelcomeActivity, SignupActivity::class.java))
+        findViewById<TextView>(R.id.tv_signup2).setOnClickListener {
+            startActivity(Intent(this@WelcomeActivity, ChooseRoleActivity::class.java))
         }
     }
 }

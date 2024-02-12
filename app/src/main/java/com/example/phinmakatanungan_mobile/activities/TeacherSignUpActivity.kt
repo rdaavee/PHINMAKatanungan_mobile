@@ -1,24 +1,22 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.example.phinmakatanungan_mobile.R
 import com.example.phinmakatanungan_mobile.api.PHINMAClient
 import com.example.phinmakatanungan_mobile.models.DefaultResponse
-import com.example.phinmakatanungan_mobile.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignupActivity : AppCompatActivity() {
-
+class TeacherSignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        setContentView(R.layout.activity_teacher_sign_up)
 
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
         val edittextpassword = findViewById<EditText>(R.id.editTextPassword)

@@ -16,10 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ChooseRoleActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CreatePostActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SignupActivity"
+            android:name=".activities.StudentSignUpActivity"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"

@@ -13,7 +13,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         findViewById<TextView>(R.id.tv_signup2).setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+            startActivity(Intent(this@LoginActivity, StudentSignUpActivity::class.java))
         }
 
         findViewById<Button>(R.id.btnLogin2).setOnClickListener {

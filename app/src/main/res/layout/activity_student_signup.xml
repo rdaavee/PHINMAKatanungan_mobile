@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SignupActivity"
+    tools:context=".activities.StudentSignUpActivity"
     android:background="@color/bg_color_secondary"
     android:orientation="vertical">
 
@@ -172,16 +172,36 @@
             android:layout_marginTop="30dp"
             />
 
-        <TextView
-            android:id="@+id/tv_login"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account? Log In"
-            android:textSize="12sp"
-            android:fontFamily="@font/montserrat"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="80dp"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/signup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Don’t have an account?"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_signup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/text_color_login"
+                android:text="Log In"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

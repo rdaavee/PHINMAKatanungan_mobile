@@ -9,13 +9,16 @@
 
     <ImageView
         android:contentDescription="@android:string/unknownName"
-        android:id="@+id/iv_onboarding_1"
+        android:id="@+id/iv_welcome"
         android:layout_width="600dp"
         android:layout_height="440.86dp"
-        android:src="@drawable/welcome"
+        android:src="@drawable/welcome_bg2"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_welcomeToPHINMAKatanungan"/>
+
 
     <TextView
         android:id="@+id/tv_welcomeToPHINMAKatanungan"
@@ -30,7 +33,6 @@
         app:layout_constraintBottom_toTopOf="@id/tv_subHeader" />
 
 
-
     <TextView
         android:id="@+id/tv_subHeader"
         android:layout_width="wrap_content"
@@ -43,8 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_welcomeToPHINMAKatanungan" />
 
-
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
         android:layout_width="358dp"
@@ -52,7 +52,7 @@
         android:background="@drawable/login_welcome_btn"
         android:elevation="0dp"
         android:fontFamily="@font/montserrat_semibold"
-        android:text="Login"
+        android:text="Log In"
         android:textAllCaps="false"
         android:textColor="@color/text_color_secondary"
         android:layout_marginBottom="80dp"
@@ -63,18 +63,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_subHeader"/>
 
-    <TextView
-        android:id="@+id/tv_signup"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don’t have an account? Sign Up"
-        android:textSize="12sp"
-        android:textColor="#005483"
-        android:fontFamily="@font/montserrat"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="7dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin"/>
+        app:layout_constraintTop_toBottomOf="@id/btnLogin">
+
+        <TextView
+            android:id="@+id/signup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Don’t have an account?"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_signup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/text_color_signup"
+            android:text="Sign Up"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

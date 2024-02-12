@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.TeacherSignUpActivity"
+    android:background="@color/bg_color_secondary"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create an account"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="hurry and become part of our app"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:layout_marginTop="80dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <!-- ===== EMAIL EDIT TEXT ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"
+                android:inputType="textEmailAddress"/>
+
+        </LinearLayout>
+
+        <!-- ===== PASSWORD EDIT TEXT ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Number"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/editTextStudNumber"
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"
+                android:inputType="textPassword"
+                android:paddingEnd="13dp"
+                android:drawableEnd="@drawable/hide_pass" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginBottom="25dp">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/montserrat"
+                android:text="By Signing up, I agree with Terms and conditions"
+                android:textSize="12sp"
+                app:useMaterialThemeColors="true" />
+
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSignUp"
+            android:layout_width="358dp"
+            android:layout_height="60dp"
+            android:text="Sign up"
+            android:textSize="14sp"
+            android:textColor="@color/text_color_secondary"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserrat_bold"
+            android:background="@drawable/signup_btn"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/signup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Don’t have an account?"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_signup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/text_color_login"
+                android:text="Log In"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
