@@ -80,9 +80,6 @@ class SignupActivity : AppCompatActivity() {
                             Log.e("API_RESPONSE", errorMessage)
                         }
                     }
-
-
-
                 })
 
         }

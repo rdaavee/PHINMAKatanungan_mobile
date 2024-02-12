@@ -6,6 +6,7 @@
     <color name="text_color_secondary">#FFFFFFFF</color>
     <color name="text_color_forget">#00AF97</color>
     <color name="text_color_logout">#FF0000</color>
+    <color name="text_color_signup">#00AF97</color>
 
                     <!-- BUTTONS -->
     <color name="btn_primary_bg_color">#00AF97</color>
