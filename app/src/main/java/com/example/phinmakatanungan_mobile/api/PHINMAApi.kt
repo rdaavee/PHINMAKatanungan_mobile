@@ -27,7 +27,7 @@ interface PHINMAApi {
         @Field("email") email:String,
         @Field("password") password:String,
         @Field("name") name:String,
-        @Field("studnumber") studnumber:String,
+        @Field("department") department:String
 
     ):retrofit2.Call<DefaultResponse>
 }
