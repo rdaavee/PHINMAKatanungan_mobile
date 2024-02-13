@@ -9,7 +9,7 @@ object PHINMAClient {
 
     private val AUTH = "Basic " + Base64.encodeToString("testuser:123456".toByteArray(), Base64.NO_WRAP)
 
-    private const val BASE_URL = "http://192.168.100.28/mobileapi/public/"
+    private const val BASE_URL = "http://192.168.100.66/mobileapi/public/"
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->

@@ -1,8 +1,11 @@
 package com.example.phinmakatanungan_mobile.activities
 
 import android.os.Bundle
+import android.util.JsonReader
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -12,6 +15,7 @@ import com.example.phinmakatanungan_mobile.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.StringReader
 
 class StudentSignUpActivity : AppCompatActivity() {
 
@@ -60,28 +64,43 @@ class StudentSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            PHINMAClient.instance.createUser(email, password, name, studnumber)
-                .enqueue(object : Callback<DefaultResponse> {
+            val signupDataJson = "{\"email\":\"$email\",\"password\":\"$password\",\"name\":\"$name\",\"studnumber\":\"$studnumber\"}"
 
-                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    }
+            try {
 
-                    override fun onResponse(
-                        call: Call<DefaultResponse>,
-                        response: Response<DefaultResponse>
-                    ) {
-                        if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
-                        } else {
-                            val errorMessage = "Failed to get a valid response. Response code: ${response.code()}"
-                            Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
-                            Log.e("API_RESPONSE", errorMessage)
+                val reader = JsonReader(StringReader(signupDataJson))
+                reader.isLenient = true
+
+                reader.beginObject()
+
+                reader.close()
+
+                PHINMAClient.instance.createUser(email, password, name, studnumber)
+                    .enqueue(object : Callback<DefaultResponse> {
+
+                        override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                            Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
                         }
-                    }
-                })
 
+                        override fun onResponse(
+                            call: Call<DefaultResponse>,
+                            response: Response<DefaultResponse>
+                        ) {
+                            if (response.isSuccessful && response.body() != null) {
+                                Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
+                            } else {
+                                val errorMessage = "Failed to get a valid response. Response code: ${response.code()}"
+                                Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
+                                Log.e("API_RESPONSE", errorMessage)
+                            }
+                        }
+                    })
+
+            } catch (e: Exception) {
+                // Handle JSON parsing error
+                Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
         }
-
     }
 }
