@@ -1,5 +1,6 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.JsonReader
 import android.util.Log
@@ -45,9 +46,7 @@ class StudentSignUpActivity : AppCompatActivity() {
 
                 updateYearSpinner(selectedCourse)
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
         }
 
@@ -60,29 +59,24 @@ class StudentSignUpActivity : AppCompatActivity() {
             val studnumber = edittextstudnumber.text.toString().trim()
             val course = courseSpinner.selectedItem.toString().trim()
             val year = yearSpinner.selectedItem.toString().trim()
+            val signupDataJson = "{\"email\":\"$email\",\"password\":\"$password\",\"name\":\"$name\",\"studnumber\":\"$studnumber\",\"course\":\"$course\",\"year\":\"$year\"}"
 
             if(email.isEmpty()){
-
                 edittextemail.error = "Email required"
                 edittextemail.requestFocus()
                 return@setOnClickListener
             }
-
             if(studnumber.isEmpty()){
-
                 edittextstudnumber.error = "Student number required"
                 edittextstudnumber.requestFocus()
                 return@setOnClickListener
             }
 
-
             if(name.isEmpty()){
-
                 edittextname.error = "Name required"
                 edittextname.requestFocus()
                 return@setOnClickListener
             }
-
             if(course == "Choose a course"){
                 Toast.makeText(applicationContext, "Choose a course", Toast.LENGTH_SHORT).show()
                 courseSpinner.requestFocus()
@@ -90,13 +84,12 @@ class StudentSignUpActivity : AppCompatActivity() {
             }
 
             if(password.isEmpty()){
-
                 edittextpassword.error = "Password required"
                 edittextpassword.requestFocus()
                 return@setOnClickListener
             }
 
-            val signupDataJson = "{\"email\":\"$email\",\"password\":\"$password\",\"name\":\"$name\",\"studnumber\":\"$studnumber\",\"course\":\"$course\",\"year\":\"$year\"}"
+
 
             try {
 
@@ -113,13 +106,13 @@ class StudentSignUpActivity : AppCompatActivity() {
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                             Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
                         }
-
                         override fun onResponse(
                             call: Call<DefaultResponse>,
                             response: Response<DefaultResponse>
                         ) {
                             if (response.isSuccessful && response.body() != null) {
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
+                                startActivity(Intent(this@StudentSignUpActivity,LoginActivity::class.java))
                             } else {
                                 val errorMessage = "Failed to get a valid response. Response code: ${response.code()}"
                                 Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
@@ -144,7 +137,7 @@ class StudentSignUpActivity : AppCompatActivity() {
             "BSIT", "BSCE", "BSBA", "BSBE", "BSARCH", "BSCRIM", "BSA", "BSN" -> arrayOf("First Year", "Second Year", "Third Year", "Fourth Year")
             "BSARCHI"-> arrayOf("First Year", "Second Year", "Third Year", "Fourth Year", "Fifth Year")
 
-            else -> arrayOf()
+            else -> arrayOf("Course undefined")
         }
 
         // Create adapter for year Spinner
@@ -156,7 +149,6 @@ class StudentSignUpActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedYear = parent?.getItemAtPosition(position).toString()
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
