@@ -43,7 +43,6 @@ class StudentSignUpActivity : AppCompatActivity() {
         courseSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedCourse = parent?.getItemAtPosition(position).toString()
-
                 updateYearSpinner(selectedCourse)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {

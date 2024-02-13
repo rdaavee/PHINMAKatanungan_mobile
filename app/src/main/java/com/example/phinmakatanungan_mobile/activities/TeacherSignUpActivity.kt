@@ -1,7 +1,9 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.JsonReader
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -16,6 +18,7 @@ import com.example.phinmakatanungan_mobile.models.DefaultResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.StringReader
 
 class TeacherSignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +30,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
         val edittextname = findViewById<EditText>(R.id.editTextName)
         val signupButton = findViewById<AppCompatButton>(R.id.buttonSignUp)
         val departmentSpinner: Spinner = findViewById(R.id.spinner_deparment)
-        val departments = arrayOf("CITE", "CAHS", "CCJE", "CELA", "CEA")
+        val departments = arrayOf("Choose a department", "CITE", "CAHS", "CCJE", "CELA", "CEA")
 
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
         departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -35,6 +38,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
 
         departmentSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
                 val selectedDepartment = parent?.getItemAtPosition(position).toString()
 
             }
@@ -48,6 +52,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
             val password = edittextpassword.text.toString().trim()
             val name = edittextname.text.toString().trim()
             val department = departmentSpinner.selectedItem.toString().trim()
+
             val signupDataJson = "{\"email\":\"$email\",\"password\":\"$password\",\"name\":\"$name\",\"departments\":\"$department\"}"
 
             if(email.isEmpty()){
@@ -77,30 +82,42 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            try {
 
+                val reader = JsonReader(StringReader(signupDataJson))
+                reader.isLenient = true
 
-            PHINMAClient.instance.createTeacher(email, password, name, department)
-                .enqueue(object : Callback<DefaultResponse> {
+                reader.beginObject()
 
-                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    }
+                reader.close()
 
-                    override fun onResponse(
-                        call: Call<DefaultResponse>,
-                        response: Response<DefaultResponse>
-                    ) {
-                        if (response.isSuccessful && response.body() != null) {
-                            Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
-                        } else {
-                            val errorMessage = "Failed to get a valid response. Response code: ${response.code()}"
-                            Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
-                            Log.e("API_RESPONSE", errorMessage)
+                PHINMAClient.instance.createTeacher(email, password, name, department)
+                    .enqueue(object : Callback<DefaultResponse> {
+
+                        override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                            Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
                         }
-                    }
-                })
+                        override fun onResponse(
+                            call: Call<DefaultResponse>,
+                            response: Response<DefaultResponse>
+                        ) {
+                            if (response.isSuccessful && response.body() != null) {
+                                Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
+                                startActivity(Intent(this@TeacherSignUpActivity,LoginActivity::class.java))
+                            } else {
+                                val errorMessage = "Failed to get a valid response. Response code: ${response.code()}"
+                                Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
+                                Log.e("API_RESPONSE", errorMessage)
+                            }
+                        }
+                    })
 
+            } catch (e: Exception) {
+                Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
         }
 
     }
+
 }

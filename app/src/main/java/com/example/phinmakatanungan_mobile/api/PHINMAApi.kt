@@ -21,6 +21,7 @@ interface PHINMAApi {
 
     ):retrofit2.Call<DefaultResponse>
 
+    @FormUrlEncoded
     @POST("createteacher")
     fun createTeacher(
 

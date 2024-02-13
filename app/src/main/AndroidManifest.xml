@@ -25,6 +25,9 @@
             android:name=".activities.StudentSignUpActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.TeacherSignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
