@@ -66,6 +66,8 @@
                 android:id="@+id/editTextEmail"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:background="@drawable/custom_input"
                 android:inputType="textEmailAddress"/>
 
@@ -89,6 +91,8 @@
                 android:id="@+id/editTextStudNumber"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:background="@drawable/custom_input"/>
 
         </LinearLayout>
@@ -110,6 +114,8 @@
                 android:id="@+id/editTextName"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:background="@drawable/custom_input" />
 
         </LinearLayout>
@@ -137,7 +143,7 @@
                 <Spinner
                     android:id="@+id/spinner_course"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
@@ -170,7 +176,7 @@
                 <Spinner
                     android:id="@+id/spinner_year"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
@@ -199,7 +205,8 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:inputType="textPassword"
-                android:paddingEnd="13dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:drawableEnd="@drawable/hide_pass" />
 
         </LinearLayout>

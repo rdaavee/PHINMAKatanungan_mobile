@@ -59,7 +59,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            PHINMAClient.instance.createUser(email, password, name, studnumber)
+            PHINMAClient.instance.createTeacher(email, password, name, studnumber)
                 .enqueue(object : Callback<DefaultResponse> {
 
                     override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {

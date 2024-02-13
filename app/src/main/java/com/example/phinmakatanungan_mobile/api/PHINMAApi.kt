@@ -15,7 +15,19 @@ interface PHINMAApi {
         @Field("email") email:String,
         @Field("password") password:String,
         @Field("name") name:String,
-        @Field("studnumber") studnumber:String
+        @Field("studnumber") studnumber:String,
+        @Field("course") course:String,
+        @Field("year") year:String
 
-        ):retrofit2.Call<DefaultResponse>
+    ):retrofit2.Call<DefaultResponse>
+
+    @POST("createteacher")
+    fun createTeacher(
+
+        @Field("email") email:String,
+        @Field("password") password:String,
+        @Field("name") name:String,
+        @Field("studnumber") studnumber:String,
+
+    ):retrofit2.Call<DefaultResponse>
 }
