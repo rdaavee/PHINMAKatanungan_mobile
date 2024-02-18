@@ -1,32 +1,35 @@
 package com.example.phinmakatanungan_mobile.api
 
+import android.util.Base64
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import android.util.Base64
+import java.util.concurrent.TimeUnit
 
 object PHINMAClient {
 
-    private val AUTH = "Basic " + Base64.encodeToString("testuser:123456".toByteArray(), Base64.NO_WRAP)
-
-    private const val BASE_URL = "http://192.168.100.66/mobileapi/public/"
+    private const val BASE_URL = "http://192.168.100.66:8000/api/"
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
-
-            val original = chain.request()
-
-            val requestBuilder = original.newBuilder()
-                .addHeader("Authorization", AUTH)
-                .method(original.method(), original.body())
-
-            val request = requestBuilder.build()
+            val request = chain.request().newBuilder()
+                .addHeader("Authorization", getAuthToken())
+                .build()
             chain.proceed(request)
+        }
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) // Add logging interceptor
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .build()
 
-        }.build()
+    private fun getAuthToken(): String {
+        val credentials = "root:"
+        val encodedCredentials = Base64.encode(credentials.toByteArray(), Base64.NO_WRAP)
+        return "Basic " + String(encodedCredentials)
+    }
 
-    val instance: PHINMAApi by lazy{
-
+    val instance: PHINMAApi by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -35,5 +38,4 @@ object PHINMAClient {
 
         retrofit.create(PHINMAApi::class.java)
     }
-
 }

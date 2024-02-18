@@ -9,16 +9,17 @@ import retrofit2.http.POST
 interface PHINMAApi {
 
     @FormUrlEncoded
-    @POST("createuser")
+    @POST("storeStudent")
     fun createUser(
-
+        @Field("student_id") studentID:String,
+        @Field("first_name") firstName:String,
+        @Field("middle_name") middleName:String,
+        @Field("last_name") lastName:String,
         @Field("email") email:String,
         @Field("password") password:String,
-        @Field("name") name:String,
-        @Field("studnumber") studnumber:String,
-        @Field("course") course:String,
-        @Field("year") year:String
-
+        @Field("course_id") course:String,
+        @Field("year_level") year:String,
+        @Field("school_id") school:String
     ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded

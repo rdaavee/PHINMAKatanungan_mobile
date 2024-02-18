@@ -9,7 +9,9 @@
         android:id="@+id/dashboardFragment"
         android:name="com.example.phinmakatanungan_mobile.activities.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action android:id="@+id/action_dashboardFragment_to_profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.phinmakatanungan_mobile.activities.ProfileFragment"

@@ -91,6 +91,7 @@
                 android:id="@+id/editTextStudNumber"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
+                android:inputType="number"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 android:background="@drawable/custom_input"/>
@@ -100,7 +101,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="First Name"
             android:textSize="14sp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_marginStart="40dp"/>
@@ -111,12 +112,91 @@
             android:gravity="center_horizontal">
 
             <EditText
-                android:id="@+id/editTextName"
+                android:id="@+id/editTextfirstName"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 android:background="@drawable/custom_input" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Middle Name"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/editTextMiddleName"
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/custom_input" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/editTextLastName"
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/custom_input" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="School"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                app:cardCornerRadius="8dp"
+                android:padding="5dp"
+                android:background="@drawable/custom_input">
+
+                <Spinner
+                    android:id="@+id/spinner_school"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    />
+
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
