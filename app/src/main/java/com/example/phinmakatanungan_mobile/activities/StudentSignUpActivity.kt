@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -33,12 +34,13 @@ class StudentSignUpActivity : AppCompatActivity() {
         val edittextmiddlename = findViewById<EditText>(R.id.editTextMiddleName)
         val edittextlastname = findViewById<EditText>(R.id.editTextLastName)
         val edittextstudnumber = findViewById<EditText>(R.id.editTextStudNumber)
+        val log = findViewById<TextView>(R.id.log)
         val signupButton = findViewById<AppCompatButton>(R.id.buttonSignUp)
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val courseSpinner: Spinner = findViewById(R.id.spinner_course)
         val yearSpinner: Spinner = findViewById(R.id.spinner_year)
-        val schools = arrayOf("1", "2", "3", "4", "5")
-        val courses = arrayOf("Choose a course", "BSIT", "BSCE", "BSBA", "BSBE", "BSARCH", "BSCRIM", "BSA", "BSN")
+        val schools = arrayOf("01", "02", "03", "04", "05")
+        val courses = arrayOf("Choose a course", "BSIT", "BSCE", "BSBA", "BSBE", "BSARCH", "BSCRIM", "BSA", "BSN", "BSLAW")
 
 
         val courseAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courses)
@@ -126,7 +128,7 @@ class StudentSignUpActivity : AppCompatActivity() {
                 reader.isLenient = true
                 reader.beginObject()
                 reader.close()
-                PHINMAClient.instance.createUser(email, password, firstName, middleName, lastName, studentID, school, course, year)
+                PHINMAClient.instance.createUser(studentID,firstName,middleName,lastName,email,password,year,course,school)
                     .enqueue(object : Callback<DefaultResponse> {
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                             Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
@@ -146,6 +148,7 @@ class StudentSignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
+            log.text = signupDataJson.toString()
         }
     }
     private fun updateYearSpinner(selectedCourse: String) {
@@ -153,8 +156,8 @@ class StudentSignUpActivity : AppCompatActivity() {
         val yearSpinner = findViewById<Spinner>(R.id.spinner_year)
         // Define years array based on selected course
         val years: Array<String> = when (selectedCourse) {
-            "BSIT", "BSCE", "BSBA", "BSBE", "BSCRIM", "BSA", "BSN" -> arrayOf("First Year", "Second Year", "Third Year", "Fourth Year")
-            "BSARCH"-> arrayOf("First Year", "Second Year", "Third Year", "Fourth Year", "Fifth Year")
+            "BSIT", "BSCE", "BSBA", "BSBE", "BSCRIM", "BSA", "BSN" -> arrayOf("First", "Second", "Third", "Fourth")
+            "BSARCH", "BSLAW"-> arrayOf("First", "Second", "Third", "Fourth", "Fifth")
 
             else -> arrayOf("Course undefined")
         }

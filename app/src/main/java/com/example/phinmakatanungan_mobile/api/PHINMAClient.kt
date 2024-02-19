@@ -9,8 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object PHINMAClient {
 
-    private const val BASE_URL = "http://192.168.100.66:8000/api/"
-
+    private const val BASE_URL = "http://replace with your IP/api/"
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val request = chain.request().newBuilder()
