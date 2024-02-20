@@ -21,7 +21,7 @@ interface PHINMAApi {
         @Field("password") password:String,
         @Field("year_level") year:String,
         @Field("course_id") course:String,
-        @Field("school_id") school:String
+        @Field("school_id") camp:String
     ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded

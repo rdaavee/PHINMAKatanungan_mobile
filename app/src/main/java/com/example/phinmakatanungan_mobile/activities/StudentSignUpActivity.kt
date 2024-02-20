@@ -1,6 +1,7 @@
 package com.example.phinmakatanungan_mobile.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.JsonReader
 import android.util.Log
@@ -28,6 +29,7 @@ class StudentSignUpActivity : AppCompatActivity() {
 
     private lateinit var button : AppCompatButton
     private lateinit var image : ImageView
+    private lateinit var selectedImage: Uri
 
     companion object {
         val IMAGE_REQUEST_CODE = 100
@@ -39,6 +41,7 @@ class StudentSignUpActivity : AppCompatActivity() {
         button = findViewById(R.id.buttonImagePicker)
         image = findViewById(R.id.iv_profilePicture)
 
+        //variables
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
         val edittextpassword = findViewById<EditText>(R.id.editTextPassword)
         val edittextfirstname = findViewById<EditText>(R.id.editTextfirstName)
@@ -50,10 +53,11 @@ class StudentSignUpActivity : AppCompatActivity() {
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val courseSpinner: Spinner = findViewById(R.id.spinner_course)
         val yearSpinner: Spinner = findViewById(R.id.spinner_year)
-        val schools = arrayOf("01", "02", "03", "04", "05")
+        val schools = arrayOf("UPang - Dagpuan", "UPang - Urdaneta")
         val courses = arrayOf("Choose a course", "BSIT", "BSCE", "BSBA", "BSBE", "BSARCH", "BSCRIM", "BSA", "BSN", "BSLAW")
 
 
+        //adapters for the spinners
         val courseAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courses)
         courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         courseSpinner.adapter = courseAdapter
@@ -83,7 +87,7 @@ class StudentSignUpActivity : AppCompatActivity() {
             pickImageGallery()
         }
 
-
+        //signup functionality
         signupButton.setOnClickListener{
 
             val email = edittextemail.text.toString().trim()
@@ -95,10 +99,18 @@ class StudentSignUpActivity : AppCompatActivity() {
             val school = schoolSpinner.selectedItem.toString().trim()
             val course = courseSpinner.selectedItem.toString().trim()
             val year = yearSpinner.selectedItem.toString().trim()
+            var camp = ""
+            if(school == "UPang - Dagpuan") {
+                camp = "01"
+            }
+            else if(school == "UPang - Urdaneta") {
+                camp = "02"
+            }
 
-            val signupDataJson = "{\"student_id\":\"$studentID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"school_id\":\"$school\"}"
+            //json data
+            val signupDataJson = "{\"student_id\":\"$studentID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"school_id\":\"$camp\"}"
 
-
+            //validation
             if(email.isEmpty()){
                 edittextemail.error = "Email required"
                 edittextemail.requestFocus()
@@ -138,12 +150,13 @@ class StudentSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            //correct malformed data
             try {
                 val reader = JsonReader(StringReader(signupDataJson))
                 reader.isLenient = true
                 reader.beginObject()
                 reader.close()
-                PHINMAClient.instance.createUser(studentID,firstName,middleName,lastName,email,password,year,course,school)
+                PHINMAClient.instance.createUser(studentID,firstName,middleName,lastName,email,password,year,course,camp)
                     .enqueue(object : Callback<DefaultResponse> {
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                             Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
@@ -153,7 +166,11 @@ class StudentSignUpActivity : AppCompatActivity() {
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
                                 startActivity(Intent(this@StudentSignUpActivity, LoginActivity::class.java))
                             } else {
-                                val errorMessage = "Failed to get a valid response. Response code: ${response.code()}"
+                                val errorMessage: String = try {
+                                    response.errorBody()?.string() ?: "Failed to get a valid response. Response code: ${response.code()}"
+                                } catch (e: Exception) {
+                                    "Failed to get a valid response. Response code: ${response.code()}"
+                                }
                                 Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
                                 Log.e("API_RESPONSE", errorMessage)
                             }
@@ -166,6 +183,7 @@ class StudentSignUpActivity : AppCompatActivity() {
             log.text = signupDataJson.toString()
         }
     }
+    //updates spinner based on course
     private fun updateYearSpinner(selectedCourse: String) {
 
         val yearSpinner = findViewById<Spinner>(R.id.spinner_year)
@@ -177,7 +195,6 @@ class StudentSignUpActivity : AppCompatActivity() {
             else -> arrayOf("Course undefined")
         }
 
-        // Create adapter for year Spinner
         val yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         yearSpinner.adapter = yearAdapter
@@ -190,7 +207,7 @@ class StudentSignUpActivity : AppCompatActivity() {
             }
         }
     }
-
+    //image picker
     private fun pickImageGallery() {
 
         val intent = Intent(Intent.ACTION_PICK)
@@ -200,7 +217,6 @@ class StudentSignUpActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             image.setImageURI(data?.data)
         }
