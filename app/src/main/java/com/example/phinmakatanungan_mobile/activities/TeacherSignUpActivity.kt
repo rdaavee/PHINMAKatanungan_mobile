@@ -27,10 +27,15 @@ class TeacherSignUpActivity : AppCompatActivity() {
 
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
         val edittextpassword = findViewById<EditText>(R.id.editTextPassword)
-        val edittextname = findViewById<EditText>(R.id.editTextName)
+        val edittextfirstname = findViewById<EditText>(R.id.editTextfirstName)
+        val edittextmiddlename = findViewById<EditText>(R.id.editTextMiddleName)
+        val edittextlastname = findViewById<EditText>(R.id.editTextLastName)
+        val edittextidnumber = findViewById<EditText>(R.id.editTextIDNumber)
         val signupButton = findViewById<AppCompatButton>(R.id.buttonSignUp)
-        val departmentSpinner: Spinner = findViewById(R.id.spinner_deparment)
+        val departmentSpinner: Spinner = findViewById(R.id.spinner_department)
+        val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val departments = arrayOf("Choose a department", "CITE", "CAHS", "CCJE", "CELA", "CEA")
+        val schools = arrayOf("UPang - Dagpuan", "UPang - Urdaneta")
 
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
         departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -46,14 +51,37 @@ class TeacherSignUpActivity : AppCompatActivity() {
             }
         }
 
+        val schoolAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, schools)
+        schoolAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        schoolSpinner.adapter = schoolAdapter
+
+        schoolSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedSchool = parent?.getItemAtPosition(position).toString()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
         signupButton.setOnClickListener{
 
             val email = edittextemail.text.toString().trim()
             val password = edittextpassword.text.toString().trim()
-            val name = edittextname.text.toString().trim()
-            val department = departmentSpinner.selectedItem.toString().trim()
+            val firstName = edittextfirstname.text.toString().trim()
+            val middleName = edittextmiddlename.text.toString().trim()
+            val lastName = edittextlastname.text.toString().trim()
+            val teacherID = edittextidnumber.text.toString().trim()
+            val school = schoolSpinner.selectedItem.toString().trim()
+            val departmentID = departmentSpinner.selectedItem.toString().trim()
+            var camp = ""
+            if(school == "UPang - Dagpuan") {
+                camp = "01"
+            }
+            else if(school == "UPang - Urdaneta") {
+                camp = "02"
+            }
 
-            val signupDataJson = "{\"email\":\"$email\",\"password\":\"$password\",\"name\":\"$name\",\"departments\":\"$department\"}"
+            val signupDataJson = "{\"teacher_id\":\"$teacherID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"email\":\"$email\",\"password\":\"$password\",\"department_id\":\"$departmentID\",\"school_id\":\"$camp\"}"
 
             if(email.isEmpty()){
 
@@ -69,16 +97,25 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if(department == "Choose a department"){
+            if(departmentID == "Choose a department"){
                 Toast.makeText(applicationContext, "Choose a department", Toast.LENGTH_SHORT).show()
                 departmentSpinner.requestFocus()
                 return@setOnClickListener
             }
 
-            if(name.isEmpty()){
-
-                edittextname.error = "Name required"
-                edittextname.requestFocus()
+            if(firstName.isEmpty()){
+                edittextfirstname.error = "Name required"
+                edittextfirstname.requestFocus()
+                return@setOnClickListener
+            }
+            if(middleName.isEmpty()){
+                edittextmiddlename.error = "Name required"
+                edittextmiddlename.requestFocus()
+                return@setOnClickListener
+            }
+            if(lastName.isEmpty()){
+                edittextlastname.error = "Name required"
+                edittextlastname.requestFocus()
                 return@setOnClickListener
             }
 
@@ -91,7 +128,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
 
                 reader.close()
 
-                PHINMAClient.instance.createTeacher(email, password, name, department)
+                PHINMAClient.instance.createTeacher(teacherID, firstName, middleName, lastName, email, password, departmentID, camp)
                     .enqueue(object : Callback<DefaultResponse> {
 
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {

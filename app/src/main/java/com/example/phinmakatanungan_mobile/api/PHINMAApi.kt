@@ -25,13 +25,18 @@ interface PHINMAApi {
     ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded
+    @Headers("Accept: application/json")
     @POST("createteacher")
     fun createTeacher(
 
+        @Field("teacher_id") teacherID:String,
+        @Field("first_name") firstName:String,
+        @Field("middle_name") middleName:String,
+        @Field("last_name") lastName:String,
         @Field("email") email:String,
         @Field("password") password:String,
-        @Field("name") name:String,
-        @Field("department") department:String
+        @Field("department_id") departmentID:String,
+        @Field("school_id") school:String
 
     ):retrofit2.Call<DefaultResponse>
 }
