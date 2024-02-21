@@ -6,11 +6,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.phinmakatanungan_mobile.R
+import com.example.phinmakatanungan_mobile.dbHelper.DBHelper
 
 class WelcomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
+
+        val dbHelper = DBHelper(this)
+        val db = dbHelper.writableDatabase
 
         findViewById<Button>(R.id.btnLogin).setOnClickListener {
             startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
