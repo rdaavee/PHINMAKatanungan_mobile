@@ -2,6 +2,7 @@ package com.example.phinmakatanungan_mobile.api
 
 import android.telecom.Call
 import com.example.phinmakatanungan_mobile.models.DefaultResponse
+import com.example.phinmakatanungan_mobile.models.LoginResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
@@ -39,4 +40,13 @@ interface PHINMAApi {
         @Field("school_id") school:String
 
     ):retrofit2.Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("userlogin")
+    fun userLogin(
+        @Field("email") email:String,
+        @Field("password") password: String
+
+    ):retrofit2.Call<LoginResponse>
 }
