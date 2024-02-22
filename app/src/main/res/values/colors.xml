@@ -8,6 +8,7 @@
     <color name="text_color_logout">#FF0000</color>
     <color name="text_color_signup">#1A8B93</color>
     <color name="text_color_login">#1A8B93</color>
+    <color name="text_color_subheader">#F9CE4C</color>
 
                     <!-- BUTTONS -->
     <color name="btn_primary_bg_color">#1A8B93</color>

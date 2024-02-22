@@ -18,11 +18,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:itemTextColor="@color/text_color_secondary"
-        app:itemRippleColor="@android:color/transparent"
+        app:itemIconTint="@color/text_color_secondary"
+        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
         app:itemTextAppearanceActive="@style/bottomNav_font_details"
         app:itemTextAppearanceInactive="@style/bottomNav_font_details"
-        app:itemTextAppearanceActiveBoldEnabled="true"
-        app:labelVisibilityMode="labeled"/>
+        app:itemTextAppearanceActiveBoldEnabled="true" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"

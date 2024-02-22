@@ -22,14 +22,13 @@
       android:layout_alignParentBottom="true"
       android:background="@color/bottomNav_bg_color"
       app:menu="@menu/bottom_nav"
-      app:itemIconSize="30dp"
+      app:itemIconSize="25dp"
       app:itemIconTint="#FFFFFF"
       app:itemTextColor="@color/text_color_secondary"
       app:itemRippleColor="@android:color/transparent"
-      app:itemTextAppearanceActive="@style/bottomNav_font_details"
+      app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
       app:itemTextAppearanceInactive="@style/bottomNav_font_details"
-      app:itemTextAppearanceActiveBoldEnabled="true"
-      app:labelVisibilityMode="labeled"/>
+      app:itemTextAppearanceActiveBoldEnabled="true" />
 
 
 </RelativeLayout>

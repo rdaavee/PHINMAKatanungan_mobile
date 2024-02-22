@@ -67,7 +67,7 @@
                 android:id="@+id/editTextEmail"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
-                android:paddingStart="5dp"
+                android:paddingStart="15dp"
                 android:paddingEnd="5dp"
                 android:background="@drawable/custom_input"
                 android:inputType="textEmailAddress"/>
@@ -93,7 +93,7 @@
                 android:layout_width="358dp"
                 android:layout_height="60dp"
                 android:inputType="number"
-                android:paddingStart="5dp"
+                android:paddingStart="15dp"
                 android:paddingEnd="5dp"
                 android:background="@drawable/custom_input"/>
 
@@ -116,7 +116,7 @@
                 android:id="@+id/editTextfirstName"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
-                android:paddingStart="5dp"
+                android:paddingStart="15dp"
                 android:paddingEnd="5dp"
                 android:background="@drawable/custom_input" />
 
@@ -139,7 +139,7 @@
                 android:id="@+id/editTextMiddleName"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
-                android:paddingStart="5dp"
+                android:paddingStart="15dp"
                 android:paddingEnd="5dp"
                 android:background="@drawable/custom_input" />
 
@@ -162,7 +162,7 @@
                 android:id="@+id/editTextLastName"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
-                android:paddingStart="5dp"
+                android:paddingStart="15dp"
                 android:paddingEnd="5dp"
                 android:background="@drawable/custom_input" />
 
@@ -286,9 +286,9 @@
                 android:layout_height="60dp"
                 android:background="@drawable/custom_input"
                 android:inputType="textPassword"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:drawableEnd="@drawable/hide_pass" />
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:drawableEnd="@drawable/pass_hide" />
 
         </LinearLayout>
 
@@ -358,7 +358,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="50dp">
 
             <TextView
                 android:id="@+id/signup2"

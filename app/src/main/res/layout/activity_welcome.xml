@@ -27,7 +27,7 @@
         android:layout_marginStart="30dp"
         android:fontFamily="@font/montserrat_black"
         android:text="Welcome to\nPHINMAKatanungan"
-        android:textColor="#00AF97"
+        android:textColor="#1A8B93"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_subHeader" />
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:text="Easily collaborate and interact with other users\naffiliated in Dagupan Campus with this forum-\nbased community."
-        android:textColor="#005483"
+        android:textColor="@color/text_color_primary"
         android:textSize="11sp"
         android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
