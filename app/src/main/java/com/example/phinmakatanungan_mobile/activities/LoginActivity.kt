@@ -15,7 +15,6 @@ import com.example.phinmakatanungan_mobile.api.PHINMAClient
 import com.example.phinmakatanungan_mobile.dbHelper.DBHelper
 import com.example.phinmakatanungan_mobile.models.LoginResponse
 import retrofit2.Call
-import okhttp3.ResponseBody
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.StringReader
@@ -74,10 +73,11 @@ class LoginActivity : AppCompatActivity() {
                             response: Response<LoginResponse>
                         ) {
                             if (response.isSuccessful && response.body() != null) {
+                                val tokenFromApi = response.body()!!.accessToken
+                                val helper = DBHelper(applicationContext)
+                                helper.addOrUpdateToken(tokenFromApi)
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
-                                startActivity(
-                                    Intent(this@LoginActivity, DashboardActivity::class.java)
-                                )
+                                startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
                             } else {
                                 val errorMessage: String = try {
                                     response.errorBody()?.string()

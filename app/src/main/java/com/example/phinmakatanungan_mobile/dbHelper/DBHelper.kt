@@ -4,38 +4,46 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-class DBHelper(private val context: Context) : SQLiteOpenHelper(context, "tokenHolder", null, 2) {
+
+class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
+    companion object {
+        const val DATABASE_VERSION = 1
+        const val DATABASE_NAME = "tokens_database"
+        const val TABLE_NAME = "TOKENS"
+        const val COLUMN_ID = "id INTEGER PRIMARY KEY"
+        const val COLUMN_ACTIVE_TOKEN = "ACTIVE_TOKEN"
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
-        // Create tables
-        db.execSQL(CREATE_TABLE_USERS)
+        val createTableQuery = "CREATE TABLE $TABLE_NAME ($COLUMN_ID, $COLUMN_ACTIVE_TOKEN TEXT)"
+        db.execSQL(createTableQuery)
+        val contentValues = ContentValues().apply {
+            put("id", 1)
+            put(COLUMN_ACTIVE_TOKEN, null as String?)
+        }
+        db.insert(TABLE_NAME, null, contentValues)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // Drop older tables if they exist
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_TOKEN")
-        // Recreate tables
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
-
-    fun insertToken(token: String): Boolean {
-        return try {
-            val db = this.writableDatabase
+    fun addOrUpdateToken(activeToken: String) {
+        val CURRENT_ID = "id"
+        val db = this.writableDatabase
+        try {
             val values = ContentValues().apply {
-                put("currentToken", token)
+                put(COLUMN_ACTIVE_TOKEN, activeToken)
             }
-            val insertionResult = db.insert(TABLE_TOKEN, null, values)
+            db.update(TABLE_NAME, values, "$CURRENT_ID = ?", arrayOf("1"))
+        } finally {
             db.close()
-            insertionResult != -1L
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
     }
-
-    companion object {
-        private const val DATABASE_VERSION = 1
-        private const val DATABASE_NAME = "token.db"
-        private const val TABLE_TOKEN = "current_token"
-        private const val CREATE_TABLE_USERS = "CREATE TABLE $TABLE_TOKEN (id INTEGER PRIMARY KEY, currentToken TEXT)"
+    fun deleteAllTokens() {
+        val db = this.writableDatabase
+        db.delete(TABLE_NAME, null, null)
+        db.close()
     }
 }
