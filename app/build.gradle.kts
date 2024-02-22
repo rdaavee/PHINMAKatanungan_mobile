@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.phinmakatanungan_mobile"
-        minSdk = 25
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -52,6 +52,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //splashscreen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
     //retrofit,okhttp,gson libraries
 

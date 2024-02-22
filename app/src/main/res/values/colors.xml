@@ -19,6 +19,9 @@
     <color name="bg_color_primary">#F3F6FF</color>
     <color name="bg_color_secondary">#FFFFFFFF</color>
 
+                <!-- SPLASHSCREEN BG -->
+    <color name="bg_color_splash">#1A8B93</color>
+
                     <!-- CHIPS -->
     <color name="chip_bg_color_bsit">#000000</color>
     <color name="chip_bg_color_bsn">#09921E</color>

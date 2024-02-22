@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.SplashScreen"
+            android:exported="false" />
+        <activity
             android:name=".activities.ChooseRoleActivity"
             android:exported="false" />
         <activity
@@ -38,6 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.WelcomeActivity"
+            android:theme="@style/Theme.App.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
