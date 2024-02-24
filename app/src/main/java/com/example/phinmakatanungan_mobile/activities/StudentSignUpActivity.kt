@@ -1,19 +1,15 @@
 package com.example.phinmakatanungan_mobile.activities
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.JsonReader
 import android.util.Log
 import android.view.View
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -40,8 +36,9 @@ class StudentSignUpActivity : AppCompatActivity() {
         val edittextlastname = findViewById<EditText>(R.id.editTextLastName)
         val edittextstudnumber = findViewById<EditText>(R.id.editTextStudNumber)
         val edittextconfirmpassword = findViewById<EditText>(R.id.editTextConfirmPassword)
-        val log = findViewById<TextView>(R.id.log)
+
         val signupButton = findViewById<AppCompatButton>(R.id.buttonSignUp)
+
         val departmentSpinner : Spinner = (findViewById(R.id.spinner_department))
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val courseSpinner: Spinner = findViewById(R.id.spinner_course)
@@ -50,7 +47,6 @@ class StudentSignUpActivity : AppCompatActivity() {
         val schools = arrayOf("Branch", "University of Pangasinan", "Araullo University", "Cagayan De Oro College", "UNIVERSITY OF ILOILO")
         val departments = arrayOf("SHS","CITE","CEA","CAHS","CCJE","CELA","CMA")
         val genders = arrayOf("Male", "Female", "Rather not tell")
-
 
         //adapters for the spinners
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
@@ -87,6 +83,14 @@ class StudentSignUpActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+        }
+
+        findViewById<ImageView>(R.id.iv_backBtnChooseRole).setOnClickListener {
+            startActivity(Intent(this@StudentSignUpActivity, ChooseRoleActivity::class.java))
+//            this@StudentSignUpActivity.overridePendingTransition(
+//                R.anim.slide_in_right,
+//                R.anim.slide_out_right
+//            )
         }
 
         //signup functionality
@@ -182,6 +186,7 @@ class StudentSignUpActivity : AppCompatActivity() {
                             if (response.isSuccessful && response.body() != null) {
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
                                 startActivity(Intent(this@StudentSignUpActivity, LoginActivity::class.java))
+                                finish()
                             } else {
                                 val errorMessage: String = try {
                                     response.errorBody()?.string() ?: "Failed to get a valid response. Response code: ${response.code()}"
@@ -197,7 +202,6 @@ class StudentSignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
-            log.text = signupDataJson.toString()
         }
     }
     //updates spinner based on course
@@ -253,5 +257,10 @@ class StudentSignUpActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+    }
+    override fun finish() {
+        super.finish()
+        // Animation when the activity is finished (exited)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }

@@ -78,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
                                 helper.addOrUpdateToken(tokenFromApi)
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
                                 startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                                finish()
                             } else {
                                 val errorMessage: String = try {
                                     response.errorBody()?.string()

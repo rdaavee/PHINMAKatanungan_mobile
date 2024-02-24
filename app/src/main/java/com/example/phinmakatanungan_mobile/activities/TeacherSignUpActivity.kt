@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -76,6 +77,10 @@ class TeacherSignUpActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+        }
+
+        findViewById<ImageView>(R.id.iv_backBtnChooseRole2).setOnClickListener {
+            startActivity(Intent(this@TeacherSignUpActivity, ChooseRoleActivity::class.java))
         }
 
         signupButton.setOnClickListener{
@@ -160,6 +165,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
                             if (response.isSuccessful && response.body() != null) {
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
                                 startActivity(Intent(this@TeacherSignUpActivity,LoginActivity::class.java))
+                                finish()
                             } else {
                                 val errorMessage = "Failed to get a valid response. Response code: ${response.code()}"
                                 Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_LONG).show()
