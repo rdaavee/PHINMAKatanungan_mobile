@@ -30,5 +30,14 @@
       app:itemTextAppearanceInactive="@style/bottomNav_font_details"
       app:itemTextAppearanceActiveBoldEnabled="true" />
 
+  <Button
+      android:id="@+id/btnSignOut"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="250dp"
+      android:backgroundTint="@color/text_color_logout"
+      android:text="LOG OUT"
+      android:textSize="20sp"/>
+
 
 </RelativeLayout>

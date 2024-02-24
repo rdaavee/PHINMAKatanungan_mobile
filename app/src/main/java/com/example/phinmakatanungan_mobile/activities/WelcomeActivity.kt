@@ -1,25 +1,47 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.phinmakatanungan_mobile.R
-import com.example.phinmakatanungan_mobile.dbHelper.DBHelper
 
 class WelcomeActivity : AppCompatActivity() {
+
+    private lateinit var sharedPreferences : SharedPreferences
+
+    private fun getAuthToken() : String {
+
+        return sharedPreferences.getString("authToken", "") ?: ""
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Check if a valid token is present in SharedPreferences
+        sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+
+
+        val authToken = getAuthToken()
+        if (authToken.isNotEmpty()) {
+            // Redirect to DashboardActivity
+            startActivity(Intent(this@WelcomeActivity, DashboardActivity::class.java))
+            finish()  // Finish LoginActivity to prevent the user from navigating back
+        }else {
+                // Log the absence of a token
+                Log.d("WelcomeActivity", "No token detected")
+        }
 
         Thread.sleep(3000)
         installSplashScreen()
 
         setContentView(R.layout.activity_welcome)
 
-        val dbHelper = DBHelper(this)
-        val db = dbHelper.writableDatabase
 
         findViewById<Button>(R.id.btnLogin).setOnClickListener {
             startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
@@ -29,4 +51,5 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(Intent(this@WelcomeActivity, ChooseRoleActivity::class.java))
         }
     }
+
 }
