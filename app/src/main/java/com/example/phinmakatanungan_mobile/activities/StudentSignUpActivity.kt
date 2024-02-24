@@ -27,19 +27,10 @@ import java.io.StringReader
 
 class StudentSignUpActivity : AppCompatActivity() {
 
-    private lateinit var button : AppCompatButton
-    private lateinit var image : ImageView
-    private lateinit var selectedImage: Uri
-
-    companion object {
-        val IMAGE_REQUEST_CODE = 100
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_signup)
 
-        button = findViewById(R.id.buttonImagePicker)
-        image = findViewById(R.id.iv_profilePicture)
 
         //variables
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
@@ -48,29 +39,44 @@ class StudentSignUpActivity : AppCompatActivity() {
         val edittextmiddlename = findViewById<EditText>(R.id.editTextMiddleName)
         val edittextlastname = findViewById<EditText>(R.id.editTextLastName)
         val edittextstudnumber = findViewById<EditText>(R.id.editTextStudNumber)
+        val edittextconfirmpassword = findViewById<EditText>(R.id.editTextConfirmPassword)
         val log = findViewById<TextView>(R.id.log)
         val signupButton = findViewById<AppCompatButton>(R.id.buttonSignUp)
+        val departmentSpinner : Spinner = (findViewById(R.id.spinner_department))
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val courseSpinner: Spinner = findViewById(R.id.spinner_course)
+        val genderSpinner: Spinner = findViewById(R.id.spinner_gender)
         val yearSpinner: Spinner = findViewById(R.id.spinner_year)
-        val schools = arrayOf("UPang - Dagpuan", "UPang - Urdaneta")
-        val courses = arrayOf("Choose a course", "BSIT", "BSCE", "BSBA", "BSBE", "BSARCH", "BSCRIM", "BSA", "BSN", "BSLAW")
+        val schools = arrayOf("Branch", "University of Pangasinan", "Araullo University", "Cagayan De Oro College", "UNIVERSITY OF ILOILO")
+        val departments = arrayOf("SHS","CITE","CEA","CAHS","CCJE","CELA","CMA")
+        val genders = arrayOf("Male", "Female", "Rather not tell")
 
 
         //adapters for the spinners
-        val courseAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courses)
-        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        courseSpinner.adapter = courseAdapter
+        val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
+        departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        departmentSpinner.adapter = departmentAdapter
 
-        courseSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        departmentSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedCourse = parent?.getItemAtPosition(position).toString()
-                updateYearSpinner(selectedCourse)
+                val selectedDepartment = parent?.getItemAtPosition(position).toString()
+                updateCourseSpinner(selectedDepartment)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
 
+        val genderAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genders)
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        genderSpinner.adapter = genderAdapter
+
+        genderSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedGender = parent?.getItemAtPosition(position).toString()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
         val schoolAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, schools)
         schoolAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         schoolSpinner.adapter = schoolAdapter
@@ -83,32 +89,37 @@ class StudentSignUpActivity : AppCompatActivity() {
             }
         }
 
-        button.setOnClickListener {
-            pickImageGallery()
-        }
-
         //signup functionality
         signupButton.setOnClickListener{
 
             val email = edittextemail.text.toString().trim()
             val password = edittextpassword.text.toString().trim()
+            val confirmPassword = edittextconfirmpassword.text.toString().trim()
             val firstName = edittextfirstname.text.toString().trim()
             val middleName = edittextmiddlename.text.toString().trim()
             val lastName = edittextlastname.text.toString().trim()
+            val selectedGender = genderSpinner.selectedItem.toString().trim()
             val studentID = edittextstudnumber.text.toString().trim()
+            val departmentID = departmentSpinner.selectedItem.toString().trim()
             val school = schoolSpinner.selectedItem.toString().trim()
             val course = courseSpinner.selectedItem.toString().trim()
             val year = yearSpinner.selectedItem.toString().trim()
-            var camp = ""
-            if(school == "UPang - Dagpuan") {
-                camp = "01"
+            var campus = ""
+            if(school == "University of Pangasinan") {
+                campus = "01"
             }
-            else if(school == "UPang - Urdaneta") {
-                camp = "02"
+            else if(school == "Araullo University") {
+                campus = "02"
+            }
+            else if(school == "Cagayan De Oro College") {
+                campus = "03"
+            }
+            else if(school == "UNIVERSITY OF ILOILO") {
+                campus = "04"
             }
 
             //json data
-            val signupDataJson = "{\"student_id\":\"$studentID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"school_id\":\"$camp\"}"
+            val signupDataJson = "{\"student_id\":\"$studentID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
 
             //validation
             if(email.isEmpty()){
@@ -150,13 +161,19 @@ class StudentSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if(password != confirmPassword){
+                edittextconfirmpassword.error = "Password doesn't match"
+                edittextconfirmpassword.requestFocus()
+                return@setOnClickListener
+            }
+
             //correct malformed data
             try {
                 val reader = JsonReader(StringReader(signupDataJson))
                 reader.isLenient = true
                 reader.beginObject()
                 reader.close()
-                PHINMAClient.instance.createUser(studentID,firstName,middleName,lastName,email,password,year,course,camp)
+                PHINMAClient.instance.createUser(studentID,firstName,middleName,lastName,selectedGender,email,password,year,course,departmentID,campus)
                     .enqueue(object : Callback<DefaultResponse> {
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                             Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
@@ -190,7 +207,8 @@ class StudentSignUpActivity : AppCompatActivity() {
         // Define years array based on selected course
         val years: Array<String> = when (selectedCourse) {
             "BSIT", "BSCE", "BSBA", "BSBE", "BSCRIM", "BSA", "BSN" -> arrayOf("First", "Second", "Third", "Fourth")
-            "BSARCH", "BSLAW"-> arrayOf("First", "Second", "Third", "Fourth", "Fifth")
+            "BSArch", "BSLAW"-> arrayOf("First", "Second", "Third", "Fourth", "Fifth")
+            "HUMMS", "STEM", "GAS", "ABM" -> arrayOf("Grade 11","Grade 12")
 
             else -> arrayOf("Course undefined")
         }
@@ -207,19 +225,33 @@ class StudentSignUpActivity : AppCompatActivity() {
             }
         }
     }
-    //image picker
-    private fun pickImageGallery() {
 
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    private fun updateCourseSpinner(selectedDepartment: String) {
 
-    }
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            image.setImageURI(data?.data)
+        val courseSpinner = findViewById<Spinner>(R.id.spinner_course)
+        // Define courses array based on selected department
+        val courses: Array<String> = when (selectedDepartment) {
+            "CITE"  -> arrayOf("BSIT")
+            "CEA" -> arrayOf("BSCE","BSEE","BSArch","BSCpE","BSME")
+            "CAHS" -> arrayOf("BSN","BSPharm","BMLS","BSPsych","BSN")
+            "CCJE" -> arrayOf("BSCrim")
+            "CELA" -> arrayOf("ABComm","ABPolSci","BSEEduc","BSED")
+            "CMA" -> arrayOf("BSA","BSMA","BSAT","BSHM","BSTM","BSBA")
+            "SHS" -> arrayOf("HUMMS","STEM","GAS","ABM")
+            else -> arrayOf("Department Undefined")
+        }
+
+        val courseAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courses)
+        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        courseSpinner.adapter = courseAdapter
+
+        courseSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedCourse = parent?.getItemAtPosition(position).toString()
+                updateYearSpinner(selectedCourse)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
         }
     }
 }

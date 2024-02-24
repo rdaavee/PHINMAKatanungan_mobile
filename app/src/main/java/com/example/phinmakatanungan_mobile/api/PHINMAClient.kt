@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 object PHINMAClient {
 
     //link to api
-    private const val BASE_URL = "http://192.168.100.66:8000/api/"
+    private const val BASE_URL = "https://phinmakatanungan-5024a311e7fa.herokuapp.com/api/"
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->

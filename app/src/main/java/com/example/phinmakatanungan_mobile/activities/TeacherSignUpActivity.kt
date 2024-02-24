@@ -31,11 +31,14 @@ class TeacherSignUpActivity : AppCompatActivity() {
         val edittextmiddlename = findViewById<EditText>(R.id.editTextMiddleName)
         val edittextlastname = findViewById<EditText>(R.id.editTextLastName)
         val edittextidnumber = findViewById<EditText>(R.id.editTextIDNumber)
+        val edittextconfirmpassword = findViewById<EditText>(R.id.editTextConfirmPassword)
         val signupButton = findViewById<AppCompatButton>(R.id.buttonSignUp)
         val departmentSpinner: Spinner = findViewById(R.id.spinner_department)
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
+        val genderSpinner: Spinner = findViewById(R.id.spinner_gender)
         val departments = arrayOf("Choose a department", "CITE", "CAHS", "CCJE", "CELA", "CEA")
         val schools = arrayOf("UPang - Dagpuan", "UPang - Urdaneta")
+        val genders = arrayOf("Male", "Female", "Rather not tell")
 
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
         departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -63,14 +66,28 @@ class TeacherSignUpActivity : AppCompatActivity() {
             }
         }
 
+        val genderAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genders)
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        genderSpinner.adapter = genderAdapter
+
+        genderSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedGender = parent?.getItemAtPosition(position).toString()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
         signupButton.setOnClickListener{
 
             val email = edittextemail.text.toString().trim()
             val password = edittextpassword.text.toString().trim()
+            val confirmPassword = edittextconfirmpassword.text.toString().trim()
             val firstName = edittextfirstname.text.toString().trim()
             val middleName = edittextmiddlename.text.toString().trim()
             val lastName = edittextlastname.text.toString().trim()
             val teacherID = edittextidnumber.text.toString().trim()
+            val gender = genderSpinner.toString().trim()
             val school = schoolSpinner.selectedItem.toString().trim()
             val departmentID = departmentSpinner.selectedItem.toString().trim()
             var camp = ""
@@ -81,7 +98,8 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 camp = "02"
             }
 
-            val signupDataJson = "{\"teacher_id\":\"$teacherID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"email\":\"$email\",\"password\":\"$password\",\"department_id\":\"$departmentID\",\"school_id\":\"$camp\"}"
+            val signupDataJson = "{\"teacher_id\":\"$teacherID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$gender\",\"email\":\"$email\",\"password\":\"$password\",\"department_id\":\"$departmentID\",\"school_id\":\"$camp\"}"
+
 
             if(email.isEmpty()){
 
@@ -90,45 +108,46 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if(teacherID.isEmpty()){
+                edittextidnumber.error = "ID required"
+                edittextidnumber.requestFocus()
+                return@setOnClickListener
+            }
+
+            if(firstName.isEmpty()){
+                edittextfirstname.error = "First name required"
+                edittextfirstname.requestFocus()
+                return@setOnClickListener
+            }
+            if(middleName.isEmpty()){
+                edittextmiddlename.error = "Middle name required"
+                edittextmiddlename.requestFocus()
+                return@setOnClickListener
+            }
+            if(lastName.isEmpty()){
+                edittextlastname.error = "Last name required"
+                edittextlastname.requestFocus()
+                return@setOnClickListener
+            }
             if(password.isEmpty()){
 
                 edittextpassword.error = "Password required"
                 edittextpassword.requestFocus()
                 return@setOnClickListener
             }
-
-            if(departmentID == "Choose a department"){
-                Toast.makeText(applicationContext, "Choose a department", Toast.LENGTH_SHORT).show()
-                departmentSpinner.requestFocus()
+            if(password != confirmPassword){
+                edittextconfirmpassword.error = "Password doesn't match"
+                edittextconfirmpassword.requestFocus()
                 return@setOnClickListener
             }
-
-            if(firstName.isEmpty()){
-                edittextfirstname.error = "Name required"
-                edittextfirstname.requestFocus()
-                return@setOnClickListener
-            }
-            if(middleName.isEmpty()){
-                edittextmiddlename.error = "Name required"
-                edittextmiddlename.requestFocus()
-                return@setOnClickListener
-            }
-            if(lastName.isEmpty()){
-                edittextlastname.error = "Name required"
-                edittextlastname.requestFocus()
-                return@setOnClickListener
-            }
-
             try {
 
                 val reader = JsonReader(StringReader(signupDataJson))
                 reader.isLenient = true
-
                 reader.beginObject()
-
                 reader.close()
 
-                PHINMAClient.instance.createTeacher(teacherID, firstName, middleName, lastName, email, password, departmentID, camp)
+                PHINMAClient.instance.createTeacher(teacherID, firstName, middleName, lastName, gender, email, password, departmentID, camp)
                     .enqueue(object : Callback<DefaultResponse> {
 
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {

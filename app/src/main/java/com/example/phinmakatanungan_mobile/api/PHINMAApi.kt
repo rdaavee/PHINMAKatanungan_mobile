@@ -17,11 +17,13 @@ interface PHINMAApi {
         @Field("first_name") firstName:String,
         @Field("middle_name") middleName:String,
         @Field("last_name") lastName:String,
+        @Field("gender") selectedGender:String,
         @Field("email") email:String,
         @Field("password") password:String,
         @Field("year_level") year:String,
         @Field("course_id") course:String,
-        @Field("school_id") camp:String
+        @Field("department_id") departmentID:String,
+        @Field("school_id") campus:String
     ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded
@@ -33,6 +35,7 @@ interface PHINMAApi {
         @Field("first_name") firstName:String,
         @Field("middle_name") middleName:String,
         @Field("last_name") lastName:String,
+        @Field("gender") gender: String,
         @Field("email") email:String,
         @Field("password") password:String,
         @Field("department_id") departmentID:String,

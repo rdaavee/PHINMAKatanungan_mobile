@@ -9,7 +9,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
     companion object {
         const val DATABASE_VERSION = 1
-        const val DATABASE_NAME = "tokens_database"
+        const val DATABASE_NAME = "tokens_database.db"
         const val TABLE_NAME = "TOKENS"
         const val COLUMN_ID = "id INTEGER PRIMARY KEY"
         const val COLUMN_ACTIVE_TOKEN = "ACTIVE_TOKEN"
