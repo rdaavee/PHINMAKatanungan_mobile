@@ -18,9 +18,20 @@
             android:layout_height="190dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_backBtnChooseRole"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/back_btn"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="13dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,10 +103,12 @@
                 android:id="@+id/editTextStudNumber"
                 android:layout_width="358dp"
                 android:layout_height="60dp"
-                android:inputType="number"
+                android:inputType="textFilter|textNoSuggestions"
+                android:digits="0123456789-"
                 android:paddingStart="15dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/custom_input"/>
+                android:background="@drawable/custom_input"
+                tools:ignore="TextFields" />
 
         </LinearLayout>
 
