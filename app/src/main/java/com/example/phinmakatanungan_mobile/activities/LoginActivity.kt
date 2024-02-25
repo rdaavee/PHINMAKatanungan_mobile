@@ -23,6 +23,7 @@ import android.content.SharedPreferences
 
 class LoginActivity : AppCompatActivity() {
 
+    //initialize sharedpref from PHINMAClient
     private lateinit var sharedPreferences : SharedPreferences
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +34,10 @@ class LoginActivity : AppCompatActivity() {
         val edittextpassword = findViewById<EditText>(R.id.editTextPassword)
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
 
+
         sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
 
+        //call the sharedpref
         PHINMAClient.setSharedPreferences(sharedPreferences)
 
         findViewById<TextView>(R.id.tv_signup2).setOnClickListener {
@@ -81,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
                             if (response.isSuccessful && response.body() != null) {
                                 val tokenFromApi = response.body()!!.accessToken
 
+                                //save token in sharedpref
                                 saveTokenToSharedPreferences(tokenFromApi)
 
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
@@ -113,7 +117,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("authToken", token)
         editor.apply()
 
-        // Print the token to verify if it's being saved
+        // print the token to verify if it's being saved
         Log.d("SharedPreferences", "Saved token: $token")
     }
 
