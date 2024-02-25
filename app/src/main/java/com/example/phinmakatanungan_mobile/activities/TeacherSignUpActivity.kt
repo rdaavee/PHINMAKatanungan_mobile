@@ -92,7 +92,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
             val middleName = edittextmiddlename.text.toString().trim()
             val lastName = edittextlastname.text.toString().trim()
             val teacherID = edittextidnumber.text.toString().trim()
-            val gender = genderSpinner.toString().trim()
+            val gender = genderSpinner.selectedItem.toString().trim() //haha dagdagan lang pala ng "selectedItem"
             val school = schoolSpinner.selectedItem.toString().trim()
             val departmentID = departmentSpinner.selectedItem.toString().trim()
             var camp = ""
