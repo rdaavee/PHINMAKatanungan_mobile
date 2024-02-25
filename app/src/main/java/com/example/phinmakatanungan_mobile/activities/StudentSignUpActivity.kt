@@ -44,9 +44,9 @@ class StudentSignUpActivity : AppCompatActivity() {
         val courseSpinner: Spinner = findViewById(R.id.spinner_course)
         val genderSpinner: Spinner = findViewById(R.id.spinner_gender)
         val yearSpinner: Spinner = findViewById(R.id.spinner_year)
-        val schools = arrayOf("Branch", "University of Pangasinan", "Araullo University", "Cagayan De Oro College", "UNIVERSITY OF ILOILO")
-        val departments = arrayOf("SHS","CITE","CEA","CAHS","CCJE","CELA","CMA")
-        val genders = arrayOf("Male", "Female", "Rather not tell")
+        val schools = arrayOf("Select branch", "University of Pangasinan", "Araullo University", "Cagayan De Oro College", "University of ILOILO")
+        val departments = arrayOf("Select department","SHS","CITE","CEA","CAHS","CCJE","CELA","CMA")
+        val genders = arrayOf("Select gender","Male", "Female", "Rather not tell")
 
         //adapters for the spinners
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
@@ -109,19 +109,14 @@ class StudentSignUpActivity : AppCompatActivity() {
             val course = courseSpinner.selectedItem.toString().trim()
             val year = yearSpinner.selectedItem.toString().trim()
             var campus = ""
-            if(school == "University of Pangasinan") {
-                campus = "01"
-            }
-            else if(school == "Araullo University") {
-                campus = "02"
-            }
-            else if(school == "Cagayan De Oro College") {
-                campus = "03"
-            }
-            else if(school == "UNIVERSITY OF ILOILO") {
-                campus = "04"
-            }
 
+            when(school){
+                "University of Pangasinan" -> campus = "01"
+                "Araullo University" -> campus = "02"
+                "Cagayan De Oro College" -> campus = "03"
+                "University of ILOILO" -> campus = "04"
+                else -> campus = "Select branch"
+            }
             //json data
             val signupDataJson = "{\"student_id\":\"$studentID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
 
@@ -151,14 +146,23 @@ class StudentSignUpActivity : AppCompatActivity() {
             edittextlastname.error = "Name required"
             edittextlastname.requestFocus()
             return@setOnClickListener
-        }
+             }
+            if(campus == "Select branch"){
+                Toast.makeText(applicationContext, "Choose a branch", Toast.LENGTH_SHORT).show()
+                courseSpinner.requestFocus()
+                return@setOnClickListener
+            }
+            if(departmentID == "Select department"){
+                Toast.makeText(applicationContext, "Choose a department", Toast.LENGTH_SHORT).show()
+                courseSpinner.requestFocus()
+                return@setOnClickListener
+            }
 
             if(course == "Choose a course"){
                 Toast.makeText(applicationContext, "Choose a course", Toast.LENGTH_SHORT).show()
                 courseSpinner.requestFocus()
                 return@setOnClickListener
             }
-
             if(password.isEmpty()){
                 edittextpassword.error = "Password required"
                 edittextpassword.requestFocus()

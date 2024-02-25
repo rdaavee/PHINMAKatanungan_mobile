@@ -19,6 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.StringReader
 import android.content.SharedPreferences
+import androidx.appcompat.app.AlertDialog
 
 
 class LoginActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val btnlogin2 = findViewById<AppCompatButton>(R.id.btnLogin2)
         val edittextpassword = findViewById<EditText>(R.id.editTextPassword)
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
+        val artDialogBuilder = AlertDialog.Builder(this)
 
 
         sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
@@ -50,13 +52,13 @@ class LoginActivity : AppCompatActivity() {
             val password = edittextpassword.text.toString().trim()
 
             if(email.isEmpty()){
-                edittextemail.error = "Email required"
+                edittextemail.error = "Enter your email"
                 edittextemail.requestFocus()
                 return@setOnClickListener
             }
 
             if(password.isEmpty()){
-                edittextpassword.error = "Password required"
+                edittextpassword.error = "Enter your password"
                 edittextpassword.requestFocus()
                 return@setOnClickListener
             }
@@ -83,13 +85,13 @@ class LoginActivity : AppCompatActivity() {
                         ) {
                             if (response.isSuccessful && response.body() != null) {
                                 val tokenFromApi = response.body()!!.accessToken
-
-                                //save token in sharedpref
                                 saveTokenToSharedPreferences(tokenFromApi)
-
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finish()
+                                if(response.body()!!.message == "Invalid Credentials"){
+                                    Toast.makeText(applicationContext, "Choose a branch", Toast.LENGTH_SHORT).show()
+                                }
                             } else {
                                 val errorMessage: String = try {
                                     response.errorBody()?.string()
