@@ -12,7 +12,7 @@ import com.example.phinmakatanungan_mobile.api.PHINMAClient
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences : SharedPreferences
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
@@ -23,7 +23,6 @@ class DashboardActivity : AppCompatActivity() {
             signOut()
         }
     }
-
     private fun signOut() {
         Log.d("SignOut", "Current token before removal: " + sharedPreferences.getString("authToken", "Not Found"))
         // remove the token from SharedPreferences

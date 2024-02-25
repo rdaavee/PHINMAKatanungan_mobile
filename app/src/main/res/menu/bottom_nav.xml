@@ -12,12 +12,12 @@
         android:title="Departments"/>
 
     <item
-        android:id="@+id/nav_create_post"
+        android:id="@+id/createPostFragment"
         android:icon="@drawable/create_post"
         android:title="Create Post"/>
 
     <item
-        android:id="@+id/nav_search"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/search_icon"
         android:title="Search"/>
 

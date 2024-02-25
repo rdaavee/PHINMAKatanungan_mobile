@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
                                 saveTokenToSharedPreferences(tokenFromApi)
 
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
-                                startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finish()
                             } else {
                                 val errorMessage: String = try {

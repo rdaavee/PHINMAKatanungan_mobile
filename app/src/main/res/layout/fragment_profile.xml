@@ -5,9 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProfileFragment">
 
-    <TextView
+    <Button
+        android:id="@+id/btnSignOut"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:backgroundTint="@color/text_color_logout"
+        android:text="LOG OUT"
+        android:textSize="20sp"/>
+
 
 </FrameLayout>

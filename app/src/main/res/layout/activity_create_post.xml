@@ -45,7 +45,7 @@
                 android:layout_height="30dp"
                 android:text="Post"
                 android:textSize="15sp"
-                android:fontFamily="@font/montserrat_light"
+                android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
                 android:layout_gravity="end"
                 android:layout_marginStart="105dp"/>

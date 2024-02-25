@@ -30,7 +30,7 @@ class WelcomeActivity : AppCompatActivity() {
         val authToken = getAuthToken()
         if (authToken.isNotEmpty()) {
             // Redirect to DashboardActivity
-            startActivity(Intent(this@WelcomeActivity, DashboardActivity::class.java))
+            startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
             finish()  // Finish LoginActivity to prevent the user from navigating back
         }else {
                 // Log the absence of a token
