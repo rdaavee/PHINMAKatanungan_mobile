@@ -38,7 +38,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val genderSpinner: Spinner = findViewById(R.id.spinner_gender)
         val departments = arrayOf("Choose a department", "CITE", "CAHS", "CCJE", "CELA", "CEA")
-        val schools = arrayOf("UPang - Dagpuan", "UPang - Urdaneta")
+        val schools = arrayOf("UPang - Dagupan", "UPang - Urdaneta")
         val genders = arrayOf("Male", "Female", "Rather not tell")
 
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
@@ -96,7 +96,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
             val school = schoolSpinner.selectedItem.toString().trim()
             val departmentID = departmentSpinner.selectedItem.toString().trim()
             var camp = ""
-            if(school == "UPang - Dagpuan") {
+            if(school == "UPang - Dagupan") {
                 camp = "01"
             }
             else if(school == "UPang - Urdaneta") {
