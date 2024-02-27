@@ -19,24 +19,6 @@ class DashboardActivity : AppCompatActivity() {
         // initialize sharedPreferences
         sharedPreferences = getSharedPreferences("myPreference", MODE_PRIVATE)
 
-        findViewById<Button>(R.id.btnSignOut).setOnClickListener {
-            signOut()
-        }
-    }
-    private fun signOut() {
-        Log.d("SignOut", "Current token before removal: " + sharedPreferences.getString("authToken", "Not Found"))
-        // remove the token from SharedPreferences
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
-
-        Log.d("SignOut", "Token after removal: " + sharedPreferences.getString("authToken", "Not Found"))
-
-        // redirect back to WelcomeActivity and clear the activity stack
-        val intent = Intent(this@DashboardActivity, WelcomeActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        finish()  // finish DashboardActivity to prevent the user from navigating back
     }
 
     private fun getAuthToken(): String {
