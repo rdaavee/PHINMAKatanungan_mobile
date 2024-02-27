@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                             response: Response<LoginResponse>
                         ) {
                             if (response.isSuccessful && response.body() != null) {
-                                val tokenFromApi = response.body()!!.accessToken
+                                val tokenFromApi = response.body()?.accessToken
                                 saveTokenToSharedPreferences(tokenFromApi)
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_LONG).show()
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
@@ -114,13 +114,11 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
-    private fun saveTokenToSharedPreferences(token: String) {
+    private fun saveTokenToSharedPreferences(token: String?) {
         val editor = sharedPreferences.edit()
         editor.putString("authToken", token)
         editor.apply()
 
-        // print the token to verify if it's being saved
-        Log.d("SharedPreferences", "Saved token: $token")
     }
 
     private fun getAuthToken(): String {

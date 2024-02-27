@@ -18,7 +18,6 @@ class DashboardActivity : AppCompatActivity() {
 
         // initialize sharedPreferences
         sharedPreferences = getSharedPreferences("myPreference", MODE_PRIVATE)
-
     }
 
     private fun getAuthToken(): String {
