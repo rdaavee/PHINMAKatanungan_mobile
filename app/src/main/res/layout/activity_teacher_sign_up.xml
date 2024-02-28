@@ -290,15 +290,24 @@
             android:layout_height="75dp"
             android:gravity="center_horizontal">
 
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="358dp"
-                android:layout_height="60dp"
-                android:background="@drawable/custom_input"
-                android:inputType="textPassword"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp"
-                android:drawableEnd="@drawable/pass_hide" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/btn_hide_pass_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="358dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/custom_input"
+                    android:inputType="textPassword"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
 
         </LinearLayout>
 
@@ -315,15 +324,24 @@
             android:layout_height="75dp"
             android:gravity="center_horizontal">
 
-            <EditText
-                android:id="@+id/editTextConfirmPassword"
-                android:layout_width="358dp"
-                android:layout_height="60dp"
-                android:background="@drawable/custom_input"
-                android:inputType="textPassword"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp"
-                android:drawableEnd="@drawable/pass_hide" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/btn_hide_pass_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextConfirmPassword"
+                    android:layout_width="358dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/custom_input"
+                    android:inputType="textPassword"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="10dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
 
         </LinearLayout>
 

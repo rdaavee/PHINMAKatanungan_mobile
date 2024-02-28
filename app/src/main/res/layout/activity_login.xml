@@ -49,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Email"
         android:textSize="14sp" />
@@ -83,15 +84,24 @@
         android:layout_height="70dp"
         android:gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="358dp"
-            android:layout_height="60dp"
-            android:background="@drawable/custom_input"
-            android:drawableEnd="@drawable/pass_hide"
-            android:inputType="textPassword"
-            android:paddingStart="15dp"
-            android:paddingEnd="13dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/btn_hide_pass_color">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="358dp"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_input"
+                android:inputType="textPassword"
+                android:paddingStart="15dp"
+                android:paddingEnd="13dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
     </LinearLayout>
 
@@ -108,6 +118,7 @@
             android:layout_marginStart="28dp"
             android:fontFamily="@font/montserrat"
             android:text="Remember me"
+            android:textSize="12sp"
             app:useMaterialThemeColors="true" />
 
         <TextView
