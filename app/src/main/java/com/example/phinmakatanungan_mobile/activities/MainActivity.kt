@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val authToken = sharedPreferences.getString("authToken", "")
         viewModel.authToken = "Bearer $authToken"
+
     }
     fun getAuthToken(): String? {
         return viewModel.authToken
