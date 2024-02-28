@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.phinmakatanungan_mobile.api.PHINMAClient
+import com.example.phinmakatanungan_mobile.api.PHINMAApi
 import com.example.phinmakatanungan_mobile.models.DefaultResponse
 import com.example.phinmakatanungan_mobile.R
 import retrofit2.Call
@@ -181,7 +182,18 @@ class StudentSignUpActivity : AppCompatActivity() {
                 reader.isLenient = true
                 reader.beginObject()
                 reader.close()
-                PHINMAClient.instance.createUser(studentID,firstName,middleName,lastName,selectedGender,email,password,year,course,departmentID,campus)
+                PHINMAClient.instance.createUser(
+                    studentID,
+                    firstName,
+                    middleName,
+                    lastName,
+                    selectedGender,
+                    email,
+                    password,
+                    year,
+                    course,
+                    departmentID,
+                    campus)
                     .enqueue(object : Callback<DefaultResponse> {
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                             Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()

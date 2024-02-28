@@ -51,5 +51,4 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(Intent(this@WelcomeActivity, ChooseRoleActivity::class.java))
         }
     }
-
 }

@@ -1,7 +1,7 @@
 package com.example.phinmakatanungan_mobile.models
 
 data class UserData(
-    val student_id: Int,
+    val student_id: String,
     val first_name: String,
     val middle_name: String,
     val last_name: String,

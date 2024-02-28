@@ -20,12 +20,16 @@ import retrofit2.Response
 import java.io.StringReader
 import android.content.SharedPreferences
 import androidx.appcompat.app.AlertDialog
+import com.example.phinmakatanungan_mobile.api.PHINMAApi
 
 
 class LoginActivity : AppCompatActivity() {
 
     //initialize sharedpref from PHINMAClient
     private lateinit var sharedPreferences : SharedPreferences
+
+    //initialize client and interface
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,7 +122,6 @@ class LoginActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("authToken", token)
         editor.apply()
-
     }
 
     private fun getAuthToken(): String {

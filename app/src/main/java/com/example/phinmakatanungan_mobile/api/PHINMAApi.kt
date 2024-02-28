@@ -9,11 +9,12 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.GET
+import retrofit2.http.Header
 
 interface PHINMAApi {
     @FormUrlEncoded
-    @Headers("Accept: application/json")
     @POST("store")
+    @Headers("Accept: application/json")
     fun createUser(
         @Field("student_id") studentID:String,
         @Field("first_name") firstName:String,
@@ -41,11 +42,9 @@ interface PHINMAApi {
         @Field("password") password:String,
         @Field("department_id") departmentID:String,
         @Field("school_id") school:String
-
     ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded
-    @Headers("Accept: application/json")
     @POST("userlogin")
     fun userLogin(
         @Field("email") email:String,
@@ -53,7 +52,6 @@ interface PHINMAApi {
 
     ):retrofit2.Call<LoginResponse>
 
-    @Headers("Accept: application/json")
-    @GET("userProfile")
-    fun getAllUserInfo(): Call<List<UserData>>
+    @GET("profile")
+    fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
 }

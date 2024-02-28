@@ -27,13 +27,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/profile_icon" />
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:layout_width="13dp"-->
+<!--                    android:layout_height="13dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:src="@drawable/profile_icon" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
