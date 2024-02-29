@@ -56,6 +56,15 @@ interface PHINMAApi {
         @Field("password") password: String
     ):retrofit2.Call<LoginResponse>
 
+    @FormUrlEncoded
+    @POST("post")
+    fun createPost(
+        @Field("user_id") userID: String,
+        @Field("title") title: String,
+        @Field("content") content: String,
+        @Field("privacy") privacy: String
+    )
+
     @GET("profile")
     fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
 

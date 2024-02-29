@@ -10,6 +10,6 @@ data class UserData(
     val password: String,
     val year_level: String,
     val course_id: String,
-    val departmeent_id: String,
+    val department_id: String,
     val school_id: String,
 )

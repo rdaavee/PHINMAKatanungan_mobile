@@ -14,7 +14,6 @@ import com.example.phinmakatanungan_mobile.R
 class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences : SharedPreferences
-
     private fun getAuthToken() : String {
 
         return sharedPreferences.getString("authToken", "") ?: ""

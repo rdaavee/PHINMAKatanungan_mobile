@@ -17,6 +17,7 @@ import com.example.phinmakatanungan_mobile.R
 import com.example.phinmakatanungan_mobile.api.PHINMAClient
 import com.example.phinmakatanungan_mobile.databinding.FragmentProfileBinding
 import com.example.phinmakatanungan_mobile.models.UserData
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +27,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var viewModel: SharedPrefsViewModel
     private lateinit var sharedPreferences: SharedPreferences
+    private val USER_DATA_PREFS_KEY = "userData"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,63 +43,65 @@ class ProfileFragment : Fragment() {
             signOut()
         }
 
-        val authToken = (requireActivity() as MainActivity).getAuthToken()
-        authToken?.let { getUserInfo(it)}
-
+        val authToken = sharedPreferences.getString("authToken", "")
         return binding.root
     }
 
-    private fun getUserInfo(authToken: String) {
-        PHINMAClient.instance.getUserProfile("Bearer$authToken").enqueue(object : Callback<UserData> {
-            override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
-                if (response.isSuccessful) {
-                    try {
-                        val userData = response.body()
-                        if (userData != null) {
-                            updateInfo(userData)
-                        }
-                    } catch (e: Exception) {
-                        Log.e("ProfileFragment", "Exception while processing user data", e)
-                        Toast.makeText(requireContext(), "Failed to process user info", Toast.LENGTH_SHORT).show()
-                    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-                    val responseBody = response.body().toString()
-                    Log.d("Response", responseBody)
-                } else {
-                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
-                }
-            }
+        // Call the function to update user info from SharedPreferences
+        updateUserInfoFromPrefs(requireContext())
+    }
+    private fun updateUserInfoFromPrefs(context: Context) {
+        val sharedPreferences = context.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
+        val userDataJson = sharedPreferences.getString(USER_DATA_PREFS_KEY, null)
 
-            override fun onFailure(call: Call<UserData>, t: Throwable) {
-                Log.e("ProfileFragment", "Failed to get user info", t)
-                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
-            }
-        })
+        if (userDataJson != null) {
+            val userData = Gson().fromJson(userDataJson, UserData::class.java)
+            updateInfo(userData, context)
+        } else {
+            Log.e("UserInfoUpdate", "User data not found in SharedPreferences")
+        }
     }
 
+
     @SuppressLint("SetTextI18n")
-    fun updateInfo(userData: UserData){
-        if(userData.user_role == "Student"){
-            val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
-            binding.tvStudentName.text = fullName
-            binding.tvStudentID.text = userData.user_id
-            binding.tvStudentEmail.text = userData.email
-            binding.tvCourse.text = userData.course_id
-        }
-        else if (userData.user_role == "Teacher"){
-            binding.tvIDRole.text = "Teacher ID"
-            binding.tvDepCors.text = "Department"
-            val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
-            binding.tvStudentName.text = fullName
-            binding.tvStudentID.text = userData.user_id
-            binding.tvStudentEmail.text = userData.email
-            binding.tvCourse.text = userData.course_id
-        }
+    fun updateInfo(userData: UserData, context: Context) {
+        val binding = // Obtain the binding object for your layout
+
+            when (userData.user_role) {
+                "Student" -> {
+                    val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
+                    binding.tvStudentName.text = fullName
+                    binding.tvStudentID.text = userData.user_id
+                    binding.tvStudentEmail.text = userData.email
+                    binding.tvCourse.text = userData.course_id
+                }
+                "Teacher" -> {
+                    binding.tvIDRole.text = "Teacher ID"
+                    binding.tvDepCors.text = "Department"
+                    val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
+                    binding.tvStudentName.text = fullName
+                    binding.tvStudentID.text = userData.user_id
+                    binding.tvStudentEmail.text = userData.email
+                    binding.tvCourse.text = userData.department_id
+                }
+                else -> {
+                    binding.tvStudentName.text = "No data retrieved"
+                    binding.tvStudentID.text = "No data retrieved"
+                    binding.tvStudentEmail.text = "No data retrieved"
+                    binding.tvCourse.text = "No data retrieved"
+                }
+            }
     }
     private fun signOut() {
         // Remove the token from SharedPreferences
         val editor = sharedPreferences.edit()
         editor.clear()
+        editor.apply()
+
+        editor.remove("userDataPrefs")
         editor.apply()
 
         // Redirect back to WelcomeActivity and clear the activity stack

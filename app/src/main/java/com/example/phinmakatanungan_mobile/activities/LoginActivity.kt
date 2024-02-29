@@ -20,14 +20,15 @@ import retrofit2.Response
 import java.io.StringReader
 import android.content.SharedPreferences
 import androidx.appcompat.app.AlertDialog
-import com.example.phinmakatanungan_mobile.api.PHINMAApi
 import com.example.phinmakatanungan_mobile.models.UserData
+import com.google.gson.Gson
 
 
 class LoginActivity : AppCompatActivity() {
 
     //initialize sharedpref from PHINMAClient
     private lateinit var sharedPreferences : SharedPreferences
+    private val USER_DATA_PREFS_KEY = "userData"
 
     //initialize client and interface
 
@@ -39,12 +40,9 @@ class LoginActivity : AppCompatActivity() {
         val btnlogin2 = findViewById<AppCompatButton>(R.id.btnLogin2)
         val edittextpassword = findViewById<EditText>(R.id.editTextPassword)
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
-        val artDialogBuilder = AlertDialog.Builder(this)
-
 
         sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
 
-        //call the sharedpref
         PHINMAClient.setSharedPreferences(sharedPreferences)
 
         findViewById<TextView>(R.id.tv_signup2).setOnClickListener {
@@ -123,8 +121,53 @@ class LoginActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("authToken", token)
         editor.apply()
+        if (token != null) {
+            getUserInfoData(token, this)
+        }
     }
-    private fun getUserInfo(authToken: String) {
+
+    private fun getUserInfoData(token: String, loginActivity: LoginActivity) {
+        PHINMAClient.instance.getUserProfile("Bearer $token").enqueue(object : Callback<UserData> {
+            override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+                if (response.isSuccessful) {
+                    try {
+                        val userData = response.body()
+                        // Save the UserData object to SharedPreferences
+                        saveUserDataToPrefs(userData, this@LoginActivity)
+                    } catch (e: Exception) {
+                        Log.e("ProfileFragment", "Exception while processing user data", e)
+                        Toast.makeText(applicationContext, "Failed to process user info", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UserData>, t: Throwable) {
+                Log.e("ProfileFragment", "Failed to get user info", t)
+                Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+    private fun getUserInfo(authToken: String, context: Context) {
+
+    }
+
+    private fun saveUserDataToPrefs(userData: UserData?, context: Context) {
+        val sharedPreferences = context.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        if (userData != null) {
+            val userDataJson = Gson().toJson(userData)
+            editor.putString(USER_DATA_PREFS_KEY, userDataJson)
+        } else {
+            // Clear the UserData from SharedPreferences if null
+            editor.remove(USER_DATA_PREFS_KEY)
+        }
+        editor.apply()
+    }
+    private fun getUserInfo(authToken: String, loginActivity: LoginActivity) {
         PHINMAClient.instance.getUserProfile("Bearer$authToken").enqueue(object : Callback<UserData> {
             override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
                 if (response.isSuccessful) {
