@@ -58,12 +58,13 @@ interface PHINMAApi {
 
     @FormUrlEncoded
     @POST("post")
+    @Headers("Accept: application/json")
     fun createPost(
         @Field("user_id") userID: String,
         @Field("title") title: String,
         @Field("content") content: String,
         @Field("privacy") privacy: String
-    )
+    ):retrofit2.Call<DefaultResponse>
 
     @GET("profile")
     fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>

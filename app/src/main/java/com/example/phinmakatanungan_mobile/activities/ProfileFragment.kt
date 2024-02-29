@@ -27,7 +27,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var viewModel: SharedPrefsViewModel
     private lateinit var sharedPreferences: SharedPreferences
-    private val USER_DATA_PREFS_KEY = "userData"
+    private val userDataPrefKeys = "userData"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +55,7 @@ class ProfileFragment : Fragment() {
     }
     private fun updateUserInfoFromPrefs(context: Context) {
         val sharedPreferences = context.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
-        val userDataJson = sharedPreferences.getString(USER_DATA_PREFS_KEY, null)
+        val userDataJson = sharedPreferences.getString(userDataPrefKeys, null)
 
         if (userDataJson != null) {
             val userData = Gson().fromJson(userDataJson, UserData::class.java)
