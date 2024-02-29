@@ -27,13 +27,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-<!--                <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                    android:layout_width="13dp"-->
-<!--                    android:layout_height="13dp"-->
-<!--                    android:layout_marginEnd="5dp"-->
-<!--                    android:layout_marginStart="10dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:src="@drawable/profile_icon" />-->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/girl" />
 
                 <TextView
                     android:id="@+id/tv_userName"
@@ -88,15 +88,16 @@
                     android:text="New Student Here!"
                     android:textSize="13sp"
                     android:textColor="@color/text_color_primary"
-                    android:fontFamily="@font/montserrat_black"/>
+                    android:fontFamily="@font/montserrat_bold"/>
 
                 <TextView
                     android:id="@+id/tv_body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_light"
+                    android:fontFamily="@font/montserrat"
                     android:text="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio et tenetur possimus. Reiciendis repellat autem nisi, nulla cum soluta consectetur vel deleniti facere atque nemo esse commodi! Commodi, tempora laudantium!"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp"
+                    android:textColor="@color/text_color_gray"/>
 
             </LinearLayout>
 
