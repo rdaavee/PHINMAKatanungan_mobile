@@ -47,7 +47,7 @@ class StudentSignUpActivity : AppCompatActivity() {
         val yearSpinner: Spinner = findViewById(R.id.spinner_year)
         val schools = arrayOf("Select branch", "University of Pangasinan", "Araullo University", "Cagayan De Oro College", "University of ILOILO")
         val departments = arrayOf("Select department","SHS","CITE","CEA","CAHS","CCJE","CELA","CMA")
-        val genders = arrayOf("Select gender","Male", "Female", "Rather not tell")
+        val genders = arrayOf("Define gender","Male", "Female")
 
         //adapters for the spinners
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
@@ -104,11 +104,12 @@ class StudentSignUpActivity : AppCompatActivity() {
             val middleName = edittextmiddlename.text.toString().trim()
             val lastName = edittextlastname.text.toString().trim()
             val selectedGender = genderSpinner.selectedItem.toString().trim()
-            val studentID = edittextstudnumber.text.toString().trim()
+            val userID = edittextstudnumber.text.toString().trim()
             val departmentID = departmentSpinner.selectedItem.toString().trim()
             val school = schoolSpinner.selectedItem.toString().trim()
             val course = courseSpinner.selectedItem.toString().trim()
             val year = yearSpinner.selectedItem.toString().trim()
+            val role = "Student"
             var campus = ""
 
             when(school){
@@ -119,7 +120,7 @@ class StudentSignUpActivity : AppCompatActivity() {
                 else -> campus = "Select branch"
             }
             //json data
-            val signupDataJson = "{\"student_id\":\"$studentID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
+            val signupDataJson = "{\"user_id\":\"$userID\",\"user_role\":\"$role\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
 
             //validation
             if(email.isEmpty()){
@@ -127,7 +128,7 @@ class StudentSignUpActivity : AppCompatActivity() {
                 edittextemail.requestFocus()
                 return@setOnClickListener
             }
-            if(studentID.isEmpty()){
+            if(userID.isEmpty()){
                 edittextstudnumber.error = "Student number required"
                 edittextstudnumber.requestFocus()
                 return@setOnClickListener
@@ -148,6 +149,11 @@ class StudentSignUpActivity : AppCompatActivity() {
             edittextlastname.requestFocus()
             return@setOnClickListener
              }
+            if(selectedGender == "Select gender"){
+                edittextlastname.error = "Gender required"
+                edittextlastname.requestFocus()
+                return@setOnClickListener
+            }
             if(campus == "Select branch"){
                 Toast.makeText(applicationContext, "Choose a branch", Toast.LENGTH_SHORT).show()
                 courseSpinner.requestFocus()
@@ -183,7 +189,8 @@ class StudentSignUpActivity : AppCompatActivity() {
                 reader.beginObject()
                 reader.close()
                 PHINMAClient.instance.createUser(
-                    studentID,
+                    userID,
+                    role,
                     firstName,
                     middleName,
                     lastName,

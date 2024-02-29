@@ -220,6 +220,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
+                android:id="@+id/tv_IDRole"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Student ID"
@@ -275,6 +276,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
+                android:id="@+id/tv_DepCors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Course"

@@ -39,9 +39,9 @@ class TeacherSignUpActivity : AppCompatActivity() {
         val departmentSpinner: Spinner = findViewById(R.id.spinner_department)
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val genderSpinner: Spinner = findViewById(R.id.spinner_gender)
-        val departments = arrayOf("Choose a department", "CITE", "CAHS", "CCJE", "CELA", "CEA")
-        val schools = arrayOf("UPang - Dagupan", "UPang - Urdaneta")
-        val genders = arrayOf("Male", "Female", "Rather not tell")
+        val departments = arrayOf("Select department","SHS","CITE","CEA","CAHS","CCJE","CELA","CMA")
+        val schools = arrayOf("Select branch", "University of Pangasinan", "Araullo University", "Cagayan De Oro College", "University of ILOILO")
+        val genders = arrayOf("Define gender","Male", "Female")
 
         val departmentAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, departments)
         departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -49,9 +49,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
 
         departmentSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
                 val selectedDepartment = parent?.getItemAtPosition(position).toString()
-
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -93,20 +91,22 @@ class TeacherSignUpActivity : AppCompatActivity() {
             val firstName = edittextfirstname.text.toString().trim()
             val middleName = edittextmiddlename.text.toString().trim()
             val lastName = edittextlastname.text.toString().trim()
-            val teacherID = edittextidnumber.text.toString().trim()
-            val gender = genderSpinner.selectedItem.toString().trim() //haha dagdagan lang pala ng "selectedItem"
+            val userID = edittextidnumber.text.toString().trim()
+            val selectedGender = genderSpinner.selectedItem.toString().trim() //haha dagdagan lang pala ng "selectedItem"
             val school = schoolSpinner.selectedItem.toString().trim()
             val departmentID = departmentSpinner.selectedItem.toString().trim()
-            var camp = ""
-            if(school == "UPang - Dagupan") {
-                camp = "01"
-            }
-            else if(school == "UPang - Urdaneta") {
-                camp = "02"
+            val role = "Teacher"
+            var campus = ""
+
+            when(school){
+                "University of Pangasinan" -> campus = "01"
+                "Araullo University" -> campus = "02"
+                "Cagayan De Oro College" -> campus = "03"
+                "University of ILOILO" -> campus = "04"
+                else -> campus = "Select branch"
             }
 
-            val signupDataJson = "{\"teacher_id\":\"$teacherID\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$gender\",\"email\":\"$email\",\"password\":\"$password\",\"department_id\":\"$departmentID\",\"school_id\":\"$camp\"}"
-
+            val signupDataJson = "{\"user_id\":\"$userID\",\"user_role\":\"$role\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
 
             if(email.isEmpty()){
 
@@ -115,7 +115,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if(teacherID.isEmpty()){
+            if(userID.isEmpty()){
                 edittextidnumber.error = "ID required"
                 edittextidnumber.requestFocus()
                 return@setOnClickListener
@@ -154,7 +154,17 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 reader.beginObject()
                 reader.close()
 
-                PHINMAClient.instance.createTeacher(teacherID, firstName, middleName, lastName, gender, email, password, departmentID, camp)
+                PHINMAClient.instance.createTeacher(
+                    userID,
+                    role,
+                    firstName,
+                    middleName,
+                    lastName,
+                    selectedGender,
+                    email,
+                    password,
+                    departmentID,
+                    campus)
                     .enqueue(object : Callback<DefaultResponse> {
 
                         override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {

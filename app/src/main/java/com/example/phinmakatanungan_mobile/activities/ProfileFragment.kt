@@ -1,5 +1,6 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -41,9 +42,58 @@ class ProfileFragment : Fragment() {
         }
 
         val authToken = (requireActivity() as MainActivity).getAuthToken()
+        authToken?.let { getUserInfo(it)}
+
         return binding.root
     }
 
+    private fun getUserInfo(authToken: String) {
+        PHINMAClient.instance.getUserProfile("Bearer$authToken").enqueue(object : Callback<UserData> {
+            override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+                if (response.isSuccessful) {
+                    try {
+                        val userData = response.body()
+                        if (userData != null) {
+                            updateInfo(userData)
+                        }
+                    } catch (e: Exception) {
+                        Log.e("ProfileFragment", "Exception while processing user data", e)
+                        Toast.makeText(requireContext(), "Failed to process user info", Toast.LENGTH_SHORT).show()
+                    }
+
+                    val responseBody = response.body().toString()
+                    Log.d("Response", responseBody)
+                } else {
+                    Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UserData>, t: Throwable) {
+                Log.e("ProfileFragment", "Failed to get user info", t)
+                Toast.makeText(requireContext(), "Failed to get user info", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun updateInfo(userData: UserData){
+        if(userData.user_role == "Student"){
+            val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
+            binding.tvStudentName.text = fullName
+            binding.tvStudentID.text = userData.user_id
+            binding.tvStudentEmail.text = userData.email
+            binding.tvCourse.text = userData.course_id
+        }
+        else if (userData.user_role == "Teacher"){
+            binding.tvIDRole.text = "Teacher ID"
+            binding.tvDepCors.text = "Department"
+            val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
+            binding.tvStudentName.text = fullName
+            binding.tvStudentID.text = userData.user_id
+            binding.tvStudentEmail.text = userData.email
+            binding.tvCourse.text = userData.course_id
+        }
+    }
     private fun signOut() {
         // Remove the token from SharedPreferences
         val editor = sharedPreferences.edit()

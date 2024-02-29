@@ -21,6 +21,7 @@ import java.io.StringReader
 import android.content.SharedPreferences
 import androidx.appcompat.app.AlertDialog
 import com.example.phinmakatanungan_mobile.api.PHINMAApi
+import com.example.phinmakatanungan_mobile.models.UserData
 
 
 class LoginActivity : AppCompatActivity() {
@@ -122,6 +123,32 @@ class LoginActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("authToken", token)
         editor.apply()
+    }
+    private fun getUserInfo(authToken: String) {
+        PHINMAClient.instance.getUserProfile("Bearer$authToken").enqueue(object : Callback<UserData> {
+            override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
+                if (response.isSuccessful) {
+                    try {
+                        val userData = response.body()
+                        if (userData != null) {
+                        }
+                    } catch (e: Exception) {
+                        Log.e("ProfileFragment", "Exception while processing user data", e)
+                        Toast.makeText(applicationContext, "Failed to process user info", Toast.LENGTH_SHORT).show()
+                    }
+
+                    val responseBody = response.body().toString()
+                    Log.d("Response", responseBody)
+                } else {
+                    Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UserData>, t: Throwable) {
+                Log.e("ProfileFragment", "Failed to get user info", t)
+                Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun getAuthToken(): String {

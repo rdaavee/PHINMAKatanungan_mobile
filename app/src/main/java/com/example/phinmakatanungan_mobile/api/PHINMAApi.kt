@@ -2,8 +2,10 @@ package com.example.phinmakatanungan_mobile.api
 
 import com.example.phinmakatanungan_mobile.models.DefaultResponse
 import com.example.phinmakatanungan_mobile.models.LoginResponse
+import com.example.phinmakatanungan_mobile.models.Post
 import com.example.phinmakatanungan_mobile.models.UserData
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
@@ -16,7 +18,8 @@ interface PHINMAApi {
     @POST("store")
     @Headers("Accept: application/json")
     fun createUser(
-        @Field("student_id") studentID:String,
+        @Field("user_id") userID:String,
+        @Field("user_role") role: String,
         @Field("first_name") firstName:String,
         @Field("middle_name") middleName:String,
         @Field("last_name") lastName:String,
@@ -30,19 +33,21 @@ interface PHINMAApi {
     ):retrofit2.Call<DefaultResponse>
 
     @FormUrlEncoded
+    @POST("storeteacher")
     @Headers("Accept: application/json")
-    @POST("createteacher")
     fun createTeacher(
-        @Field("teacher_id") teacherID:String,
+        @Field("user_id") userID:String,
+        @Field("user_role") role: String,
         @Field("first_name") firstName:String,
         @Field("middle_name") middleName:String,
         @Field("last_name") lastName:String,
-        @Field("gender") gender: String,
+        @Field("gender") selectedGender:String,
         @Field("email") email:String,
         @Field("password") password:String,
         @Field("department_id") departmentID:String,
-        @Field("school_id") school:String
+        @Field("school_id") campus:String
     ):retrofit2.Call<DefaultResponse>
+
 
     @FormUrlEncoded
     @POST("userlogin")
@@ -53,4 +58,7 @@ interface PHINMAApi {
 
     @GET("profile")
     fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
+
+    @GET("posts")
+    fun getPosts(param: Callback<List<Post>>): Call<List<Post>>
 }
