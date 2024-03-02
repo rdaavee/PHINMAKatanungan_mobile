@@ -112,18 +112,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
-
-                <Switch
-                    android:id="@+id/sw_privacy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Privacy "
-                    android:fontFamily="@font/montserrat_medium"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp"
-                    android:thumb="@drawable/switch_thumb_size"
-                    android:track="@drawable/switch_track_size"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
