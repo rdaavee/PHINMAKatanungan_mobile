@@ -3,6 +3,7 @@ package com.example.phinmakatanungan_mobile.api
 import com.example.phinmakatanungan_mobile.models.DefaultResponse
 import com.example.phinmakatanungan_mobile.models.LoginResponse
 import com.example.phinmakatanungan_mobile.models.Post
+import com.example.phinmakatanungan_mobile.models.PostResponse
 import com.example.phinmakatanungan_mobile.models.UserData
 import retrofit2.Call
 import retrofit2.Callback
@@ -69,6 +70,7 @@ interface PHINMAApi {
     @GET("profile")
     fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
 
-    @GET("posts")
-    fun getPosts(param: Callback<List<Post>>): Call<List<Post>>
+    @GET("getposts")
+    fun getPosts(): Call<PostResponse>
+
 }
