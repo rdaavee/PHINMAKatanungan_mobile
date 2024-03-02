@@ -7,7 +7,7 @@ data class Post(
     val id: Int,
     val title: String,
     val content: String,
-    val likes_count: BigInteger,
-    val comments_count: BigInteger,
+    val likes_count: Int,
+    val comments_count: Int,
     @SerializedName("user") val user: UserData
 )

@@ -1,5 +1,6 @@
 package com.example.phinmakatanungan_mobile.api
 
+import com.example.phinmakatanungan_mobile.models.AnnouncementResponse
 import com.example.phinmakatanungan_mobile.models.DefaultResponse
 import com.example.phinmakatanungan_mobile.models.LoginResponse
 import com.example.phinmakatanungan_mobile.models.Post
@@ -72,5 +73,8 @@ interface PHINMAApi {
 
     @GET("getposts")
     fun getPosts(): Call<PostResponse>
+
+    @GET("getannouncements")
+    fun getAnnounce(): Call<AnnouncementResponse>
 
 }
