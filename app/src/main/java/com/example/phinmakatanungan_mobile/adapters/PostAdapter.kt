@@ -61,6 +61,8 @@ class PostAdapter(private var postsMap: Map<String, List<Post>> = emptyMap()) :
         private val contentTextView: TextView = itemView.findViewById(R.id.tv_body)
         private val likesChip: Chip = itemView.findViewById(R.id.chip_like)
         private val commentsChip: Chip = itemView.findViewById(R.id.chip_comment)
+        private val commentCount: TextView = itemView.findViewById(R.id.comment_count)
+        private val likeCount: TextView = itemView.findViewById(R.id.like_count)
 
         fun bind(post: Post) {
             val chipCourse = chipCourse
@@ -88,8 +90,8 @@ class PostAdapter(private var postsMap: Map<String, List<Post>> = emptyMap()) :
             chipCourse.text = post.user.course_id
             titleTextView.text = post.title
             contentTextView.text = post.content
-            likesChip.text = post.likes_count.toString()
-            commentsChip.text = post.comments_count.toString()
+            likeCount.text = post.likes_count.toString()
+            commentCount.text = post.comments_count.toString()
         }
     }
 }

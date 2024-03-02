@@ -53,8 +53,6 @@ class DashboardFragment : Fragment() {
         recyclerView.adapter = postAdapter
 
 
-
-
         val sharedPreferences = requireActivity().getSharedPreferences("YourSharedPreferencesName", Context.MODE_PRIVATE)
 
         PHINMAClient.setSharedPreferences(sharedPreferences)
