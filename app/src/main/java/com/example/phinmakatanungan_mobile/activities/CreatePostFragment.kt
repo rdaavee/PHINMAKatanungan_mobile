@@ -40,14 +40,7 @@ class CreatePostFragment : Fragment() {
     ): View {
         binding = FragmentCreatePostBinding.inflate(inflater, container, false)
 
-        binding.swPrivacy.setOnCheckedChangeListener { _, isChecked ->
-            privacy = if(isChecked) {
-                "private"
-            } else {
-                "public"
-            }
-            isPrivate = isChecked
-        }
+
         binding.tvPostBtn.setOnClickListener {
             val title = binding.etPostTitle.text.toString().trim()
             val content = binding.etPostDescription.text.toString().trim()
