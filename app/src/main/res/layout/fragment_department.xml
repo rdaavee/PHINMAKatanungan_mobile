@@ -1,13 +1,408 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DepartmentFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DEPARTMENTS" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/textFilterOption"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="Filter Option"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="18sp"
+            android:background="@color/bg_color_alt"/>
+
+        <TextView
+            android:id="@+id/tv_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Departments"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/textFilterOption"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textViewGroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CITE"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/tv_department"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewGroup1"
+            android:layout_marginStart="20dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSIT"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CiteCustomChip"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Group 2 -->
+        <TextView
+            android:id="@+id/textViewGroup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CEA"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/chipGroup1"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewGroup2"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSEE"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CeaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSCE"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CeaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsarch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSArch"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CeaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bscpe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSCpE"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CeaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSME"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CeaCustomChip"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Group 3 -->
+        <TextView
+            android:id="@+id/textViewGroup3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CAHS"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/chipGroup2"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewGroup3"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSN"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CahsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bspharm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSPharm"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CahsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bmls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BMLS"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CahsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bspsych"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSPsych"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CahsCustomChip"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Group 4 -->
+        <TextView
+            android:id="@+id/textViewGroup4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CCJE"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/chipGroup3"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewGroup4"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bscrim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSCrim"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CcjeCustomChip"/>
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Group 5 -->
+        <TextView
+            android:id="@+id/textViewGroup5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CELA"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/chipGroup4"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewGroup5"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_abcomm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ABComm"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CelaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_abpolsci"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ABPolSci"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CelaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bseduc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSEduc"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CelaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSED"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CelaCustomChip"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Group 6 -->
+        <TextView
+            android:id="@+id/textViewGroup6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CMA"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/chipGroup5"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewGroup6"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:chipSpacingVertical="1dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSA"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CmaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSMA"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CmaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSAT"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CmaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bshm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSHM"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CmaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bstm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSTM"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CmaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bsba"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSBA"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CmaCustomChip"/>
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </RelativeLayout>
+
+</ScrollView>

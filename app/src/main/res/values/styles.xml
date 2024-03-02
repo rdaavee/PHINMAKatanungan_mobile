@@ -18,4 +18,34 @@
         <item name="colorSecondary">@color/checkbox_active_bg_color</item>
     </style>
 
+    <style name="CiteCustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/cite_bg_color</item>
+        <item name="android:textColor">@color/cite_text_color</item>
+    </style>
+
+    <style name="CeaCustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/cea_bg_color</item>
+        <item name="android:textColor">@color/cea_text_color</item>
+    </style>
+
+    <style name="CahsCustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/cahs_bg_color</item>
+        <item name="android:textColor">@color/cahs_text_color</item>
+    </style>
+
+    <style name="CcjeCustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/ccje_bg_color</item>
+        <item name="android:textColor">@color/ccje_text_color</item>
+    </style>
+
+    <style name="CelaCustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/cela_bg_color</item>
+        <item name="android:textColor">@color/cela_text_color</item>
+    </style>
+
+    <style name="CmaCustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/cma_bg_color</item>
+        <item name="android:textColor">@color/cma_text_color</item>
+    </style>
+
 </resources>

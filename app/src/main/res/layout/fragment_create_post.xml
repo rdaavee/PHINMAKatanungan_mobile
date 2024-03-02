@@ -60,6 +60,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_divider"
         android:layout_width="450dp"
         android:layout_height="1dp"
         android:background="@color/bg_color_divider"
@@ -68,19 +69,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="395dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_headerHolder">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/ll_detailHolder"
@@ -89,7 +77,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/view_divider">
 
                 <ImageView
                     android:layout_width="35dp"
@@ -110,8 +98,12 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_height="1dp"
+                    android:background="@color/bg_color_divider"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/ll_headerHolder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
                 
             </LinearLayout>
 
@@ -146,18 +138,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tf_titleLayout">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/et_postDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:hint="Write something..."
-                    android:textSize="20sp" />
+                    android:textSize="17sp"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:minLines="5"
+                    android:gravity="top|start"
+                    android:scrollbars="vertical" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/bg_color_divider"
+                app:layout_constraintTop_toBottomOf="@id/tf_writeSomethingLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

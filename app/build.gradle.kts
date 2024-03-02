@@ -55,6 +55,9 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 
+    //readmore
+    implementation ("kr.co.prnd:readmore-textview:1.0.0")
+
     //circleimage
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 

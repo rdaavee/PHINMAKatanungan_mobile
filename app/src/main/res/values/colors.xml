@@ -26,20 +26,36 @@
     <color name="bg_color_secondary">#FFFFFFFF</color>
     <color name="bg_color_cv">#391A8B93</color>
     <color name="bg_color_divider">#3EBCBCBC</color>
+    <color name="bg_color_header">#92BCBCBC</color>
     <color name="bg_color_dashboard_gap">#3EBCBCBC</color>
 
                 <!-- SPLASHSCREEN BG -->
     <color name="bg_color_splash">#1A8B93</color>
 
-                    <!-- CHIPS -->
+                <!-- CHIPS -->
     <color name="chip_bg_color_bsit">#000000</color>
-    <color name="chip_bg_color_bsn">#09921E</color>
     <color name="chip_bg_color_bsce">#7C0505</color>
-    <color name="chip_bg_color_bsed">#00A3FF</color>
-    <color name="chip_bg_color_bsba">#EBFF00</color>
+    <color name="chip_bg_color_cea">#7C0505</color>
+    <color name="chip_bg_color_bsn">#09921E</color>
+    <color name="chip_bg_color_cahs">#09921E</color>
     <color name="chip_bg_color_bscrim">#83A8BD</color>
-    <color name="chip_bg_color_react">#F5F4F5</color>
+    <color name="chip_bg_color_ccje">#83A8BD</color>
+    <color name="chip_bg_color_bsed">#00A3FF</color>
+    <color name="chip_bg_color_cela">#00A3FF</color>
+    <color name="chip_bg_color_bsba">#EBFF00</color>
+    <color name="chip_bg_color_cma">#D5B301</color>
 
+    <color name="chip_bg_color_react">#F5F4F5</color>
+    <color name="chip_icon_color_checked">#FFFFFF</color>
+
+    <color name="chip_bg_color_citeFalse">#33000000</color>
+    <color name="chip_bg_color_ceaFalse">#337C0505</color>
+    <color name="chip_bg_color_cahsFalse">#3309921E</color>
+    <color name="chip_bg_color_ccjeFalse">#3383A8BD</color>
+    <color name="chip_bg_color_celaFalse">#3300A3FF</color>
+    <color name="chip_bg_color_cmaFalse">#33D5B301</color>
+
+    <color name="filter_bg_color">#3EBCBCBC</color>
 
                 <!--  BOTTOM NAV  -->
     <color name="bottomNav_bg_color">#1A8B93</color>
