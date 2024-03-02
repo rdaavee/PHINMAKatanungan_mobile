@@ -4,8 +4,9 @@
                     <!-- COLORS -->
     <color name="text_color_primary">#FF000000</color>
     <color name="text_color_secondary">#FFFFFFFF</color>
-    <color name="text_color_gray">#C3BCBCBC</color>
+    <color name="text_color_gray">#C3414141</color>
     <color name="text_color_alt">#1A8B93</color>
+    <color name="text_color_dashboard">#1A8B93</color>
     <color name="text_color_forget">#1A8B93</color>
     <color name="text_color_logout">#FF0000</color>
     <color name="text_color_signup">#1A8B93</color>
@@ -25,6 +26,7 @@
     <color name="bg_color_secondary">#FFFFFFFF</color>
     <color name="bg_color_cv">#391A8B93</color>
     <color name="bg_color_divider">#3EBCBCBC</color>
+    <color name="bg_color_dashboard_gap">#3EBCBCBC</color>
 
                 <!-- SPLASHSCREEN BG -->
     <color name="bg_color_splash">#1A8B93</color>
