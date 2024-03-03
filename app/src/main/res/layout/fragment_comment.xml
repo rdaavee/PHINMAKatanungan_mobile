@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Add your RecyclerView to display comments here -->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/commentsRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:padding="8dp"-->
+<!--        android:scrollbars="vertical" />-->
+
+    <!-- Add an EditText field for adding comments -->
+    <EditText
+        android:id="@+id/editTextComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add a comment..."
+        android:padding="8dp"
+        android:imeOptions="actionSend"
+        android:inputType="textMultiLine"
+        android:maxLines="3" />
+
+    <!-- Add a button for submitting the comment -->
+    <Button
+        android:id="@+id/buttonSubmitComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Submit" />
+
+</LinearLayout>

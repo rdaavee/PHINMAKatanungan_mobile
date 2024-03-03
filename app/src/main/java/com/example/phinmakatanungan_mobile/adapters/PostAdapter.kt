@@ -1,14 +1,14 @@
 package com.example.phinmakatanungan_mobile.adapters
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.phinmakatanungan_mobile.R
+import com.example.phinmakatanungan_mobile.activities.CommentFragment
 import com.example.phinmakatanungan_mobile.models.Post
 import com.google.android.material.chip.Chip
 
@@ -17,11 +17,13 @@ class PostAdapter(private var postsMap: Map<String, List<Post>> = emptyMap()) :
 
     private var currentCourse: String? = ""
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setPostsMap(postsMap: Map<String, List<Post>>) {
         this.postsMap = postsMap
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setCurrentCourse(courseId: String?) {
         currentCourse = courseId
         notifyDataSetChanged()
@@ -63,7 +65,23 @@ class PostAdapter(private var postsMap: Map<String, List<Post>> = emptyMap()) :
         private val commentsChip: Chip = itemView.findViewById(R.id.chip_comment)
         private val commentCount: TextView = itemView.findViewById(R.id.comment_count)
         private val likeCount: TextView = itemView.findViewById(R.id.like_count)
-
+        init {
+            commentsChip.setOnClickListener {
+                val post = if (currentCourse.isNullOrEmpty()) {
+                    val allPosts = postsMap.values.flatten()
+                    allPosts[adapterPosition]
+                } else {
+                    val posts = postsMap[currentCourse ?: ""] ?: return@setOnClickListener
+                    posts[adapterPosition]
+                }
+                val fragment = CommentFragment.newInstance(post)
+                val fragmentManager = (itemView.context as AppCompatActivity).supportFragmentManager
+                fragmentManager.beginTransaction()
+                    .replace(R.id.fragment, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
         fun bind(post: Post) {
             val chipCourse = chipCourse
 

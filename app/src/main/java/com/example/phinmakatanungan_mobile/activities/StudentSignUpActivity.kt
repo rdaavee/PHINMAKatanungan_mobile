@@ -123,63 +123,55 @@ class StudentSignUpActivity : AppCompatActivity() {
             val signupDataJson = "{\"user_id\":\"$userID\",\"user_role\":\"$role\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"year_level\":\"$year\",\"course_id\":\"$course\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
 
             //validation
-            if(email.isEmpty()){
-                edittextemail.error = "Email required"
-                edittextemail.requestFocus()
-                return@setOnClickListener
-            }
-            if(userID.isEmpty()){
-                edittextstudnumber.error = "Student number required"
-                edittextstudnumber.requestFocus()
-                return@setOnClickListener
-            }
-
-            if(firstName.isEmpty()){
-                edittextfirstname.error = "Name required"
-                edittextfirstname.requestFocus()
-                return@setOnClickListener
-            }
-            if(middleName.isEmpty()){
-                edittextmiddlename.error = "Name required"
-                edittextmiddlename.requestFocus()
-                return@setOnClickListener
-            }
-            if(lastName.isEmpty()){
-            edittextlastname.error = "Name required"
-            edittextlastname.requestFocus()
-            return@setOnClickListener
-             }
-            if(selectedGender == "Select gender"){
-                edittextlastname.error = "Gender required"
-                edittextlastname.requestFocus()
-                return@setOnClickListener
-            }
-            if(campus == "Select branch"){
-                Toast.makeText(applicationContext, "Choose a branch", Toast.LENGTH_SHORT).show()
-                courseSpinner.requestFocus()
-                return@setOnClickListener
-            }
-            if(departmentID == "Select department"){
-                Toast.makeText(applicationContext, "Choose a department", Toast.LENGTH_SHORT).show()
-                courseSpinner.requestFocus()
-                return@setOnClickListener
-            }
-
-            if(course == "Choose a course"){
-                Toast.makeText(applicationContext, "Choose a course", Toast.LENGTH_SHORT).show()
-                courseSpinner.requestFocus()
-                return@setOnClickListener
-            }
-            if(password.isEmpty()){
-                edittextpassword.error = "Password required"
-                edittextpassword.requestFocus()
-                return@setOnClickListener
-            }
-
-            if(password != confirmPassword){
-                edittextconfirmpassword.error = "Password doesn't match"
-                edittextconfirmpassword.requestFocus()
-                return@setOnClickListener
+            when {
+                email.isEmpty() -> {
+                    edittextemail.error = "Email required"
+                    edittextemail.requestFocus()
+                }
+                userID.isEmpty() -> {
+                    edittextstudnumber.error = "Student number required"
+                    edittextstudnumber.requestFocus()
+                }
+                firstName.isEmpty() -> {
+                    edittextfirstname.error = "Name required"
+                    edittextfirstname.requestFocus()
+                }
+                middleName.isEmpty() -> {
+                    edittextmiddlename.error = "Name required"
+                    edittextmiddlename.requestFocus()
+                }
+                lastName.isEmpty() -> {
+                    edittextlastname.error = "Name required"
+                    edittextlastname.requestFocus()
+                }
+                selectedGender == "Select gender" -> {
+                    edittextlastname.error = "Gender required"
+                    edittextlastname.requestFocus()
+                }
+                campus == "Select branch" -> {
+                    Toast.makeText(applicationContext, "Choose a branch", Toast.LENGTH_SHORT).show()
+                    courseSpinner.requestFocus()
+                }
+                departmentID == "Select department" -> {
+                    Toast.makeText(applicationContext, "Choose a department", Toast.LENGTH_SHORT).show()
+                    courseSpinner.requestFocus()
+                }
+                course == "Choose a course" -> {
+                    Toast.makeText(applicationContext, "Choose a course", Toast.LENGTH_SHORT).show()
+                    courseSpinner.requestFocus()
+                }
+                password.isEmpty() -> {
+                    edittextpassword.error = "Password required"
+                    edittextpassword.requestFocus()
+                }
+                password != confirmPassword -> {
+                    edittextconfirmpassword.error = "Password doesn't match"
+                    edittextconfirmpassword.requestFocus()
+                }
+                else -> {
+                    // All validations passed, proceed with registration or other action
+                    // For example: performRegistration()
+                }
             }
 
             //correct malformed data

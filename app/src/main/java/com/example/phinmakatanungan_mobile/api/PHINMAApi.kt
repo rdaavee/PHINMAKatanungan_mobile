@@ -16,6 +16,8 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 interface PHINMAApi {
+
+    //registration
     @FormUrlEncoded
     @POST("store")
     @Headers("Accept: application/json")
@@ -50,7 +52,7 @@ interface PHINMAApi {
         @Field("school_id") campus:String
     ):retrofit2.Call<DefaultResponse>
 
-
+    //login
     @FormUrlEncoded
     @POST("userlogin")
     fun userLogin(
@@ -58,6 +60,11 @@ interface PHINMAApi {
         @Field("password") password: String
     ):retrofit2.Call<LoginResponse>
 
+    //profile
+    @GET("profile")
+    fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
+
+    //post
     @FormUrlEncoded
     @POST("post")
     @Headers("Accept: application/json")
@@ -67,14 +74,22 @@ interface PHINMAApi {
         @Field("content") content: String,
         @Field("privacy") privacy: String
     ):retrofit2.Call<DefaultResponse>
-
-    @GET("profile")
-    fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
-
     @GET("getposts")
     fun getPosts(): Call<PostResponse>
 
+    @FormUrlEncoded
+    @POST("storecomment")
+    @Headers("Accept: application/json")
+    fun addComment(
+        @Field("user_id") userID: String,
+        @Field("content") content: String,
+        @Field("post_id") postID: String,
+    ):retrofit2.Call<DefaultResponse>
+
+    //announcements
     @GET("getannouncements")
     fun getAnnounce(): Call<AnnouncementResponse>
+
+
 
 }
