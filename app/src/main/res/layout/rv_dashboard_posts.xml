@@ -82,23 +82,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Student Here!"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/text_color_primary"
                 android:fontFamily="@font/montserrat_bold"/>
 
-            <TextView
+            <kr.co.prnd.readmore.ReadMoreTextView
                 android:id="@+id/tv_body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserrat"
-                android:text="Lorem, ipsum dolor sit amet consectetur
-                 adipisicing elit. Optio et tenetur possimus.
-                  Reiciendis repellat autem nisi, nulla cum
-                   soluta consectetur vel deleniti facere atque
-                    nemo esse commodi! Commodi, tempora laudantium!"
-                android:textSize="15sp"
-                android:textColor="@color/text_color_primary" />
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@color/text_color_primary"
+                app:readMoreText=" See More"
+                app:readMoreMaxLine="5"
+                app:readMoreColor="@color/text_color_basicinfo"/>
 
         </LinearLayout>
 
