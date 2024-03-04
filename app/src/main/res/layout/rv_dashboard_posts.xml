@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="4dp"
+    app:cardElevation="1dp"
     android:layout_marginTop="5dp"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
@@ -104,34 +104,34 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="13dp"
             android:orientation="horizontal"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="10dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/like_icon"/>
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/active_likes"/>
 
             <TextView
                 android:id="@+id/like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/montserrat_medium"
                 android:layout_gravity="center_vertical"/>
 
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/comment_icon" />
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/active_comments" />
 
             <TextView
                 android:id="@+id/comment_count"
@@ -139,16 +139,16 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_medium"
                 android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
 
         <View
-            android:layout_width="380dp"
-            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
             android:layout_gravity="center"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/bg_color_divider"/>
 
         <LinearLayout
             android:id="@+id/ll_chips"
@@ -166,25 +166,24 @@
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:fontFamily="@font/montserrat_bold"
                 android:text="Like"
                 android:textAlignment="center"
-                android:textColor="@color/text_color_primary"
+                android:textColor="#AFB5C7"
                 android:textSize="12sp"
                 app:chipBackgroundColor="@color/bg_color_secondary"
                 app:chipEndPadding="0dp"
-                app:chipIcon="@drawable/like_icon"
-                app:chipIconSize="20dp"
+                app:chipIcon="@drawable/like"
+                app:chipIconSize="18dp"
                 app:chipStartPadding="0dp"
                 app:textEndPadding="35dp"
                 app:chipStrokeWidth=".01dp"
                 app:iconStartPadding="10dp"/>
 
             <View
-                android:layout_width="1dp"
+                android:layout_width=".1dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/text_color_gray"/>
+                android:background="@android:color/transparent"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_comment"
@@ -196,7 +195,7 @@
                 android:clickable="true"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Comment"
-                android:textColor="@color/text_color_primary"
+                android:textColor="#AFB5C7"
                 android:textSize="12sp"
                 app:textEndPadding="30dp"
                 app:chipBackgroundColor="@color/bg_color_secondary"

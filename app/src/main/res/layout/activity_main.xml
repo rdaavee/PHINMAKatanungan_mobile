@@ -32,9 +32,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:itemTextColor="@color/text_color_secondary"
         app:itemIconTint="@color/text_color_secondary"
+        app:labelVisibilityMode="labeled"
         app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
-        app:itemTextAppearanceActive="@style/bottomNav_font_details"
-        app:itemTextAppearanceInactive="@style/bottomNav_font_details"
+        app:itemTextAppearanceActive="@style/bottomNav_active"
+        app:itemTextAppearanceInactive="@style/bottomNav_inactive"
         app:itemTextAppearanceActiveBoldEnabled="true" />
 
 
