@@ -30,4 +30,14 @@
         android:name="com.example.phinmakatanungan_mobile.activities.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.example.phinmakatanungan_mobile.activities.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" >
+        <action
+            android:id="@+id/action_commentFragment_to_dashboardFragment2"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
 </navigation>
