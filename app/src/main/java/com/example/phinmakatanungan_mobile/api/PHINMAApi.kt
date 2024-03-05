@@ -1,6 +1,7 @@
 package com.example.phinmakatanungan_mobile.api
 
 import com.example.phinmakatanungan_mobile.models.AnnouncementResponse
+import com.example.phinmakatanungan_mobile.models.CommentResponse
 import com.example.phinmakatanungan_mobile.models.DefaultResponse
 import com.example.phinmakatanungan_mobile.models.LoginResponse
 import com.example.phinmakatanungan_mobile.models.Post
@@ -14,6 +15,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 
 interface PHINMAApi {
 
@@ -89,6 +91,9 @@ interface PHINMAApi {
     //announcements
     @GET("getannouncements")
     fun getAnnounce(): Call<AnnouncementResponse>
+
+    @GET("getcomments/{post_id}")
+    fun getComments(@Path("post_id")postID: String): Call<CommentResponse>
 
 
 
