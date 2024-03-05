@@ -48,5 +48,5 @@ object PHINMAClient {
 
         return retrofit.create(PHINMAApi::class.java)
     }
-    private const val BASE_URL = "http://192.168.100.81:8000/api/"
+    private const val BASE_URL = "http://192.168.42.194:8000/api/"
 }
