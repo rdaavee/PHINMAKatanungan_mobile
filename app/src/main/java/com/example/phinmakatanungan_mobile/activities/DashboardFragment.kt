@@ -1,5 +1,6 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -7,9 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.phinmakatanungan_mobile.R
 import com.example.phinmakatanungan_mobile.adapters.AnnouncementsAdapter
 import com.example.phinmakatanungan_mobile.adapters.PostAdapter
@@ -19,6 +23,7 @@ import com.example.phinmakatanungan_mobile.models.Announcement
 import com.example.phinmakatanungan_mobile.models.AnnouncementResponse
 import com.example.phinmakatanungan_mobile.models.Post
 import com.example.phinmakatanungan_mobile.models.PostResponse
+import kotlinx.coroutines.NonCancellable.start
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +34,9 @@ class DashboardFragment : Fragment() {
     private lateinit var postAdapter: PostAdapter
     private lateinit var announcementAdapter: AnnouncementsAdapter
     private lateinit var phinmaApi: PHINMAApi
+
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private var isBottomNavHidden = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +61,16 @@ class DashboardFragment : Fragment() {
         postAdapter = PostAdapter()
         recyclerView.adapter = postAdapter
 
+        bottomNavigationView = requireActivity().findViewById(R.id.bottomNav)
+
+        // bottom nav will hide and show when you scroll vertically
+        view.findViewById<NestedScrollView>(R.id.nestedScrollView)?.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            if (scrollY > 0 && !isBottomNavHidden) {
+                hideBottomNav()
+            } else if (scrollY == 0 && isBottomNavHidden) {
+                showBottomNav()
+            }
+        }
 
         val sharedPreferences = requireActivity().getSharedPreferences("YourSharedPreferencesName", Context.MODE_PRIVATE)
 
@@ -60,6 +78,25 @@ class DashboardFragment : Fragment() {
         phinmaApi = PHINMAClient.instance
         getAnnouncements()
         fetchPosts()
+    }
+
+    private fun hideBottomNav() {
+        val translationY = bottomNavigationView.height.toFloat()
+        ObjectAnimator.ofFloat(bottomNavigationView, "translationY", 0f, translationY).apply {
+            duration = 700
+            interpolator = AccelerateDecelerateInterpolator()
+            start()
+        }
+        isBottomNavHidden = true
+    }
+
+    private fun showBottomNav() {
+        ObjectAnimator.ofFloat(bottomNavigationView, "translationY", bottomNavigationView.translationY, 0f).apply {
+            duration = 300
+            interpolator = AccelerateDecelerateInterpolator()
+            start()
+        }
+        isBottomNavHidden = false
     }
 
     private fun fetchPosts() {
