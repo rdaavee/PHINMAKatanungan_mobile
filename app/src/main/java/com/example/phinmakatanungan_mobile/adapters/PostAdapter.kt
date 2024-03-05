@@ -19,7 +19,7 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     private var currentDepartment: String? = "CEA"
-    private var currentCourse: String? = "BSArch"
+    private var currentCourses: List<String>? = listOf()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setPostsMap(postsMap: Map<String, Map<String, List<Post>>>) {
@@ -34,8 +34,8 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setCurrentCourse(courseId: String?) {
-        currentCourse = courseId
+    fun setCurrentCourses(courseIds: List<String>?) {
+        currentCourses = courseIds
         notifyDataSetChanged()
     }
 
@@ -58,21 +58,28 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
 
     private fun getCurrentPosts(): List<Post> {
         return when {
-            currentDepartment.isNullOrEmpty() && currentCourse.isNullOrEmpty() -> {
-                // Display all posts when both department and course are null
+            currentDepartment.isNullOrEmpty() && currentCourses.isNullOrEmpty() -> {
+                // Display all posts when both department and courses are null
                 postsMap.values.flatMap { it.values }.flatten()
             }
             currentDepartment.isNullOrEmpty() -> {
-                // Display all posts with the current course
-                emptyList() // You can't set the course alone, so return empty list
+                // Display all posts with the current courses
+                postsMap.values.flatMap { departmentPosts ->
+                    currentCourses?.flatMap { courseId ->
+                        departmentPosts[courseId] ?: emptyList()
+                    } ?: emptyList()
+                }
             }
-            currentCourse.isNullOrEmpty() -> {
+            currentCourses.isNullOrEmpty() -> {
                 // Display all posts with the current department
                 postsMap[currentDepartment ?: ""]?.values?.flatten() ?: emptyList()
             }
             else -> {
-                // Display posts based on the set department and course
-                postsMap[currentDepartment ?: ""]?.get(currentCourse ?: "") ?: emptyList()
+                // Display posts based on the set department and courses
+                postsMap[currentDepartment ?: ""]
+                    ?.filterKeys { currentCourses?.contains(it) == true }
+                    ?.values
+                    ?.flatten() ?: emptyList()
             }
         }
     }
@@ -176,7 +183,7 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
                         .commit()
                 } else {
                     Log.e("PostViewHolder", "Post is null")
-                    Log.d("PostViewHolder", "currentDepartment: $currentDepartment, currentCourse: $currentCourse, adapterPosition: $adapterPosition")
+                    Log.d("PostViewHolder", "currentDepartment: $currentDepartment, currentCourse: $currentCourses, adapterPosition: $adapterPosition")
                     // Handle the case where post is null (e.g., show a message to the user)
                     Toast.makeText(itemView.context, "Post is null", Toast.LENGTH_SHORT).show()
                 }
