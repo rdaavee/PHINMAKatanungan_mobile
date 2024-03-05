@@ -33,8 +33,11 @@ class CommentAdapter(private var comments: List<Comment> = emptyList()) :
 
     inner class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val contentTextView: TextView = itemView.findViewById(R.id.tv_commentContent)
+        private val userNameTextView: TextView = itemView.findViewById(R.id.tv_userName)
 
         fun bind(comment: Comment) {
+            val fullName = "${comment.userData.first_name} ${comment.userData.middle_name} ${comment.userData.last_name}"
+            userNameTextView.text = fullName
             contentTextView.text = comment.content
         }
     }

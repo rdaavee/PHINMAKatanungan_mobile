@@ -219,34 +219,6 @@ class StudentSignUpActivity : AppCompatActivity() {
             }
         }
     }
-    //updates spinner based on course
-    private fun updateYearSpinner(selectedCourse: String) {
-
-        val yearSpinner = findViewById<Spinner>(R.id.spinner_year)
-        // Define years array based on selected course
-        val years: Array<String> = when (selectedCourse) {
-            "BSCE","BSEE","BSCpE","BSME","BSN","BSPharm","BMLS","BSPsych",
-            "BSCrim","ABComm","ABPolSci","BSEEduc","BSED",
-            "BSA","BSMA","BSAT","BSHM","BSTM","BSBA"-> arrayOf("First", "Second", "Third", "Fourth")
-            "BSArch"-> arrayOf("First", "Second", "Third", "Fourth", "Fifth")
-            "HUMMS", "STEM", "GAS", "ABM" -> arrayOf("Grade 11","Grade 12")
-
-            else -> arrayOf("Course undefined")
-        }
-
-        val yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
-        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        yearSpinner.adapter = yearAdapter
-
-        yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedYear = parent?.getItemAtPosition(position).toString()
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-        }
-    }
-
     private fun updateCourseSpinner(selectedDepartment: String) {
 
         val courseSpinner = findViewById<Spinner>(R.id.spinner_course)
@@ -275,6 +247,35 @@ class StudentSignUpActivity : AppCompatActivity() {
             }
         }
     }
+
+    //updates spinner based on course
+    private fun updateYearSpinner(selectedCourse: String) {
+
+        val yearSpinner = findViewById<Spinner>(R.id.spinner_year)
+        // Define years array based on selected course
+        val years: Array<String> = when (selectedCourse) {
+            "BSCE","BSEE","BSCpE","BSME","BSN","BSPharm","BMLS","BSPsych",
+            "BSCrim","ABComm","ABPolSci","BSEEduc","BSED",
+            "BSA","BSMA","BSAT","BSHM","BSTM","BSBA","BSIT"-> arrayOf("First", "Second", "Third", "Fourth")
+            "BSArch"-> arrayOf("First", "Second", "Third", "Fourth", "Fifth")
+            "HUMMS", "STEM", "GAS", "ABM" -> arrayOf("Grade 11","Grade 12")
+
+            else -> arrayOf("Course undefined")
+        }
+
+        val yearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        yearSpinner.adapter = yearAdapter
+
+        yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedYear = parent?.getItemAtPosition(position).toString()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+    }
+
     override fun finish() {
         super.finish()
         // Animation when the activity is finished (exited)

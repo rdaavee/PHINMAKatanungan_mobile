@@ -30,9 +30,7 @@ import retrofit2.Response
 
 class DashboardFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recyclerViews: RecyclerView
     private lateinit var postAdapter: PostAdapter
-    private lateinit var announcementAdapter: AnnouncementsAdapter
     private lateinit var phinmaApi: PHINMAApi
 
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -45,16 +43,15 @@ class DashboardFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
-
     @SuppressLint("CutPasteId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerViews = view.findViewById(R.id.announcement_recyclerView)
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerViews.layoutManager = layoutManager
-        announcementAdapter = AnnouncementsAdapter()
-        recyclerViews.adapter = announcementAdapter
+//        recyclerViews = view.findViewById(R.id.announcement_recyclerView)
+//        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        recyclerViews.layoutManager = layoutManager
+//        announcementAdapter = AnnouncementsAdapter()
+//        recyclerViews.adapter = announcementAdapter
 
         recyclerView = view.findViewById(R.id.post_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -77,7 +74,6 @@ class DashboardFragment : Fragment() {
 
         PHINMAClient.setSharedPreferences(sharedPreferences)
         phinmaApi = PHINMAClient.instance
-        getAnnouncements()
         fetchPosts()
     }
 
@@ -125,23 +121,23 @@ class DashboardFragment : Fragment() {
     }
 
 
-    private fun getAnnouncements() {
-        val call: Call<AnnouncementResponse> = phinmaApi.getAnnounce()
-
-        call.enqueue(object : Callback<AnnouncementResponse> {
-            override fun onResponse(call: Call<AnnouncementResponse>, response: Response<AnnouncementResponse>) {
-                if (response.isSuccessful) {
-                    val announcementResponse: AnnouncementResponse? = response.body()
-                    val announcements: List<Announcement> = announcementResponse?.announcements ?: emptyList()
-                    val announcementsMap = announcements.groupBy { it.department }
-                    announcementAdapter.setAnnouncementsMap(announcementsMap)
-                } else {
-                    Log.e("DashboardFragment", "Failed to fetch posts. Code: ${response.code()}")
-                }
-            }
-            override fun onFailure(call: Call<AnnouncementResponse>, t: Throwable) {
-                Log.e("DashboardFragment", "Error fetching posts: ${t.message}")
-            }
-        })
-    }
+//    private fun getAnnouncements() {
+//        val call: Call<AnnouncementResponse> = phinmaApi.getAnnounce()
+//
+//        call.enqueue(object : Callback<AnnouncementResponse> {
+//            override fun onResponse(call: Call<AnnouncementResponse>, response: Response<AnnouncementResponse>) {
+//                if (response.isSuccessful) {
+//                    val announcementResponse: AnnouncementResponse? = response.body()
+//                    val announcements: List<Announcement> = announcementResponse?.announcements ?: emptyList()
+//                    val announcementsMap = announcements.groupBy { it.department }
+//                    announcementAdapter.setAnnouncementsMap(announcementsMap)
+//                } else {
+//                    Log.e("DashboardFragment", "Failed to fetch posts. Code: ${response.code()}")
+//                }
+//            }
+//            override fun onFailure(call: Call<AnnouncementResponse>, t: Throwable) {
+//                Log.e("DashboardFragment", "Error fetching posts: ${t.message}")
+//            }
+//        })
+//    }
 }

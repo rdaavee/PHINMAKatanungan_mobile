@@ -19,7 +19,7 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     private var currentDepartment: String? = "CEA"
-    private var currentCourse: String? = ""
+    private var currentCourse: String? = "BSArch"
 
     @SuppressLint("NotifyDataSetChanged")
     fun setPostsMap(postsMap: Map<String, Map<String, List<Post>>>) {
