@@ -225,8 +225,10 @@ class StudentSignUpActivity : AppCompatActivity() {
         val yearSpinner = findViewById<Spinner>(R.id.spinner_year)
         // Define years array based on selected course
         val years: Array<String> = when (selectedCourse) {
-            "BSIT", "BSCE", "BSBA", "BSBE", "BSCRIM", "BSA", "BSN" -> arrayOf("First", "Second", "Third", "Fourth")
-            "BSArch", "BSLAW"-> arrayOf("First", "Second", "Third", "Fourth", "Fifth")
+            "BSCE","BSEE","BSCpE","BSME","BSN","BSPharm","BMLS","BSPsych",
+            "BSCrim","ABComm","ABPolSci","BSEEduc","BSED",
+            "BSA","BSMA","BSAT","BSHM","BSTM","BSBA"-> arrayOf("First", "Second", "Third", "Fourth")
+            "BSArch"-> arrayOf("First", "Second", "Third", "Fourth", "Fifth")
             "HUMMS", "STEM", "GAS", "ABM" -> arrayOf("Grade 11","Grade 12")
 
             else -> arrayOf("Course undefined")
@@ -252,7 +254,7 @@ class StudentSignUpActivity : AppCompatActivity() {
         val courses: Array<String> = when (selectedDepartment) {
             "CITE"  -> arrayOf("BSIT")
             "CEA" -> arrayOf("BSCE","BSEE","BSArch","BSCpE","BSME")
-            "CAHS" -> arrayOf("BSN","BSPharm","BMLS","BSPsych","BSN")
+            "CAHS" -> arrayOf("BSN","BSPharm","BMLS","BSPsych")
             "CCJE" -> arrayOf("BSCrim")
             "CELA" -> arrayOf("ABComm","ABPolSci","BSEEduc","BSED")
             "CMA" -> arrayOf("BSA","BSMA","BSAT","BSHM","BSTM","BSBA")

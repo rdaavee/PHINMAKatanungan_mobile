@@ -70,7 +70,11 @@ class DashboardFragment : Fragment() {
                 if (response.isSuccessful) {
                     val postResponse: PostResponse? = response.body()
                     val posts: List<Post> = postResponse?.posts ?: emptyList()
-                    val postsMap = posts.groupBy { it.user.course_id } // Group posts by course ID
+
+                    // Group posts first by department, then by course
+                    val postsMap = posts.groupBy { it.user.department_id }
+                        .mapValues { (_, posts) -> posts.groupBy { it.user.course_id } }
+
                     postAdapter.setPostsMap(postsMap)
                 } else {
                     Log.e("DashboardFragment", "Failed to fetch posts. Code: ${response.code()}")
@@ -81,6 +85,7 @@ class DashboardFragment : Fragment() {
             }
         })
     }
+
 
     private fun getAnnouncements() {
         val call: Call<AnnouncementResponse> = phinmaApi.getAnnounce()
