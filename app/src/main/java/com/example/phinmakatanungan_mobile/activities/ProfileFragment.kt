@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -41,6 +43,11 @@ class ProfileFragment : Fragment() {
         // Handle sign out button click
         binding.root.findViewById<LinearLayout>(R.id.ll_seventh).setOnClickListener {
             signOut()
+        }
+
+        binding.root.findViewById<ImageView>(R.id.iv_editProfileBtn).setOnClickListener {
+            val intent = Intent(activity, ChangePasswordActivity::class.java)
+            startActivity(intent)
         }
 
         val authToken = sharedPreferences.getString("authToken", "")
