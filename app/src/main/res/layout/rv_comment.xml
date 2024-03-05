@@ -77,14 +77,6 @@
             app:layout_constraintStart_toStartOf="parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_commentTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Student Here!"
-                android:textSize="18sp"
-                android:textColor="@color/text_color_primary"
-                android:fontFamily="@font/montserrat_bold"/>
 
             <kr.co.prnd.readmore.ReadMoreTextView
                 android:id="@+id/tv_commentContent"

@@ -36,7 +36,6 @@ import java.io.StringReader
 class CommentFragment : Fragment() {
 
     private var bottomNavigationView: BottomNavigationView? = null
-
     private lateinit var post: Post
     private lateinit var commentAdapter: CommentAdapter
     companion object {
@@ -56,15 +55,19 @@ class CommentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.getParcelable<Post>(ARG_POST)?.let { post ->
+        arguments?.getParcelable<Post>("post")?.let { post ->
             this.post = post
         }
 
         // Initialize RecyclerView for displaying comments//
-
         val buttonSubmitComment = view.findViewById<ImageView>(R.id.buttonSubmitComment)
         buttonSubmitComment.setOnClickListener {
-            addComment()
+            if (::post.isInitialized) {
+                addComment(post)
+            } else {
+                // Handle the case where post is not initialized
+                Log.e("CommentFragment", "Post is not initialized")
+            }
         }
 
         commentAdapter= CommentAdapter()
@@ -80,11 +83,6 @@ class CommentFragment : Fragment() {
         //bottom nav will hide when in the comment section
         bottomNavigationView = activity?.findViewById(R.id.bottomNav);
         bottomNavigationView?.visibility = View.GONE
-
-//        val commentBackBtn = view.findViewById<ImageView>(R.id.iv_commentBackBtn)
-//        commentBackBtn.setOnClickListener {
-//            findNavController().navigate(R.id.action_commentFragment_to_dashboardFragment2)
-//        }
 
     }
 
@@ -107,7 +105,7 @@ class CommentFragment : Fragment() {
             })
     }
 
-    private fun addComment() {
+    private fun addComment(post: Post) {
         val editTextComment = requireView().findViewById<EditText>(R.id.editTextComment)
         val content = editTextComment.text.toString()
         editTextComment.text.clear()
@@ -128,6 +126,7 @@ class CommentFragment : Fragment() {
             Toast.makeText(requireContext(), "User ID not found", Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun addCommentToDatabase(postId: String, userId: String, content: String) {
 
         val signupDataJson = "{\"id\":\"$postId\",\"user_id\":\"$userId\",\"content\":\"$content\"}"

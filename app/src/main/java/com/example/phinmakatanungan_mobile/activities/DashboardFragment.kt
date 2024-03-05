@@ -61,6 +61,7 @@ class DashboardFragment : Fragment() {
         postAdapter = PostAdapter()
         recyclerView.adapter = postAdapter
 
+
         bottomNavigationView = requireActivity().findViewById(R.id.bottomNav)
 
         // bottom nav will hide and show when you scroll vertically

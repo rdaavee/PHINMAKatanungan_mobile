@@ -1,10 +1,12 @@
 package com.example.phinmakatanungan_mobile.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.phinmakatanungan_mobile.R
@@ -16,7 +18,7 @@ import kotlin.collections.flatten
 class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = emptyMap()) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-    private var currentDepartment: String? = ""
+    private var currentDepartment: String? = "CEA"
     private var currentCourse: String? = ""
 
     @SuppressLint("NotifyDataSetChanged")
@@ -44,7 +46,18 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val posts = when {
+        val posts = getCurrentPosts()
+        val post = posts.getOrNull(position)
+        post?.let { holder.bind(it) }
+    }
+
+    override fun getItemCount(): Int {
+        val posts = getCurrentPosts()
+        return posts.size
+    }
+
+    private fun getCurrentPosts(): List<Post> {
+        return when {
             currentDepartment.isNullOrEmpty() && currentCourse.isNullOrEmpty() -> {
                 // Display all posts when both department and course are null
                 postsMap.values.flatMap { it.values }.flatten()
@@ -62,32 +75,8 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
                 postsMap[currentDepartment ?: ""]?.get(currentCourse ?: "") ?: emptyList()
             }
         }
-
-        val post = posts.getOrNull(position)
-        post?.let { holder.bind(it) }
     }
 
-    override fun getItemCount(): Int {
-        val posts = when {
-            currentDepartment.isNullOrEmpty() && currentCourse.isNullOrEmpty() -> {
-                // If both department and course are null, count all posts
-                postsMap.values.flatMap { it.values }.flatten()
-            }
-            currentDepartment.isNullOrEmpty() -> {
-                // If department is null, it means course is set alone, so return 0
-                emptyList()
-            }
-            currentCourse.isNullOrEmpty() -> {
-                // If only course is null, count all posts for the given department
-                postsMap[currentDepartment ?: ""]?.values?.flatten() ?: emptyList()
-            }
-            else -> {
-                // Count posts based on the set department and course
-                postsMap[currentDepartment ?: ""]?.get(currentCourse ?: "") ?: emptyList()
-            }
-        }
-        return posts.size
-    }
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val chipCourse: Chip = itemView.findViewById(R.id.chip_course)
         private val userNameTextView: TextView = itemView.findViewById(R.id.tv_userName)
@@ -97,33 +86,6 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
         private val commentsChip: Chip = itemView.findViewById(R.id.chip_comment)
         private val commentCount: TextView = itemView.findViewById(R.id.comment_count)
         private val likeCount: TextView = itemView.findViewById(R.id.like_count)
-
-        init {
-            commentsChip.setOnClickListener {
-                val post = if (currentCourse.isNullOrEmpty() && currentDepartment.isNullOrEmpty()) {
-                    // Display all posts when both course and department are null
-                    val allPosts = postsMap.values.flatMap { it.values }.flatten()
-                    allPosts.getOrNull(adapterPosition)
-                } else if (currentDepartment.isNullOrEmpty()) {
-                    // Display posts based on the set course when department is null
-                    val coursePosts =
-                        postsMap[currentCourse ?: ""]?.values?.flatten() ?: emptyList()
-                    coursePosts.getOrNull(adapterPosition)
-                } else {
-                    // Display posts based on the set course and department
-                    val departmentPosts =
-                        postsMap[currentCourse ?: ""]?.get(currentDepartment ?: "") ?: emptyList()
-                    departmentPosts.getOrNull(adapterPosition)
-                }
-                val fragment = CommentFragment.newInstance(post)
-                val fragmentManager = (itemView.context as AppCompatActivity).supportFragmentManager
-                fragmentManager.beginTransaction()
-                    .replace(R.id.fragment, fragment)
-                    .addToBackStack(null)
-                    .commit()
-            }
-        }
-
         fun bind(post: Post) {
             val chipCourse = chipCourse
             var cordep = ""
@@ -198,10 +160,57 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
             contentTextView.text = post.content
             likeCount.text = post.likes_count.toString()
             commentCount.text = post.comments_count.toString()
+
+
+        }
+        init {
+            commentsChip.setOnClickListener {
+                val post = getCurrentPosts().getOrNull(adapterPosition)
+
+                if (post != null) {
+                    val fragment = CommentFragment.newInstance(post)
+                    val fragmentManager = (itemView.context as AppCompatActivity).supportFragmentManager
+                    fragmentManager.beginTransaction()
+                        .replace(R.id.fragment, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                } else {
+                    Log.e("PostViewHolder", "Post is null")
+                    Log.d("PostViewHolder", "currentDepartment: $currentDepartment, currentCourse: $currentCourse, adapterPosition: $adapterPosition")
+                    // Handle the case where post is null (e.g., show a message to the user)
+                    Toast.makeText(itemView.context, "Post is null", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
-}
 
+    // Method to find a post by its ID
+    fun findPostById(postId: String): Post? {
+        val postIdInt = postId.toIntOrNull() ?: return null
+
+        for ((_, departmentPosts) in postsMap) {
+            for ((_, coursePosts) in departmentPosts) {
+                for (post in coursePosts) {
+                    if (post.id == postIdInt) {
+                        return post
+                    }
+                }
+            }
+        }
+        // Return null if no post with the given ID is found
+        return null
+    }
+
+    override fun getItemId(position: Int): Long {
+        val posts = getCurrentPosts()
+        if (position in posts.indices) {
+            // Convert the ID of the post at the given position to Long
+            return posts[position].id.toLong()
+        }
+        // Return RecyclerView.NO_ID if the position is out of bounds
+        return RecyclerView.NO_ID
+    }
+}
 
 
 
