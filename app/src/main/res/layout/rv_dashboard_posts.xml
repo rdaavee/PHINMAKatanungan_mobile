@@ -21,8 +21,7 @@
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginEnd="10dp">
 
 
             <TextView
@@ -31,10 +30,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/text_color_primary"
                 android:text="Ranier"
-                android:textSize="16sp" />
+                android:textSize="13sp" />
 
 
 
@@ -83,26 +82,39 @@
                 android:layout_height="wrap_content"
                 android:text="New Student Here!"
                 android:textSize="18sp"
-                android:textColor="@color/text_color_primary"
+                android:textColor="@color/text_color_alt"
                 android:fontFamily="@font/montserrat_bold"/>
 
-            <kr.co.prnd.readmore.ReadMoreTextView
-                android:id="@+id/tv_body"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:fontFamily="@font/montserrat"
-                android:text=""
-                android:textSize="14sp"
-                android:textColor="@color/text_color_primary"
-                app:readMoreText=" See More"
-                app:readMoreMaxLine="5"
-                app:readMoreColor="@color/text_color_basicinfo"/>
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0.1dp">
+
+                <kr.co.prnd.readmore.ReadMoreTextView
+                    android:id="@+id/tv_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat"
+                    android:text=""
+                    android:textSize="15sp"
+                    android:textColor="@color/text_color_primary"
+                    android:background="@color/content_bg_color"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    app:readMoreText=" See More"
+                    app:readMoreMaxLine="5"
+                    app:readMoreColor="@color/text_color_basicinfo"/>
+
+            </androidx.cardview.widget.CardView>
+
+
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             android:orientation="horizontal"
@@ -126,10 +138,16 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:layout_gravity="center_vertical"/>
 
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"/>
+
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/active_comments" />
 
@@ -140,7 +158,7 @@
                 android:text="0"
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="end|center_vertical"/>
 
         </LinearLayout>
 

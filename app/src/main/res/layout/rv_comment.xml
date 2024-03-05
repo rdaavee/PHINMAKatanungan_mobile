@@ -1,15 +1,224 @@
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="1dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="5dp">
 
-    <TextView
-        android:id="@+id/tv_commentContent"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/postUserInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/text_color_primary"
+                android:text="Ranier"
+                android:textSize="16sp" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_light"
+                android:text="10m"
+                android:textSize="10sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_course"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:clickable="false"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="BSIT"
+                android:textColor="#FFFFFF"
+                android:textSize="9sp"
+                app:chipBackgroundColor="@color/chip_bg_color_bsit"
+                app:chipStrokeWidth=".1dp"
+                app:chipStartPadding="0dp"
+                app:chipEndPadding="0dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_question_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/postUserInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_commentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Student Here!"
+                android:textSize="18sp"
+                android:textColor="@color/text_color_primary"
+                android:fontFamily="@font/montserrat_bold"/>
+
+            <kr.co.prnd.readmore.ReadMoreTextView
+                android:id="@+id/tv_commentContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@color/text_color_primary"
+                app:readMoreText=" See More"
+                app:readMoreMaxLine="4"
+                app:readMoreColor="@color/text_color_basicinfo"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:orientation="horizontal"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="10dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_like"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="10"
+                android:clickable="true"
+                android:textAlignment="center"
+                android:textColor="#AFB5C7"
+                android:textSize="12sp"
+                app:chipBackgroundColor="@color/bg_color_secondary"
+                app:chipEndPadding="0dp"
+                app:chipIcon="@drawable/like"
+                app:chipIconSize="15dp"
+                app:chipStartPadding="15dp"
+                app:chipStrokeWidth=".01dp"
+                app:iconStartPadding="10dp"/>
+
+            <TextView
+                android:id="@+id/like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:layout_gravity="center_vertical"/>
+
+<!--            <ImageView-->
+<!--                android:layout_width="15dp"-->
+<!--                android:layout_height="15dp"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:src="@drawable/active_comments" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/comment_count"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="0"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:fontFamily="@font/montserrat_medium"-->
+<!--                android:layout_gravity="center_vertical"/>-->
+
+        </LinearLayout>
+
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0.2dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@color/bg_color_divider"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_chips"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/ll_question_container">-->
+
+<!--            <com.google.android.material.chip.Chip-->
+<!--                android:id="@+id/chip_like"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:clickable="true"-->
+<!--                android:text="Like"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="#AFB5C7"-->
+<!--                android:textSize="12sp"-->
+<!--                app:chipBackgroundColor="@color/bg_color_secondary"-->
+<!--                app:chipEndPadding="0dp"-->
+<!--                app:chipIcon="@drawable/like"-->
+<!--                app:chipIconSize="18dp"-->
+<!--                app:chipStartPadding="0dp"-->
+<!--                app:textEndPadding="35dp"-->
+<!--                app:chipStrokeWidth=".01dp"-->
+<!--                app:iconStartPadding="10dp"/>-->
+
+<!--            <View-->
+<!--                android:layout_width=".1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:background="@android:color/transparent"/>-->
+
+<!--            <com.google.android.material.chip.Chip-->
+<!--                android:id="@+id/chip_comment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:textAlignment="center"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:clickable="true"-->
+<!--                android:fontFamily="@font/montserrat_bold"-->
+<!--                android:text="Comment"-->
+<!--                android:textColor="#AFB5C7"-->
+<!--                android:textSize="12sp"-->
+<!--                app:textEndPadding="30dp"-->
+<!--                app:chipBackgroundColor="@color/bg_color_secondary"-->
+<!--                app:chipEndPadding="0dp"-->
+<!--                app:chipIcon="@drawable/comment_icon"-->
+<!--                app:chipIconSize="20dp"-->
+<!--                app:chipStartPadding="0dp"-->
+<!--                app:chipStrokeWidth=".01dp"-->
+<!--                app:iconStartPadding="20dp" />-->
+
+<!--        </LinearLayout>-->
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
