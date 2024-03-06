@@ -21,16 +21,20 @@ class DashboardViewModel(private val phinmaApi: PHINMAApi) : ViewModel() {
         call.enqueue(object : Callback<PostResponse> {
             override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
                 if (response.isSuccessful) {
-                    val postResponse: PostResponse? = response.body()
-                    val posts: List<Post> = postResponse?.posts ?: emptyList()
-                    // Group posts first by department, then by course
-                    val postsMap = posts.groupBy { it.user.department_id }
-                        .mapValues { (_, posts) -> posts.groupBy { it.user.course_id } }
-                    _posts.value = postsMap
+                    try {
+                        val postResponse: PostResponse? = response.body()
+                        val posts: List<Post> = postResponse?.posts ?: emptyList()
+
+                        val postsMap = posts.groupBy { it.user.department_id }
+                            .mapValues { (_, posts) -> posts.groupBy { it.user.course_id } }
+                        _posts.value = postsMap
+                    } catch (e: NullPointerException) {
+                        Log.e("YourActivity", "Error occurred: ${e.message}")
+                    }
                 } else {
+                    Log.e("YourActivity", "Error occurred")
                 }
             }
-
             override fun onFailure(call: Call<PostResponse>, t: Throwable) {
             }
         })

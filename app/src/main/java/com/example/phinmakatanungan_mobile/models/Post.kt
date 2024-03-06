@@ -10,6 +10,8 @@ data class Post(
     val content: String,
     val likes_count: Int,
     val comments_count: Int,
+    val timestamp: Long, // Add timestamp field here
+
     @SerializedName("user") val user: UserData
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -18,6 +20,7 @@ data class Post(
         parcel.readString() ?: "",
         parcel.readInt(),
         parcel.readInt(),
+        parcel.readLong(), // Read the timestamp from the parcel
         parcel.readParcelable(UserData::class.java.classLoader)!!
     )
 
@@ -27,6 +30,7 @@ data class Post(
         parcel.writeString(content)
         parcel.writeInt(likes_count)
         parcel.writeInt(comments_count)
+        parcel.writeLong(timestamp) // Write the timestamp to the parcel
         parcel.writeParcelable(user, flags)
     }
 
@@ -44,3 +48,4 @@ data class Post(
         }
     }
 }
+

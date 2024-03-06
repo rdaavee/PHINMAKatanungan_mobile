@@ -15,10 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var viewModel: SharedPrefsViewModel
-    private lateinit var dashboardFragment: DashboardFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +32,16 @@ class MainActivity : AppCompatActivity() {
         initializeAuthToken()
         clearSharedPreferences()
     }
-
+    @Deprecated("This method is deprecated", level = DeprecationLevel.WARNING)
+    override fun onBackPressed() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as? NavHostFragment
+        val currentDestination = navHostFragment?.navController?.currentDestination
+        if (currentDestination?.id == R.id.dashboardFragment) {
+            finishAffinity()
+        } else {
+            super.onBackPressed()
+        }
+    }
 
     private fun clearSharedPreferences() {
         val sharedPreferences = getSharedPreferences("filter", Context.MODE_PRIVATE)
