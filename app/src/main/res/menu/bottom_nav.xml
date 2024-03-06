@@ -19,7 +19,7 @@
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/search_icon"
-        android:title="Search"/>
+        android:title="Announcements"/>
 
     <item
         android:id="@+id/profileFragment"

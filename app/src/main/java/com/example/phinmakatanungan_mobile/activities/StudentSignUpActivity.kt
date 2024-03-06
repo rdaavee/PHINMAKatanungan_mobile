@@ -37,9 +37,7 @@ class StudentSignUpActivity : AppCompatActivity() {
         val edittextlastname = findViewById<EditText>(R.id.editTextLastName)
         val edittextstudnumber = findViewById<EditText>(R.id.editTextStudNumber)
         val edittextconfirmpassword = findViewById<EditText>(R.id.editTextConfirmPassword)
-
         val signupButton = findViewById<AppCompatButton>(R.id.buttonSignUp)
-
         val departmentSpinner : Spinner = (findViewById(R.id.spinner_department))
         val schoolSpinner: Spinner = findViewById(R.id.spinner_school)
         val courseSpinner: Spinner = findViewById(R.id.spinner_course)

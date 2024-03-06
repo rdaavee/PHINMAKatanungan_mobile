@@ -1,78 +1,55 @@
 package com.example.phinmakatanungan_mobile.activities
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.phinmakatanungan_mobile.R
 import com.example.phinmakatanungan_mobile.adapters.AnnouncementsAdapter
-import com.example.phinmakatanungan_mobile.adapters.PostAdapter
 import com.example.phinmakatanungan_mobile.api.PHINMAApi
 import com.example.phinmakatanungan_mobile.api.PHINMAClient
 import com.example.phinmakatanungan_mobile.models.Announcement
 import com.example.phinmakatanungan_mobile.models.AnnouncementResponse
-import com.example.phinmakatanungan_mobile.models.Post
-import com.example.phinmakatanungan_mobile.models.PostResponse
-import kotlinx.coroutines.NonCancellable.start
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DashboardFragment : Fragment() {
+class AnnouncementFragment : Fragment() {
+
     private lateinit var recyclerView: RecyclerView
-    private lateinit var postAdapter: PostAdapter
+    private lateinit var announcementAdapter: AnnouncementsAdapter
     private lateinit var phinmaApi: PHINMAApi
-    private lateinit var viewModel: DashboardViewModel
     private lateinit var bottomNavigationView: BottomNavigationView
     private var isBottomNavHidden = false
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        return inflater.inflate(R.layout.fragment_announcement, container, false)
     }
 
-    @SuppressLint("CutPasteId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize PHINMAApi instance first
-        val sharedPreferences = requireActivity().getSharedPreferences("YourSharedPreferencesName", Context.MODE_PRIVATE)
-        PHINMAClient.setSharedPreferences(sharedPreferences)
-        phinmaApi = PHINMAClient.instance
-
-        recyclerView = view.findViewById(R.id.post_recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        postAdapter = PostAdapter()
-        recyclerView.adapter = postAdapter
+        recyclerView = view.findViewById(R.id.announcement_recyclerView)
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
+        announcementAdapter = AnnouncementsAdapter()
+        recyclerView.adapter = announcementAdapter
 
         bottomNavigationView = requireActivity().findViewById(R.id.bottomNav)
 
-        // Initialize the ViewModel after initializing phinmaApi
-        val factory = DashboardViewModelFactory(phinmaApi)
-        viewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
-
-        // Observe the posts LiveData
-        viewModel.posts.observe(viewLifecycleOwner, Observer { postsMap ->
-            // Update the UI with the new posts data
-            postAdapter.setPostsMap(postsMap)
-        })
-
-        // bottom nav will hide and show when you scroll vertically
         var lastScrollY = 0
+
         view.findViewById<NestedScrollView>(R.id.nestedScrollView)?.setOnScrollChangeListener { _, _, _, _, scrollY ->
             if (scrollY > lastScrollY && !isBottomNavHidden) {
                 // Scrolling down, hide bottom nav
@@ -84,19 +61,12 @@ class DashboardFragment : Fragment() {
             lastScrollY = scrollY
         }
 
-        viewModel.fetchPosts()
 
-//        bottomNavigationView.menu.findItem(R.id.dashboardFragment)?.setOnMenuItemClickListener {
-//            scrollToTop()
-//            true
-//        }
+        val sharedPreferences = requireActivity().getSharedPreferences("YourSharedPreferencesName", Context.MODE_PRIVATE)
+        PHINMAClient.setSharedPreferences(sharedPreferences)
+        phinmaApi = PHINMAClient.instance
+        getAnnouncements()
     }
-
-//    private fun scrollToTop() {
-//        val nestedScrollView = view?.findViewById<NestedScrollView>(R.id.nestedScrollView)
-//        nestedScrollView?.smoothScrollTo(0, 0) // Scroll to the top
-//    }
-
 
     private fun hideBottomNav() {
         val translationY = bottomNavigationView.height.toFloat()
@@ -115,5 +85,25 @@ class DashboardFragment : Fragment() {
             start()
         }
         isBottomNavHidden = false
+    }
+
+    private fun getAnnouncements() {
+        val call: Call<AnnouncementResponse> = phinmaApi.getAnnounce()
+
+        call.enqueue(object : Callback<AnnouncementResponse> {
+            override fun onResponse(call: Call<AnnouncementResponse>, response: Response<AnnouncementResponse>) {
+                if (response.isSuccessful) {
+                    val announcementResponse: AnnouncementResponse? = response.body()
+                    val announcements: List<Announcement> = announcementResponse?.announcements ?: emptyList()
+                    val announcementsMap = announcements.groupBy { it.department }
+                    announcementAdapter.setAnnouncementsMap(announcementsMap)
+                } else {
+                    Log.e("DashboardFragment", "Failed to fetch posts. Code: ${response.code()}")
+                }
+            }
+            override fun onFailure(call: Call<AnnouncementResponse>, t: Throwable) {
+                Log.e("DashboardFragment", "Error fetching posts: ${t.message}")
+            }
+        })
     }
 }

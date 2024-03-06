@@ -9,7 +9,28 @@
         android:id="@+id/dashboardFragment"
         android:name="com.example.phinmakatanungan_mobile.activities.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_departmentFragment"
+            app:destination="@id/departmentFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.phinmakatanungan_mobile.activities.ProfileFragment"
@@ -19,17 +40,35 @@
         android:id="@+id/createPostFragment"
         android:name="com.example.phinmakatanungan_mobile.activities.CreatePostFragment"
         android:label="fragment_create_post"
-        tools:layout="@layout/fragment_create_post" />
+        tools:layout="@layout/fragment_create_post" >
+        <action
+            android:id="@+id/action_createPostFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/departmentFragment"
         android:name="com.example.phinmakatanungan_mobile.activities.DepartmentFragment"
         android:label="fragment_department"
-        tools:layout="@layout/fragment_department" />
+        tools:layout="@layout/fragment_department" >
+        <action
+            android:id="@+id/action_departmentFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.phinmakatanungan_mobile.activities.SearchFragment"
+        android:name="com.example.phinmakatanungan_mobile.activities.AnnouncementFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_announcement" >
+        <action
+            android:id="@+id/action_searchFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/commentFragment"
@@ -38,6 +77,8 @@
         tools:layout="@layout/fragment_comment" >
         <action
             android:id="@+id/action_commentFragment_to_dashboardFragment2"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

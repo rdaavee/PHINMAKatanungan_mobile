@@ -18,7 +18,7 @@ import kotlin.collections.flatten
 class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = emptyMap()) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-    private var currentDepartment: String? = "CEA"
+    private var currentDepartment: String? = ""
     private var currentCourses: List<String>? = listOf()
 
     @SuppressLint("NotifyDataSetChanged")
