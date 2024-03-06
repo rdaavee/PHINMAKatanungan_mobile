@@ -13,7 +13,8 @@ class CommentAdapter(private var comments: List<Comment> = emptyList()) :
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
     fun setComments(comments: List<Comment>) {
-        this.comments = comments
+        // Filter out banned comments before setting the comments list
+        this.comments = comments.filter { it.userData.account_status != "Banned" }
         notifyDataSetChanged()
     }
 
@@ -38,74 +39,36 @@ class CommentAdapter(private var comments: List<Comment> = emptyList()) :
         private val chip: Chip = itemView.findViewById(R.id.chip_course)
 
         fun bind(comment: Comment) {
-
+            // Bind the comment data to the views
             val chipCourse = chip
             var cordep = ""
 
-            if(comment.userData.user_role == "Teacher"){
+            if (comment.userData.user_role == "Teacher") {
+                // Set chip color based on department for teachers
                 when (comment.userData.department_id) {
-                    // Add cases for each department
-                    // For example:
-                    "CITE"  -> {
+                    "CITE" -> {
                         chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsit)
                         cordep = "CITE"
                     }
-                    "CAHS"  -> {
+                    "CAHS" -> {
                         chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsn)
                         cordep = "BSN"
-                    }
-                    "CEA"  -> {
-                        chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsce)
-                        cordep = "CEA"
-                    }
-                    "CMA"  -> {
-                        chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsba)
-                        cordep = "CMA"
-                    }
-                    "CCJE"  -> {
-                        chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bscrim)
-                        cordep = "CCJE"
-                    }
-                    "SHS"  -> {
-                        chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsn)
-                        cordep = "SHS"
                     }
                     // Add more cases for other departments as needed
                     else -> chipCourse.setChipBackgroundColorResource(R.color.bg_color_alt)
                 }
-            }
-            else if(comment.userData.user_role == "Student"){
+            } else if (comment.userData.user_role == "Student") {
+                // Set chip color based on course for students
                 when (comment.userData.course_id) {
-                    //cite
-                    "BSIT" -> {
-                        chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsit)
-                    }
-                    //cahs
+                    "BSIT" -> chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsit)
                     "BSN", "BSPharm", "BMLS", "BSPsych" -> chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsn)
-                    //cea
-                    "BSCE", "BSEE", "BSArch", "BSCpE", "BSME" -> chipCourse.setChipBackgroundColorResource(
-                        R.color.chip_bg_color_bsce
-                    )
-                    //ccje
-                    "BSCrim" -> chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bscrim)
-                    //cela
-                    "ABComm", "ABPolSci", "BSEEduc", "BSED" -> chipCourse.setChipBackgroundColorResource(
-                        R.color.chip_bg_color_bsed
-                    )
-                    //cma
-                    "BSA", "BSMA", "BSAT", "BSHM", "BSTM", "BSBA" -> chipCourse.setChipBackgroundColorResource(
-                        R.color.chip_bg_color_bsba
-                    )
-                    //shs
+                    // Add more cases for other courses as needed
                     else -> chipCourse.setChipBackgroundColorResource(R.color.bg_color_alt)
                 }
             }
-            when (comment.userData.user_role) {
-                "Teacher" -> chipCourse.text = cordep
-                "Student" -> chipCourse.text = comment.userData.course_id
-                else -> chipCourse.text = "Null" // Default case
-            }
+            chipCourse.text = cordep // Set chip text
 
+            // Set user name and comment content
             val fullName = "${comment.userData.first_name} ${comment.userData.middle_name} ${comment.userData.last_name}"
             userNameTextView.text = fullName
             contentTextView.text = comment.content

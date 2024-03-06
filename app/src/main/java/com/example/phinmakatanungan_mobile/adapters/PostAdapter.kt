@@ -68,7 +68,7 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
             currentDepartment.isNullOrEmpty() && currentCourses.isNullOrEmpty() -> {
                 // Display all posts when both department and courses are null
                 postsMap.values.flatMap { it.values }.flatten()
-                    .filter { it.user.account_status == "active" } // Filter out posts from banned users
+                    .filter { it.user.account_status == "Active" } // Filter out posts from banned users
                     .sortedByDescending { it.timestamp }
             }
             currentDepartment.isNullOrEmpty() -> {
@@ -77,14 +77,14 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
                     currentCourses?.flatMap { courseId ->
                         departmentPosts[courseId] ?: emptyList()
                     } ?: emptyList()
-                }.filter { it.user.account_status == "active" } // Filter out posts from banned users
+                }.filter { it.user.account_status == "Active" } // Filter out posts from banned users
                     .sortedByDescending { it.timestamp }
             }
 
             currentCourses.isNullOrEmpty() -> {
                 // Display all posts with the current department
                 postsMap[currentDepartment ?: ""]?.values?.flatten()
-                    ?.filter { it.user.account_status == "active" } // Filter out posts from banned users
+                    ?.filter { it.user.account_status == "Active" } // Filter out posts from banned users
                     ?.sortedByDescending { it.timestamp } ?: emptyList()
             }
             else -> {
@@ -92,20 +92,11 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
                 postsMap[currentDepartment ?: ""]
                     ?.filterKeys { currentCourses?.contains(it) == true }
                     ?.values
-                    ?.flatten()?.filter { it.user.account_status == "active" } // Filter out posts from banned users
+                    ?.flatten()?.filter { it.user.account_status == "Active" } // Filter out posts from banned users
                     ?.sortedByDescending { it.timestamp } ?: emptyList()
             }
         }
     }
-
-    // Function to retrieve the account status of the current user
-    private fun getCurrentUserAccountStatus(): String {
-        // Implement the logic to retrieve the account status of the current user
-        // This could involve accessing user data or making a network request
-        // For demonstration purposes, I'm returning a hardcoded value
-        return "active"
-    }
-
 
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val chipCourse: Chip = itemView.findViewById(R.id.chip_course)
