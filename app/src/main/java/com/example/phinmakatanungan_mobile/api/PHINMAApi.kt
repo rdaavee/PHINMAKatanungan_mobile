@@ -19,6 +19,9 @@ import retrofit2.http.Path
 
 interface PHINMAApi {
 
+    @POST("verifyToken") // Adjust the endpoint URL as per your API
+    fun verifyToken(@Header("Authorization") authToken: String): Call<DefaultResponse>
+
     //registration
     @FormUrlEncoded
     @POST("store")
