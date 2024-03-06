@@ -58,6 +58,9 @@ class CommentAdapter(private var comments: List<Comment> = emptyList()) :
                     else -> chipCourse.setChipBackgroundColorResource(R.color.bg_color_alt)
                 }
             } else if (comment.userData.user_role == "Student") {
+
+                cordep = comment.userData.course_id
+
                 // Set chip color based on course for students
                 when (comment.userData.course_id) {
                     "BSIT" -> chipCourse.setChipBackgroundColorResource(R.color.chip_bg_color_bsit)

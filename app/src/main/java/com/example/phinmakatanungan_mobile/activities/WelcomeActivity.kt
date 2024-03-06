@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.phinmakatanungan_mobile.R
+import com.example.phinmakatanungan_mobile.api.PHINMAClient
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -24,6 +25,8 @@ class WelcomeActivity : AppCompatActivity() {
 
         // Check if a valid token is present in SharedPreferences
         sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+
+        PHINMAClient.setSharedPreferences(sharedPreferences)
 
 
 //        val authToken = getAuthToken()
