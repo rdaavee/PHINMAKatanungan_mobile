@@ -3,11 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="1dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginBottom="5dp">
+    app:cardElevation=".5dp"
+    android:layout_marginBottom="7dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,9 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toStartOf="parent">
 
 
             <TextView
@@ -81,14 +79,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Student Here!"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:layout_marginBottom="5dp"
                 android:textColor="@color/text_color_alt"
-                android:fontFamily="@font/montserrat_bold"/>
+                android:fontFamily="@font/montserrat_medium"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="1dp"
+                android:background="@color/content_bg_color"
                 app:cardElevation="0.1dp">
 
                 <kr.co.prnd.readmore.ReadMoreTextView
@@ -98,11 +98,8 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat"
                     android:text=""
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textColor="@color/text_color_primary"
-                    android:background="@color/content_bg_color"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
                     app:readMoreText=" See More"
                     app:readMoreMaxLine="5"
                     app:readMoreColor="@color/text_color_basicinfo"/>
@@ -127,7 +124,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/active_likes"/>
+                android:src="@drawable/like_icon2"/>
 
             <TextView
                 android:id="@+id/like_count"
@@ -146,10 +143,10 @@
 
             <ImageView
                 android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_height="13dp"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/active_comments" />
+                android:src="@drawable/comment" />
 
             <TextView
                 android:id="@+id/comment_count"

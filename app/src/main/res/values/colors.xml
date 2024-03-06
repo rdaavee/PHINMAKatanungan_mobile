@@ -26,9 +26,10 @@
     <color name="bg_color_primary">#F3F6FF</color>
     <color name="bg_color_secondary">#FFFFFFFF</color>
     <color name="bg_color_cv">#391A8B93</color>
+    <color name="bg_color_commentCard">#0F1A8B93</color>
     <color name="bg_color_divider">#3EBCBCBC</color>
     <color name="bg_color_header">#92BCBCBC</color>
-    <color name="bg_color_dashboard_gap">#3EBCBCBC</color>
+    <color name="bg_color_dashboard_gap">#F6F5F5</color>
 
                 <!-- SPLASHSCREEN BG -->
     <color name="bg_color_splash">#1A8B93</color>
@@ -58,7 +59,7 @@
 
     <color name="filter_bg_color">#3EBCBCBC</color>
 
-    <color name="comment_bg_color">#1DBCBCBC</color>
+    <color name="comment_bg_color">#DDCACACA</color>
     <color name="content_bg_color">#1DBCBCBC</color>
 
                 <!--  BOTTOM NAV  -->

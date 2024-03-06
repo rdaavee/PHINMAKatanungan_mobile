@@ -14,11 +14,11 @@
     <item
         android:id="@+id/createPostFragment"
         android:icon="@drawable/create_post"
-        android:title="Create Post"/>
+        android:title="Create Post" />
 
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/search_icon"
+        android:icon="@drawable/notification_white"
         android:title="Announcements"/>
 
     <item

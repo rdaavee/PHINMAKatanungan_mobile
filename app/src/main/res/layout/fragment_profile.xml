@@ -448,55 +448,16 @@
             android:background="@color/bg_color_divider"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/ll_fifth"
+            app:layout_constraintTop_toBottomOf="@id/ll_sixth"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <LinearLayout
-            android:clickable="true"
-            android:id="@+id/ll_seventh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_sixth"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_logout"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/logout"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="32dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log out"
-                android:textColor="@color/text_color_logout"
-                android:textSize="16sp"
-                android:fontFamily="@font/montserrat_medium"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_sixth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/ll_fifth"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -546,18 +507,58 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
 
+        <LinearLayout
+            android:clickable="true"
+            android:id="@+id/ll_seventh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/ll_sixth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <ImageView
+                android:id="@+id/iv_logout"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/logout"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log out"
+                android:textColor="@color/text_color_logout"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
 
         <View
             android:layout_width="360dp"
             android:layout_height="1dp"
             android:background="@color/bg_color_divider"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_seventh"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_sixth"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
 
-
     </LinearLayout>
+
 
 </ScrollView>
