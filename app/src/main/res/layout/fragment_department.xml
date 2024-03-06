@@ -33,6 +33,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"/>
 
+
         <TextView
             android:id="@+id/textViewGroup1"
             android:layout_width="wrap_content"
@@ -45,6 +46,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"/>
 
+
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup1"
             android:layout_width="wrap_content"
@@ -53,14 +55,12 @@
             android:layout_marginStart="20dp">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_bsit"
+                android:id="@+id/chip_bsit_click"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BSIT"
                 android:textSize="13sp"
-                android:checkable="true"
-                android:checked="false"
-                app:checkedIconVisible="false"
+                android:clickable="true"
                 style="@style/CiteCustomChip"/>
 
         </com.google.android.material.chip.ChipGroup>

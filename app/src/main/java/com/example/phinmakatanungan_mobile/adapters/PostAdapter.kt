@@ -27,16 +27,22 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
         notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setCurrentDepartment(departmentId: String?) {
         currentDepartment = departmentId
         notifyDataSetChanged()
+        getCurrentPosts()
+        Log.d("PostAdapter", "Current department set: $currentDepartment")
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    fun displayCurrent(){
+        Log.d("PostAdapter", "Current department set: $currentDepartment")
+    }
+
     fun setCurrentCourses(courseIds: List<String>?) {
         currentCourses = courseIds
         notifyDataSetChanged()
+        getCurrentPosts()
+        Log.d("PostAdapter", "Current courses set: $currentCourses")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -70,6 +76,7 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
                     } ?: emptyList()
                 }
             }
+
             currentCourses.isNullOrEmpty() -> {
                 // Display all posts with the current department
                 postsMap[currentDepartment ?: ""]?.values?.flatten() ?: emptyList()

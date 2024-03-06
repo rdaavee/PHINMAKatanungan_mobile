@@ -1,5 +1,6 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var viewModel: SharedPrefsViewModel
+    private lateinit var dashboardFragment: DashboardFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,15 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize auth token
         initializeAuthToken()
+        clearSharedPreferences()
+    }
+
+
+    private fun clearSharedPreferences() {
+        val sharedPreferences = getSharedPreferences("filter", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear() // Clear all data
+        editor.apply()
     }
 
     private fun initializeViewModel() {
