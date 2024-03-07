@@ -86,10 +86,6 @@ class StudentSignUpActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.iv_backBtnChooseRole).setOnClickListener {
             startActivity(Intent(this@StudentSignUpActivity, ChooseRoleActivity::class.java))
-//            this@StudentSignUpActivity.overridePendingTransition(
-//                R.anim.slide_in_right,
-//                R.anim.slide_out_right
-//            )
         }
 
         //signup functionality

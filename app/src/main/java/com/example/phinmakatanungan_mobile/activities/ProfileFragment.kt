@@ -103,16 +103,14 @@ class ProfileFragment : Fragment() {
             }
     }
     private fun signOut() {
-        // Remove the token from SharedPreferences
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
-
-        editor.remove("userDataPrefs")
-        editor.apply()
-
+        val myPreferenceEditor = requireContext().getSharedPreferences("myPreference", Context.MODE_PRIVATE).edit()
+        myPreferenceEditor.remove("authToken").apply()
+        val userDataPrefsEditor = requireContext().getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE).edit()
+        userDataPrefsEditor.clear().apply()
+        val filter = requireContext().getSharedPreferences("filter", Context.MODE_PRIVATE).edit()
+        filter.clear().apply()
         // Redirect back to WelcomeActivity and clear the activity stack
-        val intent = Intent(requireActivity(), WelcomeActivity::class.java)
+        val intent = Intent(requireActivity(), LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         requireActivity().finish()  // Finish MainActivity to prevent the user from navigating back

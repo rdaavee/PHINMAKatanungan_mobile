@@ -28,8 +28,7 @@ class PHINMAKatanungan : Application() {
 
         // Initialize SharedPreferences and ViewModel
         sharedPreferences = getSharedPreferences("myPreference", MODE_PRIVATE)
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this).create(
-            SharedPrefsViewModel::class.java)
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this).create(SharedPrefsViewModel::class.java)
 
         // Check if it's the first time the app is launched
         val isFirstTime = sharedPreferences.getBoolean("isFirstTime", true)

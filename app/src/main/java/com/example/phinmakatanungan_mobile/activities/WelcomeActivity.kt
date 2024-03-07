@@ -24,7 +24,7 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Check if a valid token is present in SharedPreferences
-        sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("myPreference", MODE_PRIVATE)
 
         PHINMAClient.setSharedPreferences(sharedPreferences)
 

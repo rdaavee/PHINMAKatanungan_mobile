@@ -9,18 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
             android:id="@+id/tv_department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick your preferred departments"
-            android:textSize="12sp"
-            android:textColor="#000000"
-            android:fontFamily="@font/montserrat_bold"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"/>
-
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Pick your preferred departments"
+            android:textColor="#000000"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/textViewGroup1"
@@ -32,8 +30,17 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_below="@id/tv_department"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"/>
 
+
+        <CheckBox
+            android:id="@+id/checkbox_cite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewGroup1"
+            android:layout_alignBottom="@id/textViewGroup1"
+            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup1"
@@ -43,16 +50,19 @@
             android:layout_marginStart="20dp">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_bsit_click"
+                android:id="@+id/chip_bsit"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="BSIT"
                 android:textSize="13sp"
-                android:clickable="true"
+                android:checkable="true"
+                android:checked="false"
                 app:chipMinTouchTargetSize="10dp"
                 app:chipCornerRadius="5dp"
                 android:textAlignment="center"
                 style="@style/CiteCustomChip"/>
+
+
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -67,7 +77,16 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_below="@id/chipGroup1"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_cea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewGroup2"
+            android:layout_alignBottom="@id/textViewGroup2"
+            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup2"
@@ -157,7 +176,16 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_below="@id/chipGroup2"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_cahs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewGroup3"
+            android:layout_alignBottom="@id/textViewGroup3"
+            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup3"
@@ -234,7 +262,16 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_below="@id/chipGroup3"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_ccje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewGroup4"
+            android:layout_alignBottom="@id/textViewGroup4"
+            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup4"
@@ -271,7 +308,16 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_below="@id/chipGroup4"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_cela"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewGroup5"
+            android:layout_alignBottom="@id/textViewGroup5"
+            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup5"
@@ -348,7 +394,16 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_below="@id/chipGroup5"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_cma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewGroup6"
+            android:layout_alignBottom="@id/textViewGroup6"
+            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup6"
