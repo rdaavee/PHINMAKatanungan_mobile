@@ -47,9 +47,11 @@ class PHINMAKatanungan : Application() {
         if (authToken?.isNotEmpty() == true) {
             initializeAuthToken(authToken)
         } else {
-            redirectToLoginActivity()
+            // If there is no authToken, redirect to WelcomeActivity
+            redirectToWelcomeActivity()
         }
     }
+
 
     private fun redirectToWelcomeActivity() {
         val intent = Intent(this, WelcomeActivity::class.java)

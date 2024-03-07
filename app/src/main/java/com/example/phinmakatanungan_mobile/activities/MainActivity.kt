@@ -70,10 +70,13 @@ class MainActivity : AppCompatActivity() {
         val authToken = sharedPreferences.getString("authToken", "")
         if (!authToken.isNullOrEmpty()) {
             viewModel.authToken = "Bearer $authToken"
+            // Update the authentication token in the ViewModel
+            viewModel.authToken = "Bearer $authToken"
         } else {
             Log.e("MainActivity", "Auth token is null or empty.")
         }
     }
+
 
     fun getAuthToken(): String? {
         return viewModel.authToken

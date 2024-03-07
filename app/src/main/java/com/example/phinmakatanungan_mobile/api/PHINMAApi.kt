@@ -16,6 +16,7 @@ import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface PHINMAApi {
 
@@ -80,7 +81,7 @@ interface PHINMAApi {
         @Field("privacy") privacy: String
     ):retrofit2.Call<DefaultResponse>
     @GET("getposts")
-    fun getPosts(): Call<PostResponse>
+    fun getPosts(@Query("query") query: String? = null): Call<PostResponse>
 
     @FormUrlEncoded
     @POST("storecomment")

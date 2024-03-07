@@ -121,6 +121,7 @@ class LoginActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("authToken", token)
         editor.apply()
+
         if (token != null) {
             getUserInfoData(token, this)
         }
@@ -132,28 +133,30 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     try {
                         val userData = response.body()
-                        // Save the UserData object to SharedPreferences
-                        saveUserDataToPrefs(userData, this@LoginActivity)
+                        if (userData != null) {
+                            // Save the UserData object to SharedPreferences
+                            saveUserDataToPrefs(userData, this@LoginActivity)
+                            Log.d("UserDataPrefs", "User data saved to SharedPreferences: $userData")
+                        } else {
+                            Log.e("UserDataPrefs", "User data is null in the response body")
+                        }
                     } catch (e: Exception) {
-                        Log.e("ProfileFragment", "Exception while processing user data", e)
+                        Log.e("UserDataPrefs", "Exception while processing user data", e)
                         Toast.makeText(applicationContext, "Failed to process user info", Toast.LENGTH_SHORT).show()
                     }
                 } else {
+                    Log.e("UserDataPrefs", "Failed to get user info. Response code: ${response.code()}")
                     Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<UserData>, t: Throwable) {
-                Log.e("ProfileFragment", "Failed to get user info", t)
+                Log.e("UserDataPrefs", "Failed to get user info", t)
                 Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-
-    private fun getUserInfo(authToken: String, context: Context) {
-
-    }
 
     private fun saveUserDataToPrefs(userData: UserData?, context: Context) {
         val sharedPreferences = context.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
@@ -161,37 +164,14 @@ class LoginActivity : AppCompatActivity() {
         if (userData != null) {
             val userDataJson = Gson().toJson(userData)
             editor.putString(USER_DATA_PREFS_KEY, userDataJson)
+            // Commit the changes
+            editor.apply()
         } else {
             // Clear the UserData from SharedPreferences if null
             editor.remove(USER_DATA_PREFS_KEY)
+            // Commit the changes
+            editor.apply()
         }
-        editor.apply()
-    }
-    private fun getUserInfo(authToken: String, loginActivity: LoginActivity) {
-        PHINMAClient.instance.getUserProfile("Bearer$authToken").enqueue(object : Callback<UserData> {
-            override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
-                if (response.isSuccessful) {
-                    try {
-                        val userData = response.body()
-                        if (userData != null) {
-                        }
-                    } catch (e: Exception) {
-                        Log.e("ProfileFragment", "Exception while processing user data", e)
-                        Toast.makeText(applicationContext, "Failed to process user info", Toast.LENGTH_SHORT).show()
-                    }
-
-                    val responseBody = response.body().toString()
-                    Log.d("Response", responseBody)
-                } else {
-                    Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<UserData>, t: Throwable) {
-                Log.e("ProfileFragment", "Failed to get user info", t)
-                Toast.makeText(applicationContext, "Failed to get user info", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     private fun getAuthToken(): String {

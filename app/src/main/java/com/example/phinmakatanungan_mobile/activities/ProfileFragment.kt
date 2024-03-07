@@ -110,7 +110,7 @@ class ProfileFragment : Fragment() {
         val filter = requireContext().getSharedPreferences("filter", Context.MODE_PRIVATE).edit()
         filter.clear().apply()
         // Redirect back to WelcomeActivity and clear the activity stack
-        val intent = Intent(requireActivity(), LoginActivity::class.java)
+        val intent = Intent(requireActivity(), WelcomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         requireActivity().finish()  // Finish MainActivity to prevent the user from navigating back

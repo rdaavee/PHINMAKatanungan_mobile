@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
+import androidx.appcompat.widget.SearchView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -83,15 +84,31 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val searchView = view.findViewById<SearchView>(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Call fetchPosts with the updated query
+                viewModel.fetchPosts(newText)
+                return true
+            }
+        })
+
         // Initialize the ViewModel after initializing phinmaApi
         val factory = DashboardViewModelFactory(phinmaApi)
         viewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
 
         // Observe the posts LiveData
-        viewModel.posts.observe(viewLifecycleOwner, Observer { postsMap ->
+        viewModel.posts.observe(viewLifecycleOwner, Observer { posts ->
             // Update the UI with the new posts data
-            postAdapter.setPostsMap(postsMap)
+            postAdapter.setPosts(posts)
         })
+
+        // Fetch initial posts without any filter
         viewModel.fetchPosts()
     }
     private fun hideBottomNav() {
