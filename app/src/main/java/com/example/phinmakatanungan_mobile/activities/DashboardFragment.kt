@@ -27,6 +27,7 @@ import com.example.phinmakatanungan_mobile.models.Announcement
 import com.example.phinmakatanungan_mobile.models.AnnouncementResponse
 import com.example.phinmakatanungan_mobile.models.Post
 import com.example.phinmakatanungan_mobile.models.PostResponse
+import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.NonCancellable.start
 import retrofit2.Call
 import retrofit2.Callback

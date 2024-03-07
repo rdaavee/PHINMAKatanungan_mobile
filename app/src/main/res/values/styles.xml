@@ -2,12 +2,12 @@
 <resources>
     <style name="bottomNav_active" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/montserrat_bold</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">9sp</item>
     </style>
 
     <style name="bottomNav_inactive" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/montserrat_light</item>
-        <item name="android:textSize">8sp</item>
+        <item name="android:textSize">7sp</item>
     </style>
 
     <style name="Theme.App" parent="Theme.MaterialComponents">

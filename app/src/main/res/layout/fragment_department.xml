@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,18 +8,32 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:ignore="ScrollViewSize">
 
         <TextView
             android:id="@+id/tv_department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Pick your preferred departments"
             android:textColor="#000000"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:background="@color/bg_color_divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/tv_department"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/textViewGroup1"
@@ -28,13 +43,13 @@
             android:textSize="12sp"
             android:textColor="#000000"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_below="@id/tv_department"
+            android:layout_below="@id/view"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_cite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,18 +60,21 @@
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/textViewGroup1"
-            android:layout_marginStart="20dp">
+            android:layout_marginStart="20dp"
+            app:chipSpacingHorizontal="5dp"
+            app:chipSpacingVertical="0.1dp">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsit"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:text="BSIT"
                 android:textSize="13sp"
                 android:checkable="true"
                 android:checked="false"
+                app:checkedIconVisible="false"
                 app:chipMinTouchTargetSize="10dp"
                 app:chipCornerRadius="5dp"
                 android:textAlignment="center"
@@ -65,6 +83,18 @@
 
 
         </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:background="@color/bg_color_divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/chipGroup1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- Group 2 -->
         <TextView
@@ -75,12 +105,12 @@
             android:textSize="12sp"
             android:textColor="@color/text_color_primary"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_below="@id/chipGroup1"
+            android:layout_below="@id/view1"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_cea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +121,7 @@
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/textViewGroup2"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -101,7 +131,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsee"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSEE"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -114,7 +144,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsce"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSCE"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -127,7 +157,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsarch"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSArch"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -140,7 +170,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bscpe"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSCpE"
                 android:textSize="13sp"
                 android:textAlignment="center"
@@ -153,7 +183,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsme"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSME"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -165,6 +195,18 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <View
+            android:id="@+id/view2"
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:background="@color/bg_color_divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/chipGroup2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <!-- Group 3 -->
         <TextView
             android:id="@+id/textViewGroup3"
@@ -174,23 +216,23 @@
             android:textSize="12sp"
             android:textColor="#000000"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_below="@id/chipGroup2"
+            android:layout_below="@id/view2"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_cahs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/textViewGroup3"
             android:layout_alignBottom="@id/textViewGroup3"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/textViewGroup3"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -200,7 +242,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsn"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSN"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -213,7 +255,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bspharm"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSPharm"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -226,7 +268,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bmls"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BMLS"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -239,7 +281,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bspsych"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSPsych"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -251,6 +293,18 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <View
+            android:id="@+id/view3"
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:background="@color/bg_color_divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/chipGroup3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <!-- Group 4 -->
         <TextView
             android:id="@+id/textViewGroup4"
@@ -260,12 +314,12 @@
             android:textSize="12sp"
             android:textColor="#000000"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_below="@id/chipGroup3"
+            android:layout_below="@id/view3"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_ccje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -276,7 +330,7 @@
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/textViewGroup4"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp">
@@ -284,7 +338,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bscrim"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSCrim"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -297,6 +351,18 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <View
+            android:id="@+id/view4"
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:background="@color/bg_color_divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/chipGroup4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <!-- Group 5 -->
         <TextView
             android:id="@+id/textViewGroup5"
@@ -306,12 +372,12 @@
             android:textSize="12sp"
             android:textColor="#000000"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_below="@id/chipGroup4"
+            android:layout_below="@id/view4"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_cela"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -322,7 +388,7 @@
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/textViewGroup5"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -332,7 +398,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_abcomm"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="ABComm"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -345,7 +411,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_abpolsci"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="ABPolSci"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -358,7 +424,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bseduc"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSEduc"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -371,7 +437,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsed"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSED"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -383,6 +449,19 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <View
+            android:id="@+id/view5"
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:background="@color/bg_color_divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/chipGroup5"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <!-- Group 6 -->
         <TextView
             android:id="@+id/textViewGroup6"
@@ -392,23 +471,23 @@
             android:textSize="12sp"
             android:textColor="#000000"
             android:fontFamily="@font/montserrat_bold"
-            android:layout_below="@id/chipGroup5"
+            android:layout_below="@id/view5"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_cma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/textViewGroup6"
             android:layout_alignBottom="@id/textViewGroup6"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup6"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/textViewGroup6"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -418,7 +497,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsa"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSA"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -431,7 +510,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsma"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSMA"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -444,7 +523,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsat"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSAT"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -457,7 +536,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bshm"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSHM"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -470,7 +549,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bstm"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSTM"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -483,7 +562,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_bsba"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:text="BSBA"
                 android:textSize="13sp"
                 android:checkable="true"
@@ -495,6 +574,19 @@
 
 
         </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:background="@color/bg_color_divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/chipGroup6"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </RelativeLayout>
 

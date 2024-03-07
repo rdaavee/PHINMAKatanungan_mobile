@@ -7,8 +7,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        app:cardElevation="1dp"
+        android:layout_margin="6dp"
+        app:cardElevation="0.1dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/bg_color_commentCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +30,7 @@
                 android:paddingStart="2dp"
                 android:paddingEnd="2dp"
                 android:textColor="@android:color/black"
-                android:textSize="17sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat_bold"/>
 
@@ -40,7 +42,7 @@
                 android:paddingStart="2dp"
                 android:paddingEnd="2dp"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/montserrat_light"/>
 
         </LinearLayout>
