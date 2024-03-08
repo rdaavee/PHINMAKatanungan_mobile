@@ -12,46 +12,30 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 class DashboardViewModel(private val phinmaApi: PHINMAApi) : ViewModel() {
+    private val _posts = MutableLiveData<Map<String, Map<String, List<Post>>>>()
+    val posts: LiveData<Map<String, Map<String, List<Post>>>> get() = _posts
 
-    // Define a MutableLiveData to hold the list of posts
-    private val _posts = MutableLiveData<List<Post>>()
+    fun fetchPosts() {
+        val call: Call<PostResponse> = phinmaApi.getPosts()
 
-    // Expose a LiveData object to observe posts
-    val posts: LiveData<List<Post>> get() = _posts
-
-    // Fetch posts from the API
-    fun fetchPosts(query: String? = null) {
-        // Use the phinmaApi.getPosts() method to fetch posts from the API
-        phinmaApi.getPosts().enqueue(object : Callback<PostResponse> {
+        call.enqueue(object : Callback<PostResponse> {
             override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
                 if (response.isSuccessful) {
-                    // Received posts from the API
-                    val receivedPosts = response.body()?.posts ?: emptyList()
+                    try {
+                        val postResponse: PostResponse? = response.body()
+                        val posts: List<Post> = postResponse?.posts ?: emptyList()
 
-                    // Filter posts based on the query
-                    val filteredPosts = if (query.isNullOrEmpty()) {
-                        receivedPosts
-                    } else {
-                        receivedPosts.filter { post ->
-                            post.title.contains(query, ignoreCase = true)
-                        }
+                        val postsMap = posts.groupBy { it.user.department_id }
+                            .mapValues { (_, posts) -> posts.groupBy { it.user.course_id } }
+                        _posts.value = postsMap
+                    } catch (e: NullPointerException) {
+                        Log.e("YourActivity", "Error occurred: ${e.message}")
                     }
-
-                    // Log the received and filtered posts for debugging
-                    Log.d("DashboardViewModel", "Received posts: $receivedPosts")
-                    Log.d("DashboardViewModel", "Filtered posts: $filteredPosts")
-
-                    // Set the filtered posts to the LiveData
-                    _posts.value = filteredPosts
                 } else {
-                    // Handle unsuccessful response
-                    Log.e("DashboardViewModel", "Failed to fetch posts: ${response.message()}")
+                    Log.e("YourActivity", "Error occurred")
                 }
             }
-
             override fun onFailure(call: Call<PostResponse>, t: Throwable) {
-                // Handle network errors
-                Log.e("DashboardViewModel", "Network error: ${t.message}")
             }
         })
     }

@@ -76,7 +76,6 @@ class PHINMAKatanungan : Application() {
                             val userDataPrefs = applicationContext.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
                             userDataPrefs.edit().clear().apply()
                             sharedPreferences.edit().remove("authToken").apply()
-
                             redirectToLoginActivity()
                         } catch (e: Exception) {
                             Log.e("PHINMAKatanungan", "Failed to remove authToken from SharedPreferences", e)
@@ -91,7 +90,7 @@ class PHINMAKatanungan : Application() {
                     redirectToLoginActivity()
                 }
             })
-    }
+        }
 
     private fun redirectToLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)

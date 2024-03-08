@@ -9,36 +9,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.Button
 import androidx.appcompat.widget.SearchView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.phinmakatanungan_mobile.R
-import com.example.phinmakatanungan_mobile.adapters.AnnouncementsAdapter
 import com.example.phinmakatanungan_mobile.adapters.PostAdapter
 import com.example.phinmakatanungan_mobile.api.PHINMAApi
 import com.example.phinmakatanungan_mobile.api.PHINMAClient
-import com.example.phinmakatanungan_mobile.models.Announcement
-import com.example.phinmakatanungan_mobile.models.AnnouncementResponse
-import com.example.phinmakatanungan_mobile.models.Post
-import com.example.phinmakatanungan_mobile.models.PostResponse
-import com.google.android.material.card.MaterialCardView
-import kotlinx.coroutines.NonCancellable.start
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class DashboardFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var postAdapter: PostAdapter
     private lateinit var phinmaApi: PHINMAApi
     private lateinit var viewModel: DashboardViewModel
+    private lateinit var searchView: SearchView
     private lateinit var bottomNavigationView: BottomNavigationView
     private var isBottomNavHidden = false
 
@@ -84,32 +74,30 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val searchView = view.findViewById<SearchView>(R.id.searchView)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Call fetchPosts with the updated query
-                viewModel.fetchPosts(newText)
-                return true
-            }
-        })
-
         // Initialize the ViewModel after initializing phinmaApi
         val factory = DashboardViewModelFactory(phinmaApi)
         viewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
 
         // Observe the posts LiveData
-        viewModel.posts.observe(viewLifecycleOwner, Observer { posts ->
+        viewModel.posts.observe(viewLifecycleOwner, Observer { postsMap ->
             // Update the UI with the new posts data
-            postAdapter.setPosts(posts)
+            postAdapter.setPostsMap(postsMap)
         })
-
-        // Fetch initial posts without any filter
         viewModel.fetchPosts()
+
+        searchView = view.findViewById(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Handle search query submission if needed
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Filter posts based on the new search query
+                postAdapter.setSearchQuery(newText)
+                return true
+            }
+        })
     }
     private fun hideBottomNav() {
         val translationY = bottomNavigationView.height.toFloat()

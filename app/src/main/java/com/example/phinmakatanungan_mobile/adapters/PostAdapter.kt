@@ -15,17 +15,21 @@ import com.example.phinmakatanungan_mobile.models.Post
 import com.google.android.material.chip.Chip
 import kotlin.collections.*
 import kotlin.collections.flatten
-class PostAdapter(private var posts: List<Post> = emptyList()) :
+class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = emptyMap()) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     private var currentDepartment: String? = ""
     private var currentCourses: List<String>? = listOf()
-    private var searchQuery: String? = null
+    private var searchQuery: String? = null // Add searchQuery variable
+
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setPosts(posts: List<Post>) {
-        Log.d("PostAdapter", "Setting posts: $posts")
-        this.posts = posts
+    fun setPostsMap(postsMap: Map<String, Map<String, List<Post>>>) {
+        this.postsMap = postsMap
+        notifyDataSetChanged()
+    }
+    fun setSearchQuery(query: String?) { // Add method to set search query
+        searchQuery = query
         notifyDataSetChanged()
     }
 
@@ -33,10 +37,6 @@ class PostAdapter(private var posts: List<Post> = emptyList()) :
         currentDepartment = departmentId
         notifyDataSetChanged()
         getCurrentPosts()
-        Log.d("PostAdapter", "Current department set: $currentDepartment")
-    }
-
-    fun displayCurrent(){
         Log.d("PostAdapter", "Current department set: $currentDepartment")
     }
 
@@ -64,27 +64,37 @@ class PostAdapter(private var posts: List<Post> = emptyList()) :
         return posts.size
     }
 
-    fun setSearchQuery(query: String?) {
-        searchQuery = query
-        notifyDataSetChanged()
-    }
-
     private fun getCurrentPosts(): List<Post> {
-        val currentSearchQuery = searchQuery // Safe copy to a local variable
+        val allPosts = when {
+            currentDepartment.isNullOrEmpty() && currentCourses.isNullOrEmpty() ->
+                postsMap.values.flatMap { it.values }.flatten()
+            currentDepartment.isNullOrEmpty() ->
+                postsMap.values.flatMap { departmentPosts ->
+                    currentCourses?.flatMap { courseId ->
+                        departmentPosts[courseId] ?: emptyList()
+                    } ?: emptyList()
+                }
+            currentCourses.isNullOrEmpty() ->
+                postsMap[currentDepartment ?: ""]?.values?.flatten() ?: emptyList()
+            else ->
+                postsMap[currentDepartment ?: ""]
+                    ?.filterKeys { currentCourses?.contains(it) == true }
+                    ?.values
+                    ?.flatten() ?: emptyList()
+        }
+
+        val currentSearchQuery = searchQuery
 
         return if (currentSearchQuery.isNullOrBlank()) {
-            posts // Return all posts if there is no search query
+            allPosts.filter { it.user.account_status == "Active" }
+                .sortedByDescending { it.timestamp }
         } else {
-            posts.filter { post ->
+            allPosts.filter { post ->
                 post.title.contains(currentSearchQuery, ignoreCase = true)
-            }
+            }.filter { it.user.account_status == "Active" }
+                .sortedByDescending { it.timestamp }
         }
     }
-
-
-
-
-
 
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val chipCourse: Chip = itemView.findViewById(R.id.chip_course)
@@ -194,21 +204,21 @@ class PostAdapter(private var posts: List<Post> = emptyList()) :
     }
 
     // Method to find a post by its ID
-//    fun findPostById(postId: String): Post? {
-//        val postIdInt = postId.toIntOrNull() ?: return null
-//
-//        for ((_, departmentPosts) in posts) {
-//            for ((_, coursePosts) in departmentPosts) {
-//                for (post in coursePosts) {
-//                    if (post.id == postIdInt) {
-//                        return post
-//                    }
-//                }
-//            }
-//        }
-//        // Return null if no post with the given ID is found
-//        return null
-//    }
+    fun findPostById(postId: String): Post? {
+        val postIdInt = postId.toIntOrNull() ?: return null
+
+        for ((_, departmentPosts) in postsMap) {
+            for ((_, coursePosts) in departmentPosts) {
+                for (post in coursePosts) {
+                    if (post.id == postIdInt) {
+                        return post
+                    }
+                }
+            }
+        }
+        // Return null if no post with the given ID is found
+        return null
+    }
 
     override fun getItemId(position: Int): Long {
         val posts = getCurrentPosts()
@@ -220,6 +230,3 @@ class PostAdapter(private var posts: List<Post> = emptyList()) :
         return RecyclerView.NO_ID
     }
 }
-
-
-
