@@ -5,12 +5,18 @@
          <item name="colorPrimary">@color/bottomNav_bg_color</item>
          <item name="colorPrimaryVariant">@color/bottomNav_bg_color</item>
          <item name="android:statusBarColor">@color/bottomNav_bg_color</item>
+        <item name="windowSplashScreenBackground">@color/bg_color_splash</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/phinmaicon</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.PHINMAKatanungan_mobile</item>
     </style>
 
     <style name="Theme.PHINMAKatanungan_mobile" parent="Base.Theme.PHINMAKatanungan_mobile" />
     <style name="SlideActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="windowSplashScreenBackground">@color/bg_color_splash</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/phinmaicon</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.PHINMAKatanungan_mobile</item>
     </style>
 
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
