@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
                     <!-- COLORS -->
     <color name="text_color_primary">#FF000000</color>
@@ -38,24 +38,26 @@
     <color name="chip_bg_color_bsit">#000000</color>
     <color name="chip_bg_color_bsce">#7C0505</color>
     <color name="chip_bg_color_cea">#7C0505</color>
-    <color name="chip_bg_color_bsn">#09921E</color>
-    <color name="chip_bg_color_cahs">#09921E</color>
+    <color name="chip_bg_color_cahs">#FBA1B7</color>
+    <color name="chip_bg_color_bsn">#FBA1B7</color>
     <color name="chip_bg_color_bscrim">#83A8BD</color>
     <color name="chip_bg_color_ccje">#83A8BD</color>
     <color name="chip_bg_color_bsed">#00A3FF</color>
     <color name="chip_bg_color_cela">#00A3FF</color>
     <color name="chip_bg_color_bsba">#EBFF00</color>
     <color name="chip_bg_color_cma">#D5B301</color>
+    <color name="chip_bg_color_shs">#09921E</color>
 
     <color name="chip_bg_color_react">#F5F4F5</color>
     <color name="chip_icon_color_checked">#FFFFFF</color>
 
     <color name="chip_bg_color_citeFalse">#33000000</color>
     <color name="chip_bg_color_ceaFalse">#337C0505</color>
-    <color name="chip_bg_color_cahsFalse">#3309921E</color>
+    <color name="chip_bg_color_cahsFalse">#05FBA1B7</color>
     <color name="chip_bg_color_ccjeFalse">#3383A8BD</color>
     <color name="chip_bg_color_celaFalse">#3300A3FF</color>
     <color name="chip_bg_color_cmaFalse">#33D5B301</color>
+    <color name="chip_bg_color_shsFalse">#3309921E</color>
 
     <color name="filter_bg_color">#3EBCBCBC</color>
 

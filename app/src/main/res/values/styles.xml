@@ -60,4 +60,10 @@
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
+    <style name="ShsCustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/shs_bg_color</item>
+        <item name="android:textColor">@color/shs_text_color</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
 </resources>
