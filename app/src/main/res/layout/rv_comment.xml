@@ -149,44 +149,7 @@
                 app:readMoreMaxLine="4"
                 app:readMoreColor="@color/text_color_basicinfo"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:orientation="horizontal"
-                    android:layout_marginEnd="10dp"
-                    android:layout_gravity="end"
-                    android:layout_marginBottom="10dp">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_like"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="10"
-                        android:textAlignment="center"
-                        android:textColor="#0F1A8B93"
-                        android:textSize="12sp"
-                        app:chipEndPadding="0dp"
-                        android:layout_marginEnd="5dp"
-                        app:chipIcon="@drawable/like_icon2"
-                        app:chipMinTouchTargetSize="10dp"
-                        app:chipBackgroundColor="#0F1A8B93"
-                        app:chipStrokeColor="#0F1A8B93"
-                        app:chipStrokeWidth=".1dp"
-                        app:chipIconSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/like_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:layout_gravity="center_vertical"/>
-
-
-                </LinearLayout>
 
         </LinearLayout>
 

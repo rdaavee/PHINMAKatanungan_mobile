@@ -118,34 +118,13 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp">
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/like_icon2"/>
-
-            <TextView
-                android:id="@+id/like_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:layout_marginEnd="15dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:layout_gravity="center_vertical"/>
-
-            <View
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"/>
 
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="13dp"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
                 android:src="@drawable/comment" />
 
             <TextView
@@ -175,32 +154,6 @@
             app:layout_constraintTop_toBottomOf="@id/ll_question_container">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_like"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Like"
-                android:textAlignment="center"
-                android:textColor="#AFB5C7"
-                android:textSize="12sp"
-                app:chipBackgroundColor="@color/bg_color_secondary"
-                app:chipEndPadding="0dp"
-                app:chipIcon="@drawable/like"
-                app:chipIconSize="18dp"
-                app:chipStartPadding="0dp"
-                app:textEndPadding="35dp"
-                app:chipStrokeWidth=".01dp"
-                app:iconStartPadding="10dp"/>
-
-            <View
-                android:layout_width=".1dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"/>
-
-            <com.google.android.material.chip.Chip
                 android:id="@+id/chip_comment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -209,7 +162,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Comment"
+                android:text="Send an answer"
                 android:textColor="#AFB5C7"
                 android:textSize="12sp"
                 app:textEndPadding="30dp"

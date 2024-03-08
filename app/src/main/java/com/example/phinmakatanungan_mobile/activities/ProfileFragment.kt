@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.phinmakatanungan_mobile.R
 import com.example.phinmakatanungan_mobile.api.PHINMAClient
 import com.example.phinmakatanungan_mobile.databinding.FragmentProfileBinding
@@ -48,6 +49,10 @@ class ProfileFragment : Fragment() {
         binding.root.findViewById<ImageView>(R.id.iv_editProfileBtn).setOnClickListener {
             val intent = Intent(activity, ChangePasswordActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.posts.setOnClickListener{
+            findNavController().navigate(R.id.action_profileFragment_to_userPostsFragment)
         }
 
         val authToken = sharedPreferences.getString("authToken", "")

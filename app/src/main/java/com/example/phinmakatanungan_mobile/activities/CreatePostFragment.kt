@@ -29,17 +29,27 @@ import java.io.StringReader
 class CreatePostFragment : Fragment() {
 
     private lateinit var binding: FragmentCreatePostBinding
-    private val userDataPrefKeys = "userData"
-    private var userID: String? = null
     private var privacy = "public"
+    private lateinit var sharedPreferences: SharedPreferences
+    private val userDataPrefKeys = "userData"
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCreatePostBinding.inflate(inflater, container, false)
+        val sharedPreferences = context?.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
+        val userDataJson = sharedPreferences?.getString(userDataPrefKeys, null)
 
-
+        if (userDataJson != null) {
+            val userData = Gson().fromJson(userDataJson, UserData::class.java)
+            context?.let { updateInfo(userData, it) }
+        } else {
+            Log.e("UserInfoUpdate", "User data not found in SharedPreferences")
+        }
+        binding.ivBackBtnCreate.setOnClickListener{
+            navigateToDashboardFragment()
+        }
         binding.tvPostBtn.setOnClickListener {
             val title = binding.etPostTitle.text.toString().trim()
             val content = binding.etPostDescription.text.toString().trim()
@@ -106,5 +116,9 @@ class CreatePostFragment : Fragment() {
     private fun navigateToDashboardFragment() {
         val navController = findNavController()
         navController.popBackStack(R.id.dashboardFragment, false)
+    }
+    fun updateInfo(userData: UserData, context: Context) {
+        val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
+        binding.tvFullName.text = fullName
     }
 }

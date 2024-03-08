@@ -1,14 +1,19 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.CheckBox
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import com.example.phinmakatanungan_mobile.R
 import com.example.phinmakatanungan_mobile.databinding.FragmentDepartmentBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -16,6 +21,8 @@ class DepartmentFragment : Fragment() {
 
     private lateinit var binding: FragmentDepartmentBinding
     private var courses: MutableList<String> = mutableListOf()
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private var isBottomNavHidden = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +30,20 @@ class DepartmentFragment : Fragment() {
     ): View {
         binding = FragmentDepartmentBinding.inflate(inflater, container, false)
         // Initialize postAdapter
+        bottomNavigationView = requireActivity().findViewById(R.id.bottomNav)
 
+        var lastScrollY = 0
+        view?.findViewById<NestedScrollView>(R.id.nestedScrollView)
+            ?.setOnScrollChangeListener { _, _, _, _, scrollY ->
+            if (scrollY > lastScrollY && !isBottomNavHidden) {
+                // Scrolling down, hide bottom nav
+                hideBottomNav()
+            } else if (scrollY <= lastScrollY && isBottomNavHidden) {
+                // Scrolling up, show bottom nav
+                showBottomNav()
+            }
+            lastScrollY = scrollY
+        }
 
         //cite
         binding.chipBsit.setOnClickListener {
@@ -68,6 +88,11 @@ class DepartmentFragment : Fragment() {
             toggleChipSelection(binding.chipBsme,course,department)
         }
         //cahs
+        binding.chipCahs.setOnClickListener {
+            val department = "CAHS"
+            val course = "CAHS"
+            toggleChipSelection(binding.chipCahs,course,department)
+        }
         binding.chipBsn.setOnClickListener {
             val department = "CAHS"
             val course = "BSN"
@@ -90,12 +115,22 @@ class DepartmentFragment : Fragment() {
         }
         //CCJE
 
+        binding.chipCcje.setOnClickListener {
+            val department = "CCJE"
+            val course = "CCJE"
+            toggleChipSelection(binding.chipCcje,course,department)
+        }
         binding.chipBscrim.setOnClickListener {
             val department = "CCJE"
             val course = "BSCrim"
             toggleChipSelection(binding.chipBscrim,course,department)
         }
         //cela
+        binding.chipCela.setOnClickListener {
+            val department = "CELA"
+            val course = "CELA"
+            toggleChipSelection(binding.chipCela,course,department)
+        }
 
         binding.chipAbcomm.setOnClickListener {
             val department = "CELA"
@@ -119,6 +154,11 @@ class DepartmentFragment : Fragment() {
         }
         //CMA
 
+        binding.chipCma.setOnClickListener {
+            val department = "CMA"
+            val course = "CMA"
+            toggleChipSelection(binding.chipCma,course,department)
+        }
         binding.chipBsa.setOnClickListener {
             val department = "CMA"
             val course = "BSA"
@@ -151,7 +191,11 @@ class DepartmentFragment : Fragment() {
         }
 
         //SHS
-
+        binding.chipShs.setOnClickListener {
+            val department = "SHS"
+            val course = "SHS"
+            toggleChipSelection(binding.chipShs,course,department)
+        }
 
         binding.chipStem.setOnClickListener {
             val department = "SHS"
@@ -188,6 +232,22 @@ class DepartmentFragment : Fragment() {
 
     private fun toggleChipSelection(chip: Chip, course: String, department: String) {
         val isChecked = chip.isChecked
+
+        if (isChecked) {
+            // If the chip is checked, add the course to the list
+            if (!courses.contains(course)) {
+                courses.add(course)
+                // Add the course directly to SharedPreferences
+                addCourseToSharedPreferences(course)
+            }
+        } else {
+            // If the chip is unchecked, remove the course from the list
+            if (courses.contains(course)) {
+                courses.remove(course)
+                // Remove the course directly from SharedPreferences
+                removeCourseFromSharedPreferences(course)
+            }
+        }
         when (chip.text.toString()) {
             "BSIT", "CITE Instructors" -> {
                 // Run function specific to chipGroup2
@@ -222,203 +282,192 @@ class DepartmentFragment : Fragment() {
                 courses.remove("HUMSS")
                 courses.remove("GAS")
             }
-            "BSME", "BSCE", "BSArch","BSCpE","BSEE" -> {
-                // Run function specific to chipGroup1
-                disableChipgroup1()
-                disableChipgroup3()
-                disableChipgroup4()
-                disableChipgroup5()
-                disableChipgroup6()
-                disableChipgroup7()
-                courses.remove("BSIT")
-                courses.remove("BSN")
-                courses.remove("BSPharm")
-                courses.remove("BSPsych")
-                courses.remove("BMLS")
-                courses.remove("ABComm")
-                courses.remove("ABPolSci")
-                courses.remove("BSEEduc")
-                courses.remove("BSED")
-                courses.remove("BSA")
-                courses.remove("BSMA")
-                courses.remove("BSAT")
-                courses.remove("BSHM")
-                courses.remove("BSTM")
-                courses.remove("BSBA")
-                courses.remove("TVL")
-                courses.remove("STEM")
-                courses.remove("ABM")
-                courses.remove("HUMSS")
-                courses.remove("GAS")
-            }
-            "BSN", "BSPharm", "BSPsych","BMLS" -> {
-                // Run function specific to chipGroup1
-                disableChipgroup1()
-                disableChipgroup2()
-                disableChipgroup4()
-                disableChipgroup5()
-                disableChipgroup6()
-                disableChipgroup7()
-                courses.remove("BSIT")
-                courses.remove("BSME")
-                courses.remove("BSCE")
-                courses.remove("BSArch")
-                courses.remove("BSEE")
-                courses.remove("BSCpE")
-                courses.remove("ABComm")
-                courses.remove("ABPolSci")
-                courses.remove("BSEEduc")
-                courses.remove("BSED")
-                courses.remove("BSA")
-                courses.remove("BSMA")
-                courses.remove("BSAT")
-                courses.remove("BSHM")
-                courses.remove("BSTM")
-                courses.remove("BSBA")
-                courses.remove("TVL")
-                courses.remove("STEM")
-                courses.remove("ABM")
-                courses.remove("HUMSS")
-                courses.remove("GAS")
-            }
-            "BSCrim" -> {
-                // Run function specific to chipGroup1
-                disableChipgroup1()
-                disableChipgroup2()
-                disableChipgroup3()
-                disableChipgroup5()
-                disableChipgroup6()
-                disableChipgroup7()
-                courses.remove("BSIT")
-                courses.remove("BSME")
-                courses.remove("BSCE")
-                courses.remove("BSArch")
-                courses.remove("BSEE")
-                courses.remove("BSCpE")
-                courses.remove("BSN")
-                courses.remove("BSPharm")
-                courses.remove("BSPsych")
-                courses.remove("BMLS")
-                courses.remove("ABComm")
-                courses.remove("ABPolSci")
-                courses.remove("BSEEduc")
-                courses.remove("BSED")
-                courses.remove("BSA")
-                courses.remove("BSMA")
-                courses.remove("BSAT")
-                courses.remove("BSHM")
-                courses.remove("BSTM")
-                courses.remove("BSBA")
-                courses.remove("TVL")
-                courses.remove("STEM")
-                courses.remove("ABM")
-                courses.remove("HUMSS")
-                courses.remove("GAS")
-            }
-            "ABComm","ABPolSci","BSEEduc","BSED" -> {
-                // Run function specific to chipGroup1
-                disableChipgroup1()
-                disableChipgroup2()
-                disableChipgroup3()
-                disableChipgroup4()
-                disableChipgroup6()
-                disableChipgroup7()
-                courses.remove("BSIT")
-                courses.remove("BSME")
-                courses.remove("BSCE")
-                courses.remove("BSArch")
-                courses.remove("BSEE")
-                courses.remove("BSCpE")
-                courses.remove("BSN")
-                courses.remove("BSPharm")
-                courses.remove("BSPsych")
-                courses.remove("BMLS")
-                courses.remove("BSA")
-                courses.remove("BSMA")
-                courses.remove("BSAT")
-                courses.remove("BSHM")
-                courses.remove("BSTM")
-                courses.remove("BSBA")
-                courses.remove("TVL")
-                courses.remove("STEM")
-                courses.remove("ABM")
-                courses.remove("HUMSS")
-                courses.remove("GAS")
-            }
-            "BSA","BSMA","BSAT","BSHM","BSTM","BSBA" -> {
-                // Run function specific to chipGroup1
-                disableChipgroup1()
-                disableChipgroup2()
-                disableChipgroup3()
-                disableChipgroup4()
-                disableChipgroup5()
-                disableChipgroup7()
-                courses.remove("BSIT")
-                courses.remove("BSME")
-                courses.remove("BSCE")
-                courses.remove("BSArch")
-                courses.remove("BSEE")
-                courses.remove("BSCpE")
-                courses.remove("BSN")
-                courses.remove("BSPharm")
-                courses.remove("BSPsych")
-                courses.remove("BMLS")
-                courses.remove("ABComm")
-                courses.remove("ABPolSci")
-                courses.remove("BSEEduc")
-                courses.remove("BSED")
-                courses.remove("TVL")
-                courses.remove("STEM")
-                courses.remove("ABM")
-                courses.remove("HUMSS")
-                courses.remove("GAS")
-            }
-            "STEM","GAS","TVL","HUMSS","ABM" -> {
-                // Run function specific to chipGroup1
-                disableChipgroup1()
-                disableChipgroup2()
-                disableChipgroup3()
-                disableChipgroup4()
-                disableChipgroup6()
-                courses.remove("BSIT")
-                courses.remove("BSME")
-                courses.remove("BSCE")
-                courses.remove("BSArch")
-                courses.remove("BSEE")
-                courses.remove("BSCpE")
-                courses.remove("BSN")
-                courses.remove("BSPharm")
-                courses.remove("BSPsych")
-                courses.remove("BMLS")
-                courses.remove("ABComm")
-                courses.remove("ABPolSci")
-                courses.remove("BSEEduc")
-                courses.remove("BSED")
-                courses.remove("BSA")
-                courses.remove("BSMA")
-                courses.remove("BSAT")
-                courses.remove("BSHM")
-                courses.remove("BSTM")
-                courses.remove("BSBA")
-            }
-            else -> {
-            }
-        }
-        if (isChecked) {
-            if (!courses.contains(course)) {
-                courses.add(course)
-                // Add the course directly to SharedPreferences
-                addCourseToSharedPreferences(course)
-            }
-        } else {
-            if (courses.contains(course)) {
-                courses.remove(course)
-                // Remove the course directly from SharedPreferences
-                removeCourseFromSharedPreferences(course)
-            }
-        }
 
-// Check if all courses are deselected and remove the department if so
+            "BSME", "BSCE", "BSArch", "BSCpE", "BSEE", "CEA Instructors" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup5()
+                disableChipgroup6()
+                disableChipgroup7()
+                courses.remove("BSIT")
+                courses.remove("BSN")
+                courses.remove("BSPharm")
+                courses.remove("BSPsych")
+                courses.remove("BMLS")
+                courses.remove("ABComm")
+                courses.remove("ABPolSci")
+                courses.remove("BSEEduc")
+                courses.remove("BSED")
+                courses.remove("BSA")
+                courses.remove("BSMA")
+                courses.remove("BSAT")
+                courses.remove("BSHM")
+                courses.remove("BSTM")
+                courses.remove("BSBA")
+                courses.remove("TVL")
+                courses.remove("STEM")
+                courses.remove("ABM")
+                courses.remove("HUMSS")
+                courses.remove("GAS")
+            }
+
+            "BSN", "BSPharm", "BSPsych", "BMLS", "CAHS Instructors" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup4()
+                disableChipgroup5()
+                disableChipgroup6()
+                disableChipgroup7()
+                courses.remove("BSIT")
+                courses.remove("BSME")
+                courses.remove("BSCE")
+                courses.remove("BSArch")
+                courses.remove("BSEE")
+                courses.remove("BSCpE")
+                courses.remove("ABComm")
+                courses.remove("ABPolSci")
+                courses.remove("BSEEduc")
+                courses.remove("BSED")
+                courses.remove("BSA")
+                courses.remove("BSMA")
+                courses.remove("BSAT")
+                courses.remove("BSHM")
+                courses.remove("BSTM")
+                courses.remove("BSBA")
+                courses.remove("TVL")
+                courses.remove("STEM")
+                courses.remove("ABM")
+                courses.remove("HUMSS")
+                courses.remove("GAS")
+            }
+
+            "BSCrim", "CCJE Instructors" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup5()
+                disableChipgroup6()
+                disableChipgroup7()
+                courses.remove("BSIT")
+                courses.remove("BSME")
+                courses.remove("BSCE")
+                courses.remove("BSArch")
+                courses.remove("BSEE")
+                courses.remove("BSCpE")
+                courses.remove("BSN")
+                courses.remove("BSPharm")
+                courses.remove("BSPsych")
+                courses.remove("BMLS")
+                courses.remove("ABComm")
+                courses.remove("ABPolSci")
+                courses.remove("BSEEduc")
+                courses.remove("BSED")
+                courses.remove("BSA")
+                courses.remove("BSMA")
+                courses.remove("BSAT")
+                courses.remove("BSHM")
+                courses.remove("BSTM")
+                courses.remove("BSBA")
+                courses.remove("TVL")
+                courses.remove("STEM")
+                courses.remove("ABM")
+                courses.remove("HUMSS")
+                courses.remove("GAS")
+            }
+
+            "ABComm", "ABPolSci", "BSEEduc", "BSED", "CELA Instructors" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup6()
+                disableChipgroup7()
+                courses.remove("BSIT")
+                courses.remove("BSME")
+                courses.remove("BSCE")
+                courses.remove("BSArch")
+                courses.remove("BSEE")
+                courses.remove("BSCpE")
+                courses.remove("BSN")
+                courses.remove("BSPharm")
+                courses.remove("BSPsych")
+                courses.remove("BMLS")
+                courses.remove("BSA")
+                courses.remove("BSMA")
+                courses.remove("BSAT")
+                courses.remove("BSHM")
+                courses.remove("BSTM")
+                courses.remove("BSBA")
+                courses.remove("TVL")
+                courses.remove("STEM")
+                courses.remove("ABM")
+                courses.remove("HUMSS")
+                courses.remove("GAS")
+            }
+
+            "BSA", "BSMA", "BSAT", "BSHM", "BSTM", "BSBA", "CMA Instructors" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup5()
+                disableChipgroup7()
+                courses.remove("BSIT")
+                courses.remove("BSME")
+                courses.remove("BSCE")
+                courses.remove("BSArch")
+                courses.remove("BSEE")
+                courses.remove("BSCpE")
+                courses.remove("BSN")
+                courses.remove("BSPharm")
+                courses.remove("BSPsych")
+                courses.remove("BMLS")
+                courses.remove("ABComm")
+                courses.remove("ABPolSci")
+                courses.remove("BSEEduc")
+                courses.remove("BSED")
+                courses.remove("TVL")
+                courses.remove("STEM")
+                courses.remove("ABM")
+                courses.remove("HUMSS")
+                courses.remove("GAS")
+            }
+
+            "STEM", "GAS", "TVL", "HUMSS", "ABM", "SHS Instructors" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup6()
+                courses.remove("BSIT")
+                courses.remove("BSME")
+                courses.remove("BSCE")
+                courses.remove("BSArch")
+                courses.remove("BSEE")
+                courses.remove("BSCpE")
+                courses.remove("BSN")
+                courses.remove("BSPharm")
+                courses.remove("BSPsych")
+                courses.remove("BMLS")
+                courses.remove("ABComm")
+                courses.remove("ABPolSci")
+                courses.remove("BSEEduc")
+                courses.remove("BSED")
+                courses.remove("BSA")
+                courses.remove("BSMA")
+                courses.remove("BSAT")
+                courses.remove("BSHM")
+                courses.remove("BSTM")
+                courses.remove("BSBA")
+            }
+        }
         if (courses.isEmpty()) {
             removeDepartmentFromSharedPreferences()
         } else {
@@ -428,7 +477,7 @@ class DepartmentFragment : Fragment() {
     }
     private fun disableChipgroup1(){
         binding.chipBsit.isChecked = false
-        binding.chipCite.isChecked =false
+        binding.chipCite.isChecked =  false
     }
     private fun disableChipgroup2(){
         binding.chipBsce.isChecked = false
@@ -448,7 +497,7 @@ class DepartmentFragment : Fragment() {
 
     private fun disableChipgroup4(){
         binding.chipBscrim.isChecked = false
-        binding.chipCcje.isChecked =false
+        binding.chipCcje.isChecked = false
 
     }
     private fun disableChipgroup5(){
@@ -509,35 +558,24 @@ class DepartmentFragment : Fragment() {
         editor.remove("department")
         editor.apply()
     }
-//    private fun setData(dept: String, courses: List<String>) {
-//        val sharedPreferences = requireContext().getSharedPreferences("filter", Context.MODE_PRIVATE)
-//        val savedDepartment = sharedPreferences.getString("department", null)
-//
-//        // Check if the department already exists in the filter preferences
-//        if (savedDepartment != dept) {
-//            val editor = sharedPreferences.edit()
-//            editor.putString("department", dept)
-//            editor.putStringSet("courses", courses.toSet())
-//            editor.apply()
-//            Log.d("DepartmentFragment", "Setting data - Department: $dept, Courses: $courses")
-//        } else {
-//            // Department already exists in the filter preferences, no need to insert again
-//            Log.d("DepartmentFragment", "Department $dept already exists in filter, not inserting again")
-//        }
-//
-//        // Update or remove the courses in the filter preferences
-//        val editor = sharedPreferences.edit()
-//        if (courses.isEmpty()) {
-//            // If the course list is empty, remove values under the "courses" category
-//            editor.putStringSet("courses", null)
-//            Log.d("DepartmentFragment", "Removed courses from filter preferences")
-//        } else {
-//            // If there are courses, update the values under the "courses" category
-//            editor.putStringSet("courses", courses.toSet())
-//            Log.d("DepartmentFragment", "Updated courses in filter preferences: $courses")
-//        }
-//        editor.apply()
-//    }
+    private fun hideBottomNav() {
+        val translationY = bottomNavigationView.height.toFloat()
+        ObjectAnimator.ofFloat(bottomNavigationView, "translationY", 0f, translationY).apply {
+            duration = 700
+            interpolator = AccelerateDecelerateInterpolator()
+            start()
+        }
+        isBottomNavHidden = true
+    }
+
+    private fun showBottomNav() {
+        ObjectAnimator.ofFloat(bottomNavigationView, "translationY", bottomNavigationView.translationY, 0f).apply {
+            duration = 300
+            interpolator = AccelerateDecelerateInterpolator()
+            start()
+        }
+        isBottomNavHidden = false
+    }
 
     private fun removeDepartment(department: String) {
         val sharedPreferences = requireContext().getSharedPreferences("filter", Context.MODE_PRIVATE)

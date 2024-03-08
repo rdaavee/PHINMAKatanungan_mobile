@@ -52,7 +52,6 @@ class DashboardFragment : Fragment() {
             postAdapter.setCurrentCourses(courses)
         } else {
             // Handle case where data is not available
-            Log.e("DashboardFragment", "No data found in SharedPreferences")
         }
 
         // bottom nav will hide and show when you scroll vertically
