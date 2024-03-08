@@ -187,10 +187,96 @@ class DepartmentFragment : Fragment() {
         return binding.root
     }
 
+    private fun disableChipgroup1(){
+        binding.chipBsit.isChecked = false
+    }
+    private fun disableChipgroup2(){
+        binding.chipBsce.isChecked = false
+        binding.chipBsee.isChecked = false
+        binding.chipBsarch.isChecked = false
+        binding.chipBscpe.isChecked = false
+        binding.chipBsme.isChecked = false
+    }
+    private fun disableChipgroup3(){
+        binding.chipBsn.isChecked = false
+        binding.chipBspharm.isChecked = false
+        binding.chipBspsych.isChecked = false
+        binding.chipBmls.isChecked = false
+    }
+
+    private fun disableChipgroup4(){
+        binding.chipBscrim.isChecked = false
+
+    }
+    private fun disableChipgroup5(){
+        binding.chipAbcomm.isChecked = false
+        binding.chipAbpolsci.isChecked = false
+        binding.chipBseduc.isChecked = false
+        binding.chipBsed.isChecked = false
+    }
+    private fun disableChipgroup6(){
+        binding.chipBsa.isChecked = false
+        binding.chipBsma.isChecked = false
+        binding.chipBsat.isChecked = false
+        binding.chipBstm.isChecked = false
+        binding.chipBsba.isChecked = false
+    }
 
     private fun toggleChipSelection(chip: Chip, course: String, department: String) {
         val isChecked = chip.isChecked
-
+        when (chip.text.toString()) {
+            "BSIT" -> {
+                // Run function specific to chipGroup2
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup5()
+                disableChipgroup6()
+            }
+            "BSME", "BSCE", "BSCE","BSArch","BSCpE" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup5()
+                disableChipgroup6()
+            }
+            "BSN", "BSPharm", "BSPsych","BMLS" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup4()
+                disableChipgroup5()
+                disableChipgroup6()
+            }
+            "BSCrim", "BSPharm", "BSPsych","BMLS" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup5()
+                disableChipgroup6()
+            }
+            "ABComm","ABPolSci","BSEduc","BSEduc","BSED" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup6()
+            }
+            "BSA","BSMA","BSAT","BSHM","BSTM","BSBA" -> {
+                // Run function specific to chipGroup1
+                disableChipgroup1()
+                disableChipgroup2()
+                disableChipgroup3()
+                disableChipgroup4()
+                disableChipgroup5()
+            }
+            else -> {
+                // Handle the case where the text doesn't match any known chip group
+            }
+        }
         if (isChecked) {
             if (!courses.contains(course)) {
                 courses.add(course)
@@ -204,6 +290,7 @@ class DepartmentFragment : Fragment() {
             removeDepartment(department)
         }
     }
+
     private fun toggleDepartmentSelection(checkbox: CheckBox, department: String, chipGroup: ChipGroup) {
         val isChecked = checkbox.isChecked
 
@@ -249,6 +336,7 @@ class DepartmentFragment : Fragment() {
             // Uncheck all chips in the specified chip group
             chipGroup.children.filterIsInstance<Chip>().forEach { chip ->
                 chip.isChecked = false
+                courses.clear()
             }
 
             // Make all chips in all chip groups clickable again
