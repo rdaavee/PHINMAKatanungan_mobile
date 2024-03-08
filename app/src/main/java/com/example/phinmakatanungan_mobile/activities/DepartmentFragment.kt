@@ -3,12 +3,12 @@ package com.example.phinmakatanungan_mobile.activities
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import com.example.phinmakatanungan_mobile.adapters.PostAdapter
 import com.example.phinmakatanungan_mobile.databinding.FragmentDepartmentBinding
 import com.google.android.material.chip.Chip
@@ -37,6 +37,7 @@ class DepartmentFragment : Fragment() {
         departmentCheckboxes.add(binding.checkboxCcje)
         departmentCheckboxes.add(binding.checkboxCela)
         departmentCheckboxes.add(binding.checkboxCma)
+        departmentCheckboxes.add(binding.checkboxShs)
 
         departmentChipGroups.add(binding.chipGroup1)
         departmentChipGroups.add(binding.chipGroup2)
@@ -44,6 +45,7 @@ class DepartmentFragment : Fragment() {
         departmentChipGroups.add(binding.chipGroup4)
         departmentChipGroups.add(binding.chipGroup5)
         departmentChipGroups.add(binding.chipGroup6)
+        departmentChipGroups.add(binding.chipGroup7)
 
 
         //cite
@@ -180,6 +182,42 @@ class DepartmentFragment : Fragment() {
             val department = "CMA"
             val course = "BSBA"
             toggleChipSelection(binding.chipBsba,course,department)
+        }
+
+        //SHS
+        binding.checkboxShs.setOnClickListener{
+            val department = "SHS"
+            toggleDepartmentSelection(binding.checkboxShs,department,binding.chipGroup7)
+        }
+
+        binding.chipStem.setOnClickListener {
+            val department = "SHS"
+            val course = "STEM"
+            toggleChipSelection(binding.chipStem,course,department)
+        }
+
+        binding.chipAbm.setOnClickListener {
+            val department = "SHS"
+            val course = "ABM"
+            toggleChipSelection(binding.chipAbm,course,department)
+        }
+
+        binding.chipHumss.setOnClickListener {
+            val department = "SHS"
+            val course = "HUMSS"
+            toggleChipSelection(binding.chipHumss,course,department)
+        }
+
+        binding.chipGas.setOnClickListener {
+            val department = "SHS"
+            val course = "GAS"
+            toggleChipSelection(binding.chipGas,course,department)
+        }
+
+        binding.chipTvl.setOnClickListener {
+            val department = "SHS"
+            val course = "TVL"
+            toggleChipSelection(binding.chipTvl,course,department)
         }
 
         postAdapter = PostAdapter()

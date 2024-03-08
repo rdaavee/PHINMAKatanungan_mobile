@@ -588,6 +588,106 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <!-- Group 7 -->
+        <TextView
+            android:id="@+id/textViewGroup7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHS"
+            android:textSize="12sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_below="@id/view6"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkbox_shs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textViewGroup7"
+            android:layout_alignBottom="@id/textViewGroup7"
+            android:layout_alignParentEnd="true" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/textViewGroup7"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:chipSpacingVertical="0.1dp"
+            app:chipSpacingHorizontal="5dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_stem"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="STEM"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/ShsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_abm"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="ABM"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/ShsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_humss"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="HUMSS"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/ShsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_gas"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="GAS"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/ShsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_tvl"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="TVL"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/ShsCustomChip"/>
+
+
+        </com.google.android.material.chip.ChipGroup>
+
     </RelativeLayout>
 
 </ScrollView>
