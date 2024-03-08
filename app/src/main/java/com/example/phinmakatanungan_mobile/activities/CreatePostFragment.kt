@@ -31,7 +31,6 @@ class CreatePostFragment : Fragment() {
     private lateinit var binding: FragmentCreatePostBinding
     private val userDataPrefKeys = "userData"
     private var userID: String? = null
-    private var isPrivate = false
     private var privacy = "public"
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
@@ -44,9 +43,10 @@ class CreatePostFragment : Fragment() {
         binding.tvPostBtn.setOnClickListener {
             val title = binding.etPostTitle.text.toString().trim()
             val content = binding.etPostDescription.text.toString().trim()
-            val nonNullableUserID = userID ?: ""
+            val sharedPreferences = requireContext().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+            val authToken = sharedPreferences.getString("authToken", "") ?: ""
 
-            val signupDataJson = "{\"user_id\":\"$nonNullableUserID\",\"title\":\"$title\",\"content\":\"$content\",\"privacy\":\"$privacy\"}"
+            val signupDataJson = "{\"api_token\":\"$authToken\",\"title\":\"$title\",\"content\":\"$content\",\"privacy\":\"$privacy\"}"
 
             if(title.isEmpty()){
                 binding.etPostTitle.error = "Enter a title"
@@ -60,41 +60,41 @@ class CreatePostFragment : Fragment() {
                 reader.beginObject()
                 reader.close()
                 PHINMAClient.instance.createPost(
-                    nonNullableUserID,
+                    authToken,
                     title,
                     content,
                     privacy
-                    ).enqueue(object : Callback<DefaultResponse> {
-                        override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                            Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-                        }
-                        override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
-                            if (response.isSuccessful && response.body() != null) {
-                                val message = response.body()!!.message
-                                if (message == "Post successfully created.") {
-                                    val alertDialogBuilder = AlertDialog.Builder(requireContext())
-                                    alertDialogBuilder.setTitle("Successfully posted")
-                                    alertDialogBuilder.setMessage(message)
-                                    alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
-                                        dialog.dismiss()
-                                        navigateToDashboardFragment()
-                                    }
-                                    val alertDialog = alertDialogBuilder.create()
-                                    alertDialog.show()
+                ).enqueue(object : Callback<DefaultResponse> {
+                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                        Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    }
+                    override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val message = response.body()!!.message
+                            if (message == "Post successfully created.") {
+                                val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                                alertDialogBuilder.setTitle("Successfully posted")
+                                alertDialogBuilder.setMessage(message)
+                                alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
+                                    dialog.dismiss()
+                                    navigateToDashboardFragment()
                                 }
-                                binding.etPostTitle.text = null
-                                binding.etPostDescription.text = null
-                            } else {
-                                val errorMessage: String = try {
-                                    response.errorBody()?.string() ?: "Failed to get a valid response. Response code: ${response.code()}"
-                                } catch (e: Exception) {
-                                    "Failed to get a valid response. Response code: ${response.code()}"
-                                }
-                                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-                                Log.e("API_RESPONSE", errorMessage)
+                                val alertDialog = alertDialogBuilder.create()
+                                alertDialog.show()
                             }
+                            binding.etPostTitle.text = null
+                            binding.etPostDescription.text = null
+                        } else {
+                            val errorMessage: String = try {
+                                response.errorBody()?.string() ?: "Failed to get a valid response. Response code: ${response.code()}"
+                            } catch (e: Exception) {
+                                "Failed to get a valid response. Response code: ${response.code()}"
+                            }
+                            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                            Log.e("API_RESPONSE", errorMessage)
                         }
-                    })
+                    }
+                })
             } catch (e: Exception) {
                 Toast.makeText(context, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
@@ -102,30 +102,6 @@ class CreatePostFragment : Fragment() {
         }
 
         return binding.root
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // Call the function to update user info from SharedPreferences
-        updateUserInfoFromPrefs(requireContext())
-    }
-
-    //display the name
-    private fun updateUserInfoFromPrefs(context: Context) {
-        val sharedPreferences = context.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
-        val userDataJson = sharedPreferences.getString(userDataPrefKeys, null)
-        if (userDataJson != null) {
-            val userData = Gson().fromJson(userDataJson, UserData::class.java)
-            userID = userData.user_id
-            updateInfo(userData, context)
-        } else {
-            Log.e("UserInfoUpdate", "User data not found in SharedPreferences")
-        }
-    }
-
-
-    private fun updateInfo(userData: UserData, context: Context) {
-        val fullName = "${userData.first_name} ${userData.middle_name} ${userData.last_name}"
-        binding.tvFullName.text = fullName
     }
     private fun navigateToDashboardFragment() {
         val navController = findNavController()
