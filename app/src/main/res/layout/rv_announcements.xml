@@ -10,7 +10,7 @@
         android:layout_margin="6dp"
         app:cardElevation="0.1dp"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/bg_color_commentCard"
+        app:cardBackgroundColor="@color/bg_color_announcementCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,16 +34,18 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat_bold"/>
 
-            <TextView
+            <kr.co.prnd.readmore.ReadMoreTextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:paddingStart="2dp"
-                android:paddingEnd="2dp"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp"
-                android:fontFamily="@font/montserrat_light"/>
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:text=""
+                android:textSize="10sp"
+                android:textColor="@color/text_color_primary"
+                app:readMoreText=" See More"
+                app:readMoreMaxLine="3"
+                app:readMoreColor="@color/text_color_basicinfo"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

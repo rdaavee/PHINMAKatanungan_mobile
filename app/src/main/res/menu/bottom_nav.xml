@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/notification_white"
+        android:icon="@drawable/announcement_icon"
         android:title="Announcements"/>
 
     <item

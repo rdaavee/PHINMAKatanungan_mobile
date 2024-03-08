@@ -2,6 +2,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
                     <!-- COLORS -->
+    <color name="colorPrimary">#1A8B93</color>
+    <color name="colorPrimaryDark">#125C61</color>
+    <color name="colorAccent">#F9CE4C</color>
+
+
     <color name="text_color_primary">#FF000000</color>
     <color name="text_color_secondary">#FFFFFFFF</color>
     <color name="text_color_gray">#C3414141</color>
@@ -27,9 +32,11 @@
     <color name="bg_color_secondary">#FFFFFFFF</color>
     <color name="bg_color_cv">#391A8B93</color>
     <color name="bg_color_commentCard">#0F1A8B93</color>
+    <color name="bg_color_announcementCard">#FFFFFF</color>
     <color name="bg_color_divider">#3EBCBCBC</color>
     <color name="bg_color_header">#92BCBCBC</color>
     <color name="bg_color_dashboard_gap">#F6F5F5</color>
+    <color name="bg_color_search">#F6F5F5</color>
 
                 <!-- SPLASHSCREEN BG -->
     <color name="bg_color_splash">#1A8B93</color>

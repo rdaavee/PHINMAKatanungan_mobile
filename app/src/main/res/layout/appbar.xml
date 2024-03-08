@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/bg_color_alt"
+    android:id="@+id/myToolBar"
+    android:theme="@style/ThemeOverlay.AppCompat.Light"
+    android:layout_marginBottom="7dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/bg_color_alt">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="PHINMAKatanungan"
+            android:textSize="15sp"
+            android:textColor="@color/text_color_secondary"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center_vertical"
+            android:layout_marginTop="30dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation=".1dp"
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:strokeColor="@android:color/transparent">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:queryHint="Search Here"
+                app:iconifiedByDefault="true"
+                android:layoutDirection="rtl"
+                app:queryBackground="@android:color/transparent"
+                android:background="@color/bg_color_search"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.Toolbar>

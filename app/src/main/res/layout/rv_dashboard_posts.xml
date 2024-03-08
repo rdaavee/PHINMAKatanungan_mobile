@@ -101,7 +101,7 @@
                     android:textSize="12sp"
                     android:textColor="@color/text_color_primary"
                     app:readMoreText=" See More"
-                    app:readMoreMaxLine="5"
+                    app:readMoreMaxLine="3"
                     app:readMoreColor="@color/text_color_basicinfo"/>
 
             </androidx.cardview.widget.CardView>
