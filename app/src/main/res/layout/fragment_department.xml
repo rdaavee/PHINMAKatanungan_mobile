@@ -49,14 +49,6 @@
             android:layout_marginBottom="10dp"/>
 
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_cite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/textViewGroup1"
-            android:layout_alignBottom="@id/textViewGroup1"
-            android:layout_alignParentEnd="true"/>
-
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup1"
             android:layout_width="wrap_content"
@@ -71,6 +63,20 @@
                 android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:text="BSIT"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                app:chipMinTouchTargetSize="10dp"
+                app:chipCornerRadius="5dp"
+                android:textAlignment="center"
+                style="@style/CiteCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_cite"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:text="CITE Instructors"
                 android:textSize="13sp"
                 android:checkable="true"
                 android:checked="false"
@@ -110,13 +116,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_cea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/textViewGroup2"
-            android:layout_alignBottom="@id/textViewGroup2"
-            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup2"
@@ -193,6 +192,19 @@
                 app:checkedIconVisible="false"
                 style="@style/CeaCustomChip"/>
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_cea"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="CEA Instructors"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/CeaCustomChip"/>
+
         </com.google.android.material.chip.ChipGroup>
 
         <View
@@ -221,13 +233,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_cahs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/textViewGroup3"
-            android:layout_alignBottom="@id/textViewGroup3"
-            android:layout_alignParentEnd="true" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup3"
@@ -291,6 +296,19 @@
                 app:checkedIconVisible="false"
                 style="@style/CahsCustomChip"/>
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_cahs"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="CAHS Instructors"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/CahsCustomChip"/>
+
         </com.google.android.material.chip.ChipGroup>
 
         <View
@@ -319,13 +337,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_ccje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/textViewGroup4"
-            android:layout_alignBottom="@id/textViewGroup4"
-            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup4"
@@ -340,6 +351,18 @@
                 android:layout_width="120dp"
                 android:layout_height="65dp"
                 android:text="BSCrim"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                android:checked="false"
+                app:checkedIconVisible="false"
+                style="@style/CcjeCustomChip"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_ccje"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="CCJE Instructors"
                 android:textSize="13sp"
                 android:checkable="true"
                 android:textAlignment="center"
@@ -377,13 +400,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_cela"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/textViewGroup5"
-            android:layout_alignBottom="@id/textViewGroup5"
-            android:layout_alignParentEnd="true"/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup5"
@@ -425,7 +441,7 @@
                 android:id="@+id/chip_bseduc"
                 android:layout_width="120dp"
                 android:layout_height="65dp"
-                android:text="BSEduc"
+                android:text="BSEEduc"
                 android:textSize="13sp"
                 android:checkable="true"
                 android:checked="false"
@@ -439,6 +455,19 @@
                 android:layout_width="120dp"
                 android:layout_height="65dp"
                 android:text="BSED"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/CelaCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_cela"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="CCJE Instructors"
                 android:textSize="13sp"
                 android:checkable="true"
                 android:checked="false"
@@ -476,13 +505,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_cma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/textViewGroup6"
-            android:layout_alignBottom="@id/textViewGroup6"
-            android:layout_alignParentEnd="true" />
+
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup6"
@@ -572,6 +595,19 @@
                 app:checkedIconVisible="false"
                 style="@style/CmaCustomChip"/>
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_cma"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="CMA Instructors"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/CmaCustomChip"/>
+
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -602,13 +638,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"/>
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_shs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/textViewGroup7"
-            android:layout_alignBottom="@id/textViewGroup7"
-            android:layout_alignParentEnd="true" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup7"
@@ -677,6 +706,19 @@
                 android:layout_width="120dp"
                 android:layout_height="65dp"
                 android:text="TVL"
+                android:textSize="13sp"
+                android:checkable="true"
+                android:checked="false"
+                android:textAlignment="center"
+                app:chipCornerRadius="5dp"
+                app:checkedIconVisible="false"
+                style="@style/ShsCustomChip"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_shs"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:text="SHS Instructors"
                 android:textSize="13sp"
                 android:checkable="true"
                 android:checked="false"

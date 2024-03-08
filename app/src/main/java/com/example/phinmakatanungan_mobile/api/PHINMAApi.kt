@@ -54,6 +54,7 @@ interface PHINMAApi {
         @Field("gender") selectedGender:String,
         @Field("email") email:String,
         @Field("password") password:String,
+        @Field("course_id") courseID:String,
         @Field("department_id") departmentID:String,
         @Field("school_id") campus:String
     ):retrofit2.Call<DefaultResponse>
@@ -75,11 +76,11 @@ interface PHINMAApi {
     @POST("post")
     @Headers("Accept: application/json")
     fun createPost(
-        @Field("user_id") userID: String,
+        @Header("Authorization") authToken: String,
         @Field("title") title: String,
         @Field("content") content: String,
         @Field("privacy") privacy: String
-    ):retrofit2.Call<DefaultResponse>
+    ): Call<DefaultResponse>
     @GET("getposts")
     fun getPosts(@Query("query") query: String? = null): Call<PostResponse>
 

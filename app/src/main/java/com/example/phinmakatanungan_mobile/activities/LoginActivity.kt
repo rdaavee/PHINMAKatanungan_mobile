@@ -173,7 +173,6 @@ class LoginActivity : AppCompatActivity() {
             editor.apply()
         }
     }
-
     private fun getAuthToken(): String {
         val authToken = sharedPreferences.getString("authToken", "") ?: ""
         return "Bearer $authToken"

@@ -95,6 +95,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
             val selectedGender = genderSpinner.selectedItem.toString().trim() //haha dagdagan lang pala ng "selectedItem"
             val school = schoolSpinner.selectedItem.toString().trim()
             val departmentID = departmentSpinner.selectedItem.toString().trim()
+            val courseID = departmentSpinner.selectedItem.toString().trim()
             val role = "Teacher"
             var campus = ""
 
@@ -106,7 +107,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
                 else -> campus = "Select branch"
             }
 
-            val signupDataJson = "{\"user_id\":\"$userID\",\"user_role\":\"$role\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
+            val signupDataJson = "{\"user_id\":\"$userID\",\"user_role\":\"$role\",\"first_name\":\"$firstName\",\"middle_name\":\"$middleName\",\"last_name\":\"$lastName\",\"gender\":\"$selectedGender\",\"email\":\"$email\",\"password\":\"$password\",\"course_id\":\"$courseID\",\"department_id\":\"$departmentID\",\"school_id\":\"$campus\"}"
 
             if(email.isEmpty()){
 
@@ -163,6 +164,7 @@ class TeacherSignUpActivity : AppCompatActivity() {
                     selectedGender,
                     email,
                     password,
+                    courseID,
                     departmentID,
                     campus)
                     .enqueue(object : Callback<DefaultResponse> {
