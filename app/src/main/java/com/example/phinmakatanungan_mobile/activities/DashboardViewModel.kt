@@ -1,10 +1,13 @@
 package com.example.phinmakatanungan_mobile.activities
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.phinmakatanungan_mobile.api.PHINMAApi
 import com.example.phinmakatanungan_mobile.models.Post
 import com.example.phinmakatanungan_mobile.models.PostResponse
@@ -13,10 +16,12 @@ import retrofit2.Callback
 import retrofit2.Response
 class DashboardViewModel(private val phinmaApi: PHINMAApi) : ViewModel() {
     private val _posts = MutableLiveData<Map<String, Map<String, List<Post>>>>()
+    private lateinit var sharedPreferences: SharedPreferences
     val posts: LiveData<Map<String, Map<String, List<Post>>>> get() = _posts
 
-    fun fetchPosts() {
-        val call: Call<PostResponse> = phinmaApi.getPosts()
+
+    fun fetchPosts(authToken: String) {
+        val call: Call<PostResponse> = phinmaApi.getPosts("Bearer $authToken")
 
         call.enqueue(object : Callback<PostResponse> {
             override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {

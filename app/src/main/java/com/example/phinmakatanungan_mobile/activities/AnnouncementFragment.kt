@@ -2,6 +2,7 @@ package com.example.phinmakatanungan_mobile.activities
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -30,6 +31,7 @@ class AnnouncementFragment : Fragment() {
     private lateinit var phinmaApi: PHINMAApi
     private lateinit var bottomNavigationView: BottomNavigationView
     private var isBottomNavHidden = false
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +41,9 @@ class AnnouncementFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val preference = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        val authToken = preference.getString("authToken", "")
 
         recyclerView = view.findViewById(R.id.announcement_recyclerView)
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -65,7 +70,7 @@ class AnnouncementFragment : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences("YourSharedPreferencesName", Context.MODE_PRIVATE)
         PHINMAClient.setSharedPreferences(sharedPreferences)
         phinmaApi = PHINMAClient.instance
-        getAnnouncements()
+        getAnnouncements(authToken.toString())
     }
 
     private fun hideBottomNav() {
@@ -87,8 +92,8 @@ class AnnouncementFragment : Fragment() {
         isBottomNavHidden = false
     }
 
-    private fun getAnnouncements() {
-        val call: Call<AnnouncementResponse> = phinmaApi.getAnnounce()
+    private fun getAnnouncements(authToken: String) {
+        val call: Call<AnnouncementResponse> = phinmaApi.getAnnounce("Bearer $authToken")
 
         call.enqueue(object : Callback<AnnouncementResponse> {
             override fun onResponse(call: Call<AnnouncementResponse>, response: Response<AnnouncementResponse>) {

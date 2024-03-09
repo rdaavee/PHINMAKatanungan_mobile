@@ -42,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
         val edittextemail = findViewById<EditText>(R.id.editTextEmail)
 
         sharedPreferences = getSharedPreferences("myPreference", Context.MODE_PRIVATE)
-
         PHINMAClient.setSharedPreferences(sharedPreferences)
 
         findViewById<TextView>(R.id.tv_signup2).setOnClickListener {
@@ -123,11 +122,11 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
 
         if (token != null) {
-            getUserInfoData(token, this)
+            getUserInfoData(token)
         }
     }
 
-    private fun getUserInfoData(token: String, loginActivity: LoginActivity) {
+    private fun getUserInfoData(token: String) {
         PHINMAClient.instance.getUserProfile("Bearer $token").enqueue(object : Callback<UserData> {
             override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
                 if (response.isSuccessful) {

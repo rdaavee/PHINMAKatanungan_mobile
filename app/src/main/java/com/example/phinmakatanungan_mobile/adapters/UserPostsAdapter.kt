@@ -37,10 +37,6 @@ class UserPostsAdapter : RecyclerView.Adapter<UserPostsAdapter.PostViewHolder>()
     }
 
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val chipCourse: Chip = itemView.findViewById(R.id.chip_course)
-        private val userNameTextView: TextView = itemView.findViewById(R.id.tv_userName)
-        private val titleTextView: TextView = itemView.findViewById(R.id.tv_header)
-        private val contentTextView: TextView = itemView.findViewById(R.id.tv_body)
         private val commentsChip: Chip = itemView.findViewById(R.id.chip_comment)
         private val commentCount: TextView = itemView.findViewById(R.id.comment_count)
 

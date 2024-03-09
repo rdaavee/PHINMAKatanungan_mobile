@@ -62,6 +62,7 @@ interface PHINMAApi {
     //login
     @FormUrlEncoded
     @POST("userlogin")
+    @Headers("Accept: application/json")
     fun userLogin(
         @Field("email") email:String,
         @Field("password") password: String
@@ -69,6 +70,7 @@ interface PHINMAApi {
 
     //profile
     @GET("profile")
+    @Headers("Accept: application/json")
     fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
 
     //post
@@ -82,7 +84,7 @@ interface PHINMAApi {
         @Field("privacy") privacy: String
     ): Call<DefaultResponse>
     @GET("getposts")
-    fun getPosts(@Query("query") query: String? = null): Call<PostResponse>
+    fun getPosts(@Header("Authorization")authToken:String,@Query("query")query: String? = null): Call<PostResponse>
 
     @FormUrlEncoded
     @POST("storecomment")
@@ -95,9 +97,11 @@ interface PHINMAApi {
 
     //announcements
     @GET("getannouncements")
-    fun getAnnounce(): Call<AnnouncementResponse>
+    @Headers("Accept: application/json")
+    fun getAnnounce(@Header("Authorization")authToken: String): Call<AnnouncementResponse>
 
     @GET("getcomments/{post_id}")
+    @Headers("Accept: application/json")
     fun getComments(@Path("post_id")postID: String): Call<CommentResponse>
 
 

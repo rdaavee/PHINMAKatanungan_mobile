@@ -1,6 +1,8 @@
 package com.example.phinmakatanungan_mobile.activities
 
 import UserPostsAdapter
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,6 +29,7 @@ class UserPostsFragment : Fragment() {
     private lateinit var postAdapter: UserPostsAdapter
     private var posts: List<Post> = emptyList()
     private lateinit var phinmaApi: PHINMAApi
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,17 +37,18 @@ class UserPostsFragment : Fragment() {
     ): View {
         binding = FragmentUserPostsBinding.inflate(inflater,container,false)
         phinmaApi = PHINMAClient.instance
-
+        val preference = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        val authToken = preference.getString("authToken", "")
         recyclerView = binding.postRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         postAdapter = UserPostsAdapter()
         recyclerView.adapter = postAdapter
 
-        fetchPosts()
+        fetchPosts(authToken.toString())
         return binding.root
     }
-    private fun fetchPosts() {
-        val call: Call<PostResponse> = phinmaApi.getPosts()
+    private fun fetchPosts(authToken: String) {
+        val call: Call<PostResponse> = phinmaApi.getPosts("Bearer $authToken")
         call.enqueue(object : Callback<PostResponse> {
             override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
                 if (response.isSuccessful) {

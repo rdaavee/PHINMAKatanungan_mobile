@@ -71,16 +71,28 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Initialize the ViewModel after initializing phinmaApi
-        val factory = DashboardViewModelFactory(phinmaApi)
-        viewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
 
-        // Observe the posts LiveData
-        viewModel.posts.observe(viewLifecycleOwner, Observer { postsMap ->
-            // Update the UI with the new posts data
-            postAdapter.setPostsMap(postsMap)
-        })
-        viewModel.fetchPosts()
+        val preference = requireActivity().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+        val authToken = preference.getString("authToken", "")
+
+        // Check if authToken is not null before fetching posts
+        if (!authToken.isNullOrEmpty()) {
+            // Initialize the ViewModel after initializing phinmaApi
+            val factory = DashboardViewModelFactory(phinmaApi)
+            viewModel = ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
+
+            // Observe the posts LiveData
+            viewModel.posts.observe(viewLifecycleOwner, Observer { postsMap ->
+                // Update the UI with the new posts data
+                postAdapter.setPostsMap(postsMap)
+            })
+
+            // Call fetchPosts only if authToken is not null or empty
+            viewModel.fetchPosts(authToken)
+        } else {
+            Log.e("YourActivity", "Auth token is null or empty")
+            // Handle the case where authToken is null or empty, maybe show an error message
+        }
 
         searchView = view.findViewById(R.id.searchView)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
