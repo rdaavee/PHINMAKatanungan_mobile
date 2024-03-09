@@ -70,7 +70,6 @@ interface PHINMAApi {
 
     //profile
     @GET("profile")
-    @Headers("Accept: application/json")
     fun getUserProfile(@Header("Authorization") authToken: String): Call<UserData>
 
     //post
@@ -84,7 +83,7 @@ interface PHINMAApi {
         @Field("privacy") privacy: String
     ): Call<DefaultResponse>
     @GET("getposts")
-    fun getPosts(@Header("Authorization")authToken:String,@Query("query")query: String? = null): Call<PostResponse>
+    fun getPosts(@Query("query") query: String? = null): Call<PostResponse>
 
     @FormUrlEncoded
     @POST("storecomment")

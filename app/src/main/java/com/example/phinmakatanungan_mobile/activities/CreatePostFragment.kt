@@ -40,8 +40,6 @@ class CreatePostFragment : Fragment() {
         binding = FragmentCreatePostBinding.inflate(inflater, container, false)
         val sharedPreferences = context?.getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE)
         val userDataJson = sharedPreferences?.getString(userDataPrefKeys, null)
-        val preference = requireContext().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
-        val authToken = preference.getString("authToken", "")
 
         if (userDataJson != null) {
             val userData = Gson().fromJson(userDataJson, UserData::class.java)
@@ -55,7 +53,8 @@ class CreatePostFragment : Fragment() {
         binding.tvPostBtn.setOnClickListener {
             val title = binding.etPostTitle.text.toString().trim()
             val content = binding.etPostDescription.text.toString().trim()
-
+            val sharedPreferences = requireContext().getSharedPreferences("myPreference", Context.MODE_PRIVATE)
+            val authToken = sharedPreferences.getString("authToken", "") ?: ""
 
             val signupDataJson = "{\"api_token\":\"$authToken\",\"title\":\"$title\",\"content\":\"$content\",\"privacy\":\"$privacy\"}"
 
@@ -71,7 +70,7 @@ class CreatePostFragment : Fragment() {
                 reader.beginObject()
                 reader.close()
                 PHINMAClient.instance.createPost(
-                    "Bearer $authToken",
+                    authToken,
                     title,
                     content,
                     privacy

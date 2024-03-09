@@ -168,7 +168,7 @@ class PostAdapter(private var postsMap: Map<String, Map<String, List<Post>>> = e
             when (post.user.user_role) {
                 "Teacher" -> chipCourse.text = cordep
                 "Student" -> chipCourse.text = post.user.course_id
-                else -> chipCourse.text = "Null" // Default case
+                else -> chipCourse.text = "" // Default case
             }
 
             val fullName = "${post.user.first_name} ${post.user.middle_name} ${post.user.last_name}"

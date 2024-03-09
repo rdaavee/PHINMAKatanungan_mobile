@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.phinmakatanungan_mobile.api.PHINMAApi
 import com.example.phinmakatanungan_mobile.models.Post
 import com.example.phinmakatanungan_mobile.models.PostResponse
@@ -20,9 +19,8 @@ class DashboardViewModel(private val phinmaApi: PHINMAApi) : ViewModel() {
     val posts: LiveData<Map<String, Map<String, List<Post>>>> get() = _posts
 
 
-    fun fetchPosts(authToken: String) {
-        val call: Call<PostResponse> = phinmaApi.getPosts("Bearer $authToken")
-
+    fun fetchPosts() {
+        val call: Call<PostResponse> = phinmaApi.getPosts()
         call.enqueue(object : Callback<PostResponse> {
             override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
                 if (response.isSuccessful) {
